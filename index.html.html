@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>ПДД Коннектикута</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ПДД CT">
+<style>
+:root{--bg:#f3f5f1;--card:#fff;--ink:#16211b;--mute:#5d6b62;--g:#0b6b3a;--gt:#fff;--ok:#dff3e6;--okb:#1f8a4c;--bad:#fbe3e6;--badb:#c8102e;--line:#d9dfd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--line:#2a372f}}
+:root[data-theme="dark"]{--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--line:#2a372f}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:var(--g);color:var(--gt);padding:14px 16px 10px}
+header h1{margin:0 0 8px;font-size:20px}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav button{flex:1;min-width:70px;border:0;border-radius:8px;padding:8px 6px;font:inherit;font-size:14px;background:rgba(255,255,255,.18);color:var(--gt)}
+nav button.on{background:#fff;color:#0b6b3a;font-weight:600}
+main{max-width:560px;margin:0 auto;padding:16px}
+h2{font-size:19px;line-height:1.35;margin:6px 0 14px}
+.mute{color:var(--mute);font-size:14px;margin:0}
+.opt,.go{display:block;width:100%;text-align:left;margin:0 0 8px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.go{background:var(--g);color:var(--gt);border-color:var(--g);text-align:center;font-weight:600;margin-top:10px}
+.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.bad{background:var(--bad);border-color:var(--badb)}
+.exp{padding:10px 12px;border-left:4px solid var(--g);background:var(--card);border-radius:6px;margin-top:6px}
+.card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.card svg{flex:none}.card b{display:block}
+.big{font-size:44px;font-weight:700;margin:0}
+button:focus-visible{outline:3px solid #f5c400;outline-offset:2px}
+</style></head><body>
+<header><h1>ПДД Коннектикута</h1><nav id="nav"></nav></header>
+<main id="app"></main>
+<script>
+const Q=[
+['Услышав сирену экстренной службы, откуда бы она ни ехала, нужно:',['Притормозить','Прижаться к правому краю и остановиться','Ехать с той же скоростью','Ускориться'],1,'Остановитесь у правого края и ждите, пока машина проедет. Если вы на перекрёстке, сначала проедьте его.'],
+['«No-Zone» (зона риска) — это:',['Место, где пешеходам нельзя переходить','Место, где нельзя парковаться','Слепые зоны вокруг грузовика','Ничего из перечисленного'],2,'Это опасные зоны вокруг грузовика, где водитель вас не видит.'],
+['На перекрёстке с четырьмя знаками STOP (four-way stop):',['Первым едет тот, кто слева','Можно не останавливаться, если рядом никого нет','Первым едет тот, кто приехал первым; при одновременном — тот, что справа','Первыми едут школьные автобусы'],2,'Остановитесь полностью. Кто приехал первым, тот и едет; если одновременно, уступите тому, кто справа.'],
+['При перестроении нужно:',['Посмотреть через плечо в сторону манёвра','Посигналить','Пересечь сразу две полосы','Мигнуть фарами'],0,'Зеркала не показывают слепую зону, поэтому посмотрите через плечо.'],
+['Встречная машина не переключила дальний свет. Что делать?',['Смотреть в центр дороги','Быстро мигнуть фарами пару раз','Оставить дальний свет','Выключить фары'],1,'Мигните пару раз. Если не помогло, смотрите на правый край дороги, чтобы не ослепнуть.'],
+['Знак-пятиугольник (pentagon) означает:',['Железнодорожный переезд','Запрет обгона','Школьная зона','Уступи дорогу'],2,'Пятиугольник — школьная зона и школьный переход.'],
+['Зелёные знаки — это:',['Запрещающие (regulatory)','Указательные (guide)','Предупреждающие (warning)','Только для парков'],1,'Зелёный — указатели: где вы, куда ехать, расстояние. Парки — коричневый.'],
+['Сплошная жёлтая линия между полосами означает:',['Обгон разрешён только с одной стороны','Можно менять полосу','Обгон запрещён','Ничего из перечисленного'],2,'Так в учебнике. Если рядом пунктирная жёлтая, обгон разрешён со стороны пунктирной.'],
+['Восьмиугольник (octagon) всегда означает:',['Уступи дорогу','Остановку','Школу','Опасность'],1,'STOP: полная остановка у знака или стоп-линии, затем уступите тем, у кого право проезда.'],
+['Красно-белый треугольник вершиной вниз:',['STOP','Уступи дорогу (yield)','Въезд запрещён','Парковка'],1,'Yield: сбавьте скорость и уступите, а если нужно, остановитесь.'],
+['Круглый знак предупреждает о:',['Школе','Ремонте дороги','Железнодорожном переезде','Парке'],2,'Круг — railroad crossing. Сбавьте скорость, смотрите и слушайте.'],
+['Знак-вымпел (трёхугольный, слева от дороги) означает:',['Зону запрета обгона','Школу','Переезд','Уступи дорогу'],0,'Pennant — No Passing Zone. Стоит слева на двухполосной дороге.'],
+['Оранжевые знаки предупреждают о:',['Парках','Дорожных работах (construction)','Услугах','Школах'],1,'Оранжевый — ремонт и обслуживание дороги.'],
+['Коричневые знаки обозначают:',['Парки и места отдыха','Услуги','Запреты','Школы'],0,'Brown — parks and recreation.'],
+['Синие знаки сообщают:',['Об опасности','Об услугах вдоль дороги','О ремонте','О запрете остановки'],1,'Blue — услуги (заправки, больницы).'],
+['Красный сигнал светофора. Правый поворот на красный:',['Всегда запрещён','Разрешён после полной остановки, если нет движения и запрещающего знака','Разрешён без остановки','Только ночью'],1,'Остановитесь, убедитесь, что поворот не запрещён, и уступите пешеходам.'],
+['Мигающий красный сигнал означает:',['Сбавить скорость','То же, что знак STOP','Дорога закрыта','Можно ехать'],1,'Полная остановка, затем поезжайте, когда безопасно.'],
+['Мигающий жёлтый сигнал означает:',['Остановиться','Сбавить скорость и ехать осторожно','Уступить и стоять','Дорога закрыта'],1,'Slow down and proceed with caution.'],
+['Вы уже на перекрёстке, и загорелся жёлтый. Что делать?',['Остановиться на месте','Сдать назад','Продолжить и проехать перекрёсток','Посигналить'],2,'Если вы уже в перекрёстке, не останавливайтесь.'],
+['У школьного автобуса мигают красные огни. Вы должны:',['Объехать','Остановиться, даже если автобус на встречной полосе','Остановиться только на своей стороне','Сбавить скорость'],1,'Стоять нужно и на своей, и на встречной стороне. Исключение: проезжие части разделены барьером или разделительной полосой (median).'],
+['Парковаться нельзя ближе чем:',['10 футов (≈3 м) до пожарного гидранта','5 футов до гидранта','50 футов до знака STOP','Парковаться можно везде'],0,'10 футов до гидранта и 25 футов (≈7,6 м) до знака STOP.'],
+['Сухая дорога, хорошие шины. Тормозной путь с реакцией при 50 миль/ч — около:',['100 футов','200 футов','400 футов','800 футов'],2,'При 50 mph около 400 футов, при 30 mph около 200 футов.'],
+['Въезжая на кольцо (roundabout), нужно:',['Ехать первым','Уступить тем, кто уже на кольце','Остановиться внутри кольца','Включить дальний свет'],1,'Уступайте движущимся по кольцу и пешеходам на переходе.'],
+['Пешеход на переходе (crosswalk), размеченном или нет:',['Должен уступать машинам','Имеет преимущество: водитель обязан уступить','Должен ждать зелёного','Не имеет преимущества'],1,'Водители обязаны уступать пешеходам на размеченном и неразмеченном переходе.'],
+['При левом повороте вы обязаны уступить:',['Попутным машинам','Встречным машинам, едущим прямо','Никому','Только автобусам'],1,'Turning left must yield to oncoming vehicles going straight.'],
+['Если включены дворники, то фары:',['Можно не включать','Нужно включить — это закон','Только ночью','Только на трассе'],1,'Wipers on = headlights on.']
+];
+const SG=[['oct','#c8102e','STOP','Восьмиугольник','Полная остановка'],['tri','#ffffff','YIELD','Треугольник вершиной вниз','Уступи дорогу'],['dia','#f5c400','','Жёлтый ромб','Предупреждение об опасности'],['dia','#ff7a00','','Оранжевый ромб','Дорожные работы'],['pen','#c6e600','','Пятиугольник','Школьная зона и переход'],['cir','#f5c400','RR','Круг','Железнодорожный переезд'],['pnt','#f5c400','','Вымпел слева от дороги','Зона запрета обгона'],['rec','#0b6b3a','EXIT','Зелёный прямоугольник','Указатели: направление, расстояние'],['rec','#0057b8','FOOD','Синий прямоугольник','Услуги вдоль дороги'],['rec','#6b3e1e','PARK','Коричневый прямоугольник','Парки и места отдыха']];
+const P={oct:'30,5 70,5 95,30 95,70 70,95 30,95 5,70 5,30',tri:'6,12 94,12 50,92',dia:'50,3 97,50 50,97 3,50',pen:'50,4 96,38 78,94 22,94 4,38',pnt:'4,10 4,90 96,50'};
+function sv(s,f,t){const tri=s=='tri',tc=tri?'#c8102e':(['oct','rec'].includes(s)?'#fff':'#111');
+const sh=s=='cir'?`<circle cx="50" cy="50" r="45" fill="${f}" stroke="#111" stroke-width="3"/>`:s=='rec'?`<rect x="6" y="22" width="88" height="56" rx="6" fill="${f}"/>`:`<polygon points="${P[s]}" fill="${f}" stroke="${tri?'#c8102e':'#111'}" stroke-width="${tri?7:3}"/>`;
+return `<svg viewBox="0 0 100 100" width="64" height="64" aria-hidden="true">${sh}<text x="50" y="56" text-anchor="middle" font-size="${t.length>3?15:21}" font-weight="700" fill="${tc}">${t}</text></svg>`}
+const app=document.getElementById('app'),nav=document.getElementById('nav');
+let W=[];try{W=JSON.parse(localStorage.getItem('w')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('w',JSON.stringify(W))}catch(e){}};
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const ALL=Q.map((_,i)=>i);let S=null,V='home';
+function tabs(){nav.innerHTML=[['home','Главная'],['prac','Практика'],['exam','Экзамен'],['sign','Знаки'],['wr','Ошибки '+W.length]].map(([k,n])=>`<button data-k="${k}" class="${V==k?'on':''}">${n}</button>`).join('');
+nav.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.k))}
+function go(k){V=k;tabs();
+if(k=='home')app.innerHTML='<h2>Подготовка к экзамену на права</h2><p>Вопросы составлены по главам 3–5 официального учебника Коннектикута. Настоящий тест: 25 вопросов, для сдачи нужно 20 верных.</p><p class="mute">Практика показывает объяснение после каждого ответа. Экзамен — как настоящий: объяснения в конце. Ошибки сохраняются в этом браузере.</p><button class="go" onclick="go(\'prac\')">Начать практику</button>';
+else if(k=='prac')start(shuf(ALL),0);
+else if(k=='exam')start(shuf(ALL).slice(0,25),1);
+else if(k=='sign')app.innerHTML=SG.map(s=>`<div class="card">${sv(s[0],s[1],s[2])}<div><b>${s[4]}</b><span class="mute">${s[3]}</span></div></div>`).join('')+'<p class="mute">Знаки нарисованы упрощённо, чтобы запомнить форму и цвет.</p>';
+else if(k=='wr')W.length?start(W.slice(),0):app.innerHTML='<h2>Ошибок пока нет</h2><p class="mute">Вопросы, на которые вы ответили неверно, появятся здесь.</p>'}
+function start(ids,ex){S={ids,i:0,ok:0,ex,miss:[]};quiz()}
+function quiz(){if(S.i>=S.ids.length)return done();
+const q=Q[S.ids[S.i]];
+app.innerHTML=`<p class="mute">Вопрос ${S.i+1} из ${S.ids.length}</p><h2>${q[0]}</h2>`+shuf([0,1,2,3]).map(k=>`<button class="opt" data-k="${k}">${q[1][k]}</button>`).join('')+'<div id="fb"></div>';
+app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>ans(+b.dataset.k))}
+function ans(k){const id=S.ids[S.i],q=Q[id],r=k==q[2];
+if(r){S.ok++;if(!S.ex)W=W.filter(x=>x!=id)}else{S.miss.push(id);if(!W.includes(id))W.push(id)}
+save();tabs();
+if(S.ex){S.i++;return quiz()}
+app.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=+b.dataset.k;if(n==q[2])b.classList.add('ok');else if(n==k)b.classList.add('bad')});
+document.getElementById('fb').innerHTML=`<p class="exp"><b>${r?'Верно.':'Неверно.'}</b> ${q[3]}</p><button class="go" id="nx">Дальше</button>`;
+document.getElementById('nx').onclick=()=>{S.i++;quiz()}}
+function done(){const n=S.ids.length,pass=S.ok>=20;
+let h=`<p class="big">${S.ok} из ${n}</p>`;
+if(S.ex)h+=`<h2>${pass?'Сдано! Нужно было 20.':'Не сдано. Нужно 20 верных.'}</h2>`;
+else h+='<h2>Серия закончена</h2>';
+if(S.miss.length)h+='<p class="mute">Разбор ошибок:</p>'+S.miss.map(id=>{const q=Q[id];return `<div class="exp"><b>${q[0]}</b><br>Верно: ${q[1][q[2]]}<br><span class="mute">${q[3]}</span></div><br>`}).join('');
+h+=`<button class="go" onclick="go('${S.ex?'exam':'prac'}')">Ещё раз</button>`;
+app.innerHTML=h;tabs()}
+go('home');
+</script></body></html>
