@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><title>ПДД Коннектикута</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ПДД CT">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ПДД CT"><link rel="apple-touch-icon" href="icon.png"><meta name="theme-color" content="#0b6b3a">
 <style>
 :root{--bg:#f3f5f1;--card:#fff;--ink:#16211b;--mute:#5d6b62;--g:#0b6b3a;--gt:#fff;--ok:#dff3e6;--okb:#1f8a4c;--bad:#fbe3e6;--badb:#c8102e;--line:#d9dfd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--line:#2a372f}}
@@ -71,7 +71,7 @@ let D=[];try{D=JSON.parse(localStorage.getItem('d')||'[]')}catch(e){}
 function grp(){app.innerHTML='<h2>Темы</h2><p class="mute">Сначала теория, потом проверка: знаки и правила.</p>'+GT.map((g,i)=>`<button class="opt" onclick="gv(${i})">${D.includes(i)?'✓ ':''}${i+1}. ${g.n}<br><span class="mute">${pg(g)}</span></button>`).join('')}
 function gv(i){const g=GT[i],c=s=>`<div class="card"><img src="${s[0]}" alt=""><div><b>${s[1]}</b><span class="mute">${s[2]}</span></div></div>`;
 const L=g.r?[]:g.a<0?SH.map(c):SG.slice(g.a,g.b+1).map((s,j)=>c([s[0],s[1],EX[g.a+j]]));
-app.innerHTML=`<p class="mute"><a href="#" onclick="grp();return false">← Все темы</a></p><h2>${g.n}</h2><div class="exp">${g.t}</div><br>`+L.join('')+`<button class="go" onclick="gq(${i})">Проверить себя</button>`;window.scrollTo(0,0)}
+app.innerHTML=`<p class="mute"><a href="#" onclick="grp();return false">← Все темы</a></p><h2>${g.n}</h2><p class="mute">${pg(g)}</p><div class="exp">${g.t}</div><br>`+L.join('')+`<button class="go" onclick="gq(${i})">Проверить себя</button>`;window.scrollTo(0,0)}
 function gq(i){const g=GT[i];start(shuf(g.r?g.ids:(g.a<0?[]:SQ.slice(g.a,g.b+1)).concat(g.x)).slice(0,g.r?g.ids.length:6),0);S.g=i}
 const QI={5:13,6:28,8:0,9:1,10:32,11:15,12:29,13:26,14:27,23:11};
 let C={};try{C=JSON.parse(localStorage.getItem('c')||'{}')}catch(e){}
@@ -137,7 +137,7 @@ RT.forEach(r=>{r.r=1;r.a=-1;r.x=[];r.ids=r.q.map(x=>{RQ.push(Q.length);Q.push(x)
 RQ.forEach(id=>CD.push({id:'r'+id,img:'',q:Q[id][0],a:Q[id][1][Q[id][2]],b:Q[id][3]}));
 const RULEQ=RQ.concat([1,3]),SIGNQ=SQ.concat([5,6,8,9,10,11,12,13,14]);
 function nw(){const a=CD.filter(c=>!C[c.id]&&c.id[0]!='r'),b=CD.filter(c=>!C[c.id]&&c.id[0]=='r'),m=[];for(let i=0;m.length<12&&(i<a.length||i<b.length);i++){if(a[i])m.push(a[i]);if(b[i]&&m.length<12)m.push(b[i])}return m}
-function pg(g){const ids=g.r?g.ids.map(x=>'r'+x):g.a<0?SH.map((_,i)=>'h'+i):SG.slice(g.a,g.b+1).map((_,j)=>'s'+(g.a+j)),k=ids.filter(id=>C[id]&&C[id].d>Date.now()+7e7).length;return `Карточки: выучено ${k} из ${ids.length}`}
+function pg(g){const ids=g.r?g.ids.map(x=>'r'+x):g.a<0?SH.map((_,i)=>'h'+i):SG.slice(g.a,g.b+1).map((_,j)=>'s'+(g.a+j)),k=ids.filter(id=>C[id]&&C[id].d>Date.now()+7e7).length;const P=Math.round(100*k/ids.length);return `${P}% карточек выучено<span style="display:block;height:8px;border-radius:4px;background:var(--line);margin-top:6px;overflow:hidden"><span style="display:block;width:${P}%;height:100%;background:var(--g)"></span></span>`}
 function bt(c){const s=((C[c.id]&&C[c.id].s)||0)+1,L=['сейчас','1 мин','1 час','1 день',[2,4,7,14,30][Math.min(s-1,4)]+' дн.'];return ['Не знаю','Трудно','Хорошо','Легко','Идеально'].map((n,i)=>`<button class="opt" onclick="rate(${i})">${n} <span class="mute">· ${L[i]}</span></button>`).join('')}
 let SV={};try{SV=JSON.parse(localStorage.getItem('sv')||'{}')}catch(e){}
 const ss=()=>{try{localStorage.setItem('sv',JSON.stringify(SV))}catch(e){}};
@@ -145,6 +145,65 @@ function resume(k,f){const s=SV[k];if(s&&s.ids&&s.i<s.ids.length){S=s;quiz()}els
 function rst(){const k=S.key;delete SV[k];ss();go(k)}
 function bump(id){const k=RQ.includes(id)?'r'+id:SQ.includes(id)?'s'+SQ.indexOf(id):null;if(k){C[k]={s:0,d:Date.now()};sc()}}
 GT[0].t+='<div style="margin-top:12px">'+[['#c8102e','Красный','стоп, въезд запрещён, неверное направление'],['#ffffff','Белый','регулирующие знаки (например, ограничение скорости)'],['#f9d000','Жёлтый','общее предупреждение о необычных условиях на дороге'],['#ff7900','Оранжевый','дорожные работы и обслуживание'],['#c8e000','Жёлто-зелёный','школа, пешеходы, велосипедисты'],['#006b54','Зелёный','указатели и направления'],['#0057b8','Синий','услуги для водителей, парковка для людей с инвалидностью'],['#6d4c41','Коричневый','парки, культурные и исторические места'],['#e8486a','Розовый','временные знаки при авариях и происшествиях']].map(x=>`<div style="display:flex;gap:8px;align-items:center;margin:5px 0"><span style="width:20px;height:20px;border-radius:5px;background:${x[0]};border:1px solid #888;flex:none"></span><span><b>${x[1]}</b>: ${x[2]}</span></div>`).join('')+'</div>';
+const GLS=`Yield|уступить дорогу
+Right of way|право проезда
+Intersection|перекрёсток
+Crosswalk|пешеходный переход
+Pedestrian|пешеход
+Roundabout|кольцевой перекрёсток, кольцо
+Merge|слияние полос, вливание в поток
+Median|разделительная полоса
+Shoulder|обочина
+Lane|полоса движения
+Passing|обгон
+Tailgating|движение вплотную к впереди идущей машине
+Following distance|дистанция до впереди идущей машины
+Stopping distance|тормозной путь
+Blind spot|слепая зона
+No-Zone|опасные зоны вокруг грузовика
+Curb|бордюр
+Fire hydrant|пожарный гидрант
+Parallel parking|параллельная парковка
+High beams|дальний свет
+Low beams|ближний свет
+Parking lights|габаритные огни (только для стоянки)
+Hazard lights|аварийная сигнализация
+Turn signal|указатель поворота, поворотник
+Speed limit|ограничение скорости
+Regulatory sign|регулирующий знак (правило, которое нужно выполнять)
+Warning sign|предупреждающий знак
+Guide sign|указательный знак
+Work zone|зона дорожных работ
+Detour|объезд
+Flagger|флагман, регулировщик на дороге
+Railroad crossing|железнодорожный переезд
+Crossbuck|белый знак-крест на ж/д переезде
+HOV lane|полоса для машин с несколькими пассажирами
+Shared center lane|общая центральная полоса для левых поворотов
+Reversible lane|реверсивная полоса (направление меняется)
+Emergency vehicle|экстренная служба (скорая, пожарные, полиция)
+School bus|школьный автобус
+Skid|занос
+Hydroplaning|аквапланирование (потеря сцепления на воде)
+BAC|уровень алкоголя в крови
+Zero tolerance|нулевая терпимость (для водителей до 21 года)
+Breath test|тест на алкоголь по дыханию
+License|водительские права
+Learner permit|ученические права
+Registration|регистрация автомобиля
+Suspension|приостановка водительских прав
+Revocation|аннулирование водительских прав`.split('\n').map(x=>x.split('|'));
+let EH=[];try{EH=JSON.parse(localStorage.getItem('eh')||'[]')}catch(e){}
+function gl(q){q=(q||'').toLowerCase();const L=GLS.filter(x=>!q||x[0].toLowerCase().includes(q)||x[1].toLowerCase().includes(q));
+if(!document.getElementById('gq')){app.innerHTML='<h2>Словарик</h2><input id="gq" placeholder="Поиск: по-английски или по-русски" oninput="gl(this.value)" style="width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:10px"><div id="gl"></div>'}
+document.getElementById('gl').innerHTML=L.map(x=>`<div class="card"><div><b>${x[0]}</b><span class="mute">${x[1]}</span></div></div>`).join('')||'<p class="mute">Ничего не найдено.</p>'}
+function hs(){app.innerHTML='<h2>История экзаменов</h2>'+(EH.length?EH.slice(-10).reverse().map(e=>`<div style="margin:10px 0"><div>${new Date(e[0]).toLocaleDateString('ru-RU',{day:'numeric',month:'short'})} · <b>${e[1]} из ${e[2]}</b>${e[1]>=20?' · сдано':''}</div><div style="height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:4px"><div style="width:${Math.round(100*e[1]/e[2])}%;height:100%;background:${e[1]>=20?'var(--g)':'var(--badb)'}"></div></div></div>`).join(''):'<p class="mute">Пока нет результатов. Пройдите пробный экзамен.</p>')+'<p class="mute">Для сдачи нужно 20 верных из 25.</p>'}
+function bk(){app.innerHTML='<h2>Сохранение прогресса</h2><p class="mute">Нажмите «Показать код», скопируйте его и сохраните в заметках. Если данные пропадут, вставьте код сюда и нажмите «Восстановить».</p><button class="go" onclick="bx()">Показать код</button><textarea id="bt" rows="5" style="width:100%;box-sizing:border-box;margin-top:10px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:12px monospace"></textarea><button class="opt" style="margin-top:8px" onclick="bi()">Восстановить из кода</button><p id="bm" class="mute"></p>'}
+const BK=['w','c','d','sv','eh'];
+function bx(){const o={};BK.forEach(k=>{try{const v=localStorage.getItem(k);if(v)o[k]=v}catch(e){}});const c=btoa(unescape(encodeURIComponent(JSON.stringify(o)))),x=document.getElementById('bt'),m=document.getElementById('bm');x.value=c;x.select();
+try{navigator.clipboard.writeText(c).then(()=>m.textContent='Код скопирован. Вставьте его в заметки.',()=>m.textContent='Скопируйте код вручную.')}catch(e){m.textContent='Скопируйте код вручную.'}}
+function bi(){const m=document.getElementById('bm');try{const o=JSON.parse(decodeURIComponent(escape(atob(document.getElementById('bt').value.trim()))));BK.forEach(k=>{if(o[k])localStorage.setItem(k,o[k])});m.textContent='Готово. Перезапускаю...';setTimeout(()=>location.reload(),600)}catch(e){m.textContent='Код не подошёл. Проверьте, что скопировали его целиком.'}}
+function sp(){const w=shuf(W.filter(x=>ALL.includes(x))).slice(0,10),r=shuf(ALL.filter(x=>!w.includes(x))).slice(0,25-w.length);start(shuf(w.concat(r)),0,'prac')}
 const app=document.getElementById('app'),nav=document.getElementById('nav');
 let W=[];try{W=JSON.parse(localStorage.getItem('w')||'[]')}catch(e){}
 const save=()=>{try{localStorage.setItem('w',JSON.stringify(W))}catch(e){}};
@@ -153,8 +212,8 @@ const ALL=RULEQ.concat(SIGNQ);let S=null,V='home';
 function tabs(){nav.innerHTML=[['home','Главная'],['prac','Практика'],['exam','Экзамен'],['sign','Темы'],['cd','Карточки'],['wr','Повторить '+W.length]].map(([k,n])=>`<button data-k="${k}" class="${V==k?'on':''}">${n}</button>`).join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.k))}
 function go(k){V=k;tabs();
-if(k=='home')app.innerHTML='<h2>Подготовка к экзамену на права</h2><p>Вопросы составлены по главам 3–5 официального учебника Коннектикута. Настоящий тест: 25 вопросов, для сдачи нужно 20 верных.</p><p class="mute">Практика показывает объяснение после каждого ответа. Экзамен — как настоящий: объяснения в конце. Ошибки сохраняются в этом браузере.</p><button class="go" onclick="go(\'prac\')">Начать практику</button><button class="opt" style="margin-top:8px" onclick="go(\'cd\')">Карточки на повторение</button>';
-else if(k=='prac')resume('prac',()=>start(shuf(ALL),0,'prac'));
+if(k=='home')app.innerHTML='<h2>Подготовка к экзамену на права</h2><p>Вопросы составлены по главам 3–5 официального учебника Коннектикута. Настоящий тест: 25 вопросов, для сдачи нужно 20 верных.</p><p class="mute">Практика показывает объяснение после каждого ответа. Экзамен — как настоящий: объяснения в конце. Ошибки сохраняются в этом браузере.</p><button class="go" onclick="go(\'prac\')">Начать практику</button><button class="opt" style="margin-top:8px" onclick="go(\'cd\')">Карточки на повторение</button><button class="opt" style="margin-top:8px" onclick="gl()">Словарик терминов</button><button class="opt" style="margin-top:8px" onclick="hs()">История экзаменов</button><button class="opt" style="margin-top:8px" onclick="bk()">Сохранить или восстановить прогресс</button>';
+else if(k=='prac')resume('prac',sp);
 else if(k=='exam')resume('exam',()=>start(shuf(shuf(RULEQ).slice(0,15).concat(shuf(SIGNQ).slice(0,10))),1,'exam'));
 else if(k=='sq')start(shuf(SQ).slice(0,10),0);
 else if(k=='sign')grp();
@@ -174,7 +233,7 @@ const im=QI[id]!=null?`<img class="qi" src="${SG[QI[id]][0]}" alt="" style="marg
 document.getElementById('fb').innerHTML=`<p class="exp"><b>${r?'Верно.':'Неверно.'}</b> ${q[3]}</p>${im}<button class="opt" id="un">Не уверена — повторить позже</button><button class="go" id="nx">Дальше</button>`;
 document.getElementById('un').onclick=e=>{if(!W.includes(id)){W.push(id);save();tabs()}bump(id);e.target.textContent='Добавлено в «Повторить»';e.target.disabled=true};
 document.getElementById('nx').onclick=()=>{S.i++;quiz()}}
-function done(){if(S.key){delete SV[S.key];ss()}const n=S.ids.length,pass=S.ok>=20;
+function done(){if(S.ex&&S.key&&!S.rec){S.rec=1;EH.push([Date.now(),S.ok,S.ids.length]);EH=EH.slice(-30);try{localStorage.setItem('eh',JSON.stringify(EH))}catch(e){}}if(S.key){delete SV[S.key];ss()}const n=S.ids.length,pass=S.ok>=20;
 let h=`<p class="big">${S.ok} из ${n}</p>`;
 if(S.ex)h+=`<h2>${pass?'Сдано! Нужно было 20.':'Не сдано. Нужно 20 верных.'}</h2>`;
 else h+='<h2>Серия закончена</h2>';
@@ -182,5 +241,6 @@ if(S.miss.length)h+='<p class="mute">Разбор ошибок:</p>'+S.miss.map(
 if(S.g!=null&&S.ok>=n-1&&!D.includes(S.g)){D.push(S.g);try{localStorage.setItem('d',JSON.stringify(D))}catch(e){}}
 h+=S.g!=null?`<button class="go" onclick="gq(${S.g})">Ещё раз</button><button class="opt" style="margin-top:8px" onclick="go('sign')">К темам</button>`:`<button class="go" onclick="go('${S.ex?'exam':'prac'}')">Ещё раз</button>`;
 app.innerHTML=h;tabs()}
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 go('home');
 </script></body></html>
