@@ -69,7 +69,7 @@ const GT=[{n:'Формы и цвета',a:-1,x:[5,6,8,9,10,11,12,13,14],t:'Зн�
 {n:'Дорожные работы и переезды',a:29,b:33,x:[10,12],t:'Оранжевый цвет — работы на дороге: сбавьте скорость, будьте готовы к объезду и к рабочим. Перед железнодорожным переездом стоит круглый жёлтый знак, а белый крест Railroad Crossing стоит прямо у путей: поезду нужно уступить.'}];
 let D=[];try{D=JSON.parse(localStorage.getItem('d')||'[]')}catch(e){}
 function grp(){app.innerHTML='<h2>Темы</h2><p class="mute">Сначала теория, потом проверка: знаки и правила.</p>'+GT.map((g,i)=>`<button class="opt" onclick="gv(${i})">${D.includes(i)?'✓ ':''}${i+1}. ${g.n}<br><span class="mute">${pg(g)}</span></button>`).join('')}
-function gv(i){const g=GT[i],c=s=>`<div class="card"><img src="${s[0]}" alt=""><div><b>${s[1]}</b><span class="mute">${s[2]}</span></div></div>`;
+function gv(i){if(!TH.includes(i)){TH.push(i);try{localStorage.setItem('th',JSON.stringify(TH))}catch(e){}}const g=GT[i],c=s=>`<div class="card"><img src="${s[0]}" alt=""><div><b>${s[1]}</b><span class="mute">${s[2]}</span></div></div>`;
 const L=(g.r?[]:g.a<0?SH.map(c):SG.slice(g.a,g.b+1).map((s,j)=>c([s[0],s[1],EX[g.a+j]]))).concat(SG2.filter(s=>GT[s[3]]===g).map(s=>c([s[0],s[1],s[2]]))).concat(g===GT[XG]?SG3.map(s=>c(s)):[]);
 app.innerHTML=`<p class="mute"><a href="#" onclick="grp();return false">← Все темы</a></p><h2>${g.n}</h2><p class="mute">${pg(g)}</p><div class="exp">${g.t}</div><br>`+L.join('')+HC(i,g)+`<button class="go" onclick="gq(${i})">Проверить себя</button>`;window.scrollTo(0,0)}
 function gq(i){const g=GT[i];start(shuf(g.r?g.ids:(g.a<0?[]:SQ.slice(g.a,g.b+1)).concat(SQ2.filter((_,k)=>GT[SG2[k][3]]===g),(g===GT[XG]?SQ3:[]),g.x)).slice(0,g.r?g.ids.length:6),0);S.g=i}
@@ -507,7 +507,7 @@ if(!document.getElementById('gq')){app.innerHTML='<h2>Словарик</h2><inpu
 document.getElementById('gl').innerHTML=L.map(x=>`<div class="card"><div><b>${x[0]}</b><span class="mute">${x[1]}</span></div></div>`).join('')||'<p class="mute">Ничего не найдено.</p>'}
 function hs(){app.innerHTML='<h2>История экзаменов</h2>'+(EH.length?EH.slice(-10).reverse().map(e=>`<div style="margin:10px 0"><div>${new Date(e[0]).toLocaleDateString('ru-RU',{day:'numeric',month:'short'})} · <b>${e[1]} из ${e[2]}</b>${e[1]>=20?' · сдано':''}</div><div style="height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:4px"><div style="width:${Math.round(100*e[1]/e[2])}%;height:100%;background:${e[1]>=20?'var(--g)':'var(--badb)'}"></div></div></div>`).join(''):'<p class="mute">Пока нет результатов. Пройдите пробный экзамен.</p>')+'<p class="mute">Для сдачи нужно 20 верных из 25.</p>'}
 function bk(){app.innerHTML='<h2>Сохранение прогресса</h2><p class="mute">Нажмите «Показать код», скопируйте его и сохраните в заметках. Если данные пропадут, вставьте код сюда и нажмите «Восстановить».</p><button class="go" onclick="bx()">Показать код</button><textarea id="bt" rows="5" style="width:100%;box-sizing:border-box;margin-top:10px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:12px monospace"></textarea><button class="opt" style="margin-top:8px" onclick="bi()">Восстановить из кода</button><p id="bm" class="mute"></p>'}
-const BK=['w','c','d','sv','eh','ca'];
+const BK=['w','c','d','sv','eh','ca','th'];
 function bx(){const o={};BK.forEach(k=>{try{const v=localStorage.getItem(k);if(v)o[k]=v}catch(e){}});const c=btoa(unescape(encodeURIComponent(JSON.stringify(o)))),x=document.getElementById('bt'),m=document.getElementById('bm');x.value=c;x.select();
 try{navigator.clipboard.writeText(c).then(()=>m.textContent='Код скопирован. Вставьте его в заметки.',()=>m.textContent='Скопируйте код вручную.')}catch(e){m.textContent='Скопируйте код вручную.'}}
 function bi(){const m=document.getElementById('bm');try{const o=JSON.parse(decodeURIComponent(escape(atob(document.getElementById('bt').value.trim()))));BK.forEach(k=>{if(o[k])localStorage.setItem(k,o[k])});m.textContent='Готово. Перезапускаю...';setTimeout(()=>location.reload(),600)}catch(e){m.textContent='Код не подошёл. Проверьте, что скопировали его целиком.'}}
@@ -530,7 +530,19 @@ const saveCA=()=>{try{localStorage.setItem('ca',JSON.stringify(CA))}catch(e){}};
 if(!Array.isArray(CA)){CA=[];CD.forEach(c=>{if(C[c.id]&&!CA.includes(tp(c)))CA.push(tp(c))});saveCA()}
 const deck=()=>CD.filter(c=>CA.includes(tp(c)));
 function tg(i){const n=GT[i].n;CA=CA.includes(n)?CA.filter(x=>x!=n):CA.concat(n);saveCA();gv(i)}
-function HC(i,g){return CD.some(c=>tp(c)==g.n)?`<button class="opt" style="margin-top:8px" onclick="tg(${i})">${CA.includes(g.n)?'✓ Карточки в повторении (нажмите, чтобы убрать)':'Добавить карточки в повторение'}</button>`:'<p class="mute">Карточки по этой теме скоро появятся</p>'}
+function HC(i,g){return CD.some(c=>tp(c)==g.n)?`<button class="opt" style="margin-top:8px" onclick="tg(${i})">${CA.includes(g.n)?'✓ Карточки в повторении (нажмите, чтобы убрать)':'Добавить карточки в повторение'}</button><button class="opt" style="margin-top:8px" onclick="cardsT(${i})">Повторять карточки только этой темы</button>`:'<p class="mute">Карточки по этой теме скоро появятся</p>'}
+let TH=[];try{TH=JSON.parse(localStorage.getItem('th')||'[]')}catch(e){}
+const TO={};GT.forEach((g,i)=>{if(g.r)g.ids.forEach(id=>TO[id]=i)});
+SQ.forEach((id,k)=>{const i=GT.findIndex(g=>!g.r&&g.a>=0&&k>=g.a&&k<=g.b);if(i>=0)TO[id]=i});
+SQ2.forEach((id,k)=>TO[id]=SG2[k][3]);SQ3.forEach(id=>TO[id]=XG);[5,6,8,9,10,11,12,13,14].forEach(id=>TO[id]=0);
+const STI=GT.findIndex(g=>g.n.startsWith('Вопросы из учебника'));GT[STI].ids.forEach(id=>delete TO[id]);
+function cardsT(i){const n=GT[i].n;if(!CA.includes(n)){CA.push(n);saveCA()}V='cd';tabs();const now=Date.now(),cs=CD.filter(c=>tp(c)==n);CQ=shuf(cs.filter(c=>C[c.id]&&C[c.id].d<=now)).concat(cs.filter(c=>!C[c.id]).slice(0,15));CF=false;card()}
+function nxb(){let lab,fn;for(let i=0;i<GT.length&&!lab;i++){if(i==XG)continue;const g=GT[i],n=g.n,hc=CD.some(c=>tp(c)==n);
+if(!TH.includes(i)){lab='Читать теорию: '+n;fn='gv('+i+')'}
+else if(hc&&!CD.some(c=>tp(c)==n&&C[c.id])){lab='Повторить карточки: '+n;fn='cardsT('+i+')'}
+else if(!D.includes(i)){lab='Проверить себя: '+n;fn='gq('+i+')'}}
+if(!lab){lab='Всё пройдено! Закрепляйте в практике';fn="go('prac')"}
+return `<button class="go" style="margin-bottom:14px" onclick="${fn}">Продолжить обучение<br><span style="font-weight:400;font-size:14px">${lab}</span></button>`}
 const app=document.getElementById('app'),nav=document.getElementById('nav');
 let W=[];try{W=JSON.parse(localStorage.getItem('w')||'[]')}catch(e){}
 const save=()=>{try{localStorage.setItem('w',JSON.stringify(W))}catch(e){}};
@@ -539,7 +551,7 @@ const ALL=RULEQ.concat(SIGNQ);W=W.filter(x=>ALL.includes(x));let S=null,V='home'
 function tabs(){nav.innerHTML=[['home','Главная'],['prac','Практика'],['exam','Экзамен'],['sign','Темы'],['cd','Карточки'],['wr','Повторить '+W.length]].map(([k,n])=>`<button data-k="${k}" class="${V==k?'on':''}">${n}</button>`).join('');
 nav.querySelectorAll('button').forEach(b=>b.onclick=()=>go(b.dataset.k))}
 function go(k){V=k;tabs();
-if(k=='home')app.innerHTML='<h2>Подготовка к экзамену на права</h2>'+ov()+'<p>Вопросы составлены по главам 3–5 официального учебника Коннектикута. Настоящий тест: 25 вопросов, для сдачи нужно 20 верных.</p><p class="mute">Практика показывает объяснение после каждого ответа. Экзамен — как настоящий: объяснения в конце. Ошибки сохраняются в этом браузере.</p><button class="go" onclick="go(\'prac\')">Начать практику</button><button class="opt" style="margin-top:8px" onclick="go(\'cd\')">Карточки на повторение</button><button class="opt" style="margin-top:8px" onclick="gv(GT.length-1)">Вопросы из учебника (10 штук)</button><button class="opt" style="margin-top:8px" onclick="gl()">Словарик терминов</button><button class="opt" style="margin-top:8px" onclick="hs()">История экзаменов</button><button class="opt" style="margin-top:8px" onclick="bk()">Сохранить или восстановить прогресс</button>';
+if(k=='home')app.innerHTML='<h2>Подготовка к экзамену на права</h2>'+ov()+nxb()+'<p>Вопросы составлены по главам 3–5 официального учебника Коннектикута. Настоящий тест: 25 вопросов, для сдачи нужно 20 верных.</p><p class="mute">Практика показывает объяснение после каждого ответа. Экзамен — как настоящий: объяснения в конце. Ошибки сохраняются в этом браузере.</p><button class="go" onclick="go(\'prac\')">Начать практику</button><button class="opt" style="margin-top:8px" onclick="go(\'cd\')">Карточки на повторение</button><button class="opt" style="margin-top:8px" onclick="gv(GT.length-1)">Вопросы из учебника (10 штук)</button><button class="opt" style="margin-top:8px" onclick="gl()">Словарик терминов</button><button class="opt" style="margin-top:8px" onclick="hs()">История экзаменов</button><button class="opt" style="margin-top:8px" onclick="bk()">Сохранить или восстановить прогресс</button>';
 else if(k=='prac')resume('prac',sp);
 else if(k=='exam')resume('exam',()=>start(shuf(shuf(RULEQ).slice(0,15).concat(shuf(SIGNQ).slice(0,10))),1,'exam'));
 else if(k=='sq')start(shuf(SQ).slice(0,10),0);
@@ -557,7 +569,7 @@ save();tabs();
 if(S.ex){S.i++;return quiz()}
 app.querySelectorAll('.opt').forEach(b=>{b.disabled=true;const n=+b.dataset.k;if(n==q[2])b.classList.add('ok');else if(n==k)b.classList.add('bad')});
 const im=QI[id]!=null?`<img class="qi" src="${SG[QI[id]][0]}" alt="" style="margin-top:12px">`:'';
-document.getElementById('fb').innerHTML=`<p class="exp"><b>${r?'Верно.':'Неверно.'}</b> ${q[3]}</p>${im}<button class="opt" id="un">Не уверена — повторить позже</button><button class="go" id="nx">Дальше</button>`;
+document.getElementById('fb').innerHTML=`<p class="exp"><b>${r?'Верно.':'Неверно.'}</b> ${q[3]}</p>${im}${TO[id]!=null?`<button class="opt" onclick="gv(${TO[id]})">Где об этом в теории</button>`:''}<button class="opt" id="un">Не уверена — повторить позже</button><button class="go" id="nx">Дальше</button>`;
 document.getElementById('un').onclick=e=>{if(!W.includes(id)){W.push(id);save();tabs()}bump(id);e.target.textContent='Добавлено в «Повторить»';e.target.disabled=true};
 document.getElementById('nx').onclick=()=>{S.i++;quiz()}}
 function done(){if(S.ex&&S.key&&!S.rec){S.rec=1;EH.push([Date.now(),S.ok,S.ids.length]);EH=EH.slice(-30);try{localStorage.setItem('eh',JSON.stringify(EH))}catch(e){}}if(S.key){delete SV[S.key];ss()}const n=S.ids.length,pass=S.ok>=20;
