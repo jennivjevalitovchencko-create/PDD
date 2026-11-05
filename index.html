@@ -1196,7 +1196,7 @@ else if(k=='sq')start(shuf(SQ).slice(0,10),0);
 else if(k=='sign')grp();
 else if(k=='cd')cards();
 else if(k=='wr')W.length?start(W.slice(),0):app.innerHTML='<h2>Пока пусто</h2><p class="mute">Сюда попадают вопросы, где вы ошиблись или были не уверены.</p>'}
-let R={};try{R=JSON.parse(localStorage.getItem('r')||'{}')}catch(e){}
+let R={};try{const savedR=JSON.parse(localStorage.getItem('r')||'{}');R=savedR&&typeof savedR==='object'&&!Array.isArray(savedR)?savedR:{}}catch(e){}
 const sr=()=>{try{localStorage.setItem('r',JSON.stringify(R))}catch(e){}};
 const tids=i=>{const g=GT[i];return g.r?g.ids:(g.a<0?[]:SQ.slice(g.a,g.b+1)).concat(SQ2.filter((_,k)=>GT[SG2[k][3]]===g),(g===GT[XG]?SQ3:[]),g.x)};
 const tc=i=>{const a=tids(i);let o=0,b=0;a.forEach(x=>{if(R[x]===1)o++;else if(R[x]===0)b++});return{a,o,b,u:a.length-o-b}};
