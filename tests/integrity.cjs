@@ -13,7 +13,7 @@ function load(saved={}){
  return {a:c.audit,storage};
 }
 const {a}=load();
-assert.equal(a.Q.length,636);
+assert.equal(a.Q.length,638);
 assert.equal(a.EXQ.length,206);
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
@@ -31,6 +31,25 @@ assert(!script.includes("app.querySelectorAll('.opt')"),'NaN regression: broad s
 assert(script.includes("app.querySelectorAll('.opt[data-k]')"),'Answer selector missing');
 assert(script.includes('class="theory-help"'),'Compact theory icon missing');
 for(const id of [634,635]){assert.equal(a.Q[id].m.length,2);assert(!a.EXQ.includes(id))}
+// Approved right-of-way scenario questions (editorial/PDD-right-of-way-new-questions-2026-11-05.md)
+const svgOf=f=>fs.readFileSync(path.join(__dirname,'../editorial/svg',f),'utf8').replace(/\r/g,'').trim();
+for(const [id,start,key,file] of [
+ [636,'Вы полностью остановились у знака STOP',[2],'row-new-1-two-way-stop.svg'],
+ [637,'Вы выезжаете передним ходом с парковки магазина',[0,1],'row-new-2-driveway-sidewalk.svg']]){
+ const q=a.Q[id];
+ assert(q[0].startsWith(start),'New question text '+id);
+ assert.equal(q[1].length,4,'New question options '+id);
+ assert.deepEqual([...q.m],key,'New question key '+id);
+ assert.equal(q[2],key[0],'New question primary key '+id);
+ assert(a.RT[1].n==='Право проезда и перекрёстки'&&a.RT[1].ids.includes(id),'New question topic '+id);
+ assert(a.MQ.includes(id)&&a.ALL.includes(id),'New question practice pool '+id);
+ assert(!a.EXQ.includes(id),'New question kept out of exam pool '+id);
+ assert.equal(q.sc,1,'Scenario image style '+id);
+ const prefix='data:image/svg+xml;charset=utf-8,';
+ assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
+ assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);
+}
+assert.equal(a.RT[1].ids.length,28,'Right-of-way topic size');
 const restored=load({w:'null',r:'{"64":1}'});
 assert(Array.isArray(restored.a.W)&&restored.a.W.length===0,'Malformed repeat list not normalized');
 assert.equal(restored.a.R['64'],1,'Unrelated progress lost');
@@ -50,4 +69,4 @@ assert.equal(valid.a.R['68'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
-console.log('PASS: questions, IDs, keys, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
