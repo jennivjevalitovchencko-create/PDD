@@ -1183,7 +1183,7 @@ else if(!D.includes(i)){lab='Проверить себя: '+n;fn='gq('+i+')'}}
 if(!lab){lab='Всё пройдено! Закрепляйте в практике';fn="go('prac')"}
 return `<button class="go" style="margin-bottom:14px" onclick="V='x';tabs();${fn}">Продолжить обучение<br><span style="font-weight:400;font-size:14px">${lab}</span></button>`}
 const app=document.getElementById('app'),nav=document.getElementById('nav');
-let W=[];try{W=JSON.parse(localStorage.getItem('w')||'[]')}catch(e){}
+let W=[];try{const savedW=JSON.parse(localStorage.getItem('w')||'[]');W=Array.isArray(savedW)?savedW:[]}catch(e){}
 const save=()=>{try{localStorage.setItem('w',JSON.stringify(W))}catch(e){}};
 const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 const ALL=RULEQ.concat(SIGNQ,MQ);const EXQ=RULEQ.concat(MQ.filter(i=>{const q=Q[i];return !RULEQ.includes(i)&&!SIGNQ.includes(i)&&!q.t&&!q.n&&!q.o&&!q.p&&!q.hz&&!q[4]&&!(q.m&&q.m.length>1)&&q[1].length==4}));W=W.filter(x=>ALL.includes(x));let S=null,V='home';
