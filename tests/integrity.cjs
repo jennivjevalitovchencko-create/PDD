@@ -14,7 +14,7 @@ function load(saved={}){
 }
 const {a}=load();
 assert.equal(a.Q.length,655);
-assert.equal(a.EXQ.length,211);
+assert.equal(a.EXQ.length,213);
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -100,7 +100,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
  assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
 }
-assert.equal(a.RT[4].ids.length,18,'Alcohol/police/emergencies topic size (+N3 brake failure order)');
+assert.equal(a.RT[4].ids.length,19,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock)');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 // Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
 const restored=load({w:'null',r:'{"66":1}'});
@@ -165,4 +165,4 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
   assert(d.en&&(d.en.q||d.en.name),'English kept in spec '+d.key);
  }
 }
-console.log('PASS: new questions N1-N9 and extra topic G1-G6, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');

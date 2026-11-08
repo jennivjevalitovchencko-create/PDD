@@ -1,80 +1,362 @@
 {
- "source": "editorial/new-questions/PDD-new-questions-2026-11-08.md (N1-N9 from the user's examples, facts checked by pdd-question-reviewer 2026-11-08; G1-G6 'Полезно знать (не из учебника)' — user: «делай как думаешь будет лучше», 2026-11-09). Russian text is shown in the app; English is our own wording for a future English version.",
- "topicExtra": {"n": "Полезно знать (не из учебника)", "t": "## Зачем эта тема\n\nЭтого нет в учебнике Коннектикута, и на экзамене DMV таких вопросов, скорее всего, не будет. Но это полезно знать за рулём: здесь собраны советы по безопасности, а не требования закона.\n\nВопросы этой темы не попадают в пробный экзамен."},
+ "source": "editorial/new-questions/PDD-new-questions-2026-11-08.md (N1-N9 from the user's examples, facts checked by pdd-question-reviewer 2026-11-08; G1-G6 'Полезно знать (не из учебника)' — user: «делай как думаешь будет лучше», 2026-11-09). Russian text is shown in the app; English is our own wording for a future English version. Reviewer fixes 2026-11-09: G3 -> N10 (manual p.40) and G6 -> N11 (CGS §14-242(d)) moved to regular topics; N3, N4, N6, N7, G1, G2, G4, G5 reworded.",
+ "topicExtra": {
+  "n": "Полезно знать (не из учебника)",
+  "t": "## Зачем эта тема\n\nЭтого нет в учебнике Коннектикута или есть лишь в общем виде, и на экзамене DMV таких вопросов, скорее всего, не будет. Но это полезно знать за рулём: здесь советы по безопасности, а не требования закона.\n\nВопросы этой темы не попадают в пробный экзамен."
+ },
  "questions": [
-  {"key": "N1", "topic": 14, "type": "single",
+  {
+   "key": "N1",
+   "topic": 14,
+   "type": "single",
    "q": "Ваша машина не прошла проверку выхлопа (emissions). Сколько времени даётся, чтобы отремонтировать её и пройти повторную проверку?",
-   "o": ["60 дней", "30 дней", "14 дней", "7 дней"], "m": [0],
+   "o": [
+    "60 дней",
+    "30 дней",
+    "14 дней",
+    "7 дней"
+   ],
+   "m": [
+    0
+   ],
    "e": "После неудачной проверки выхлопа на ремонт и повторную проверку даётся 60 дней. Учебник, стр. 11; Conn. Gen. Stat. §14-164c.",
-   "en": {"q": "Your car failed the emissions test. How long do you have to repair it and pass a retest?", "o": ["60 days", "30 days", "14 days", "7 days"]}},
-  {"key": "N2", "topic": 14, "type": "single",
+   "en": {
+    "q": "Your car failed the emissions test. How long do you have to repair it and pass a retest?",
+    "o": [
+     "60 days",
+     "30 days",
+     "14 days",
+     "7 days"
+    ]
+   }
+  },
+  {
+   "key": "N2",
+   "topic": 14,
+   "type": "single",
    "q": "В ваших правах указано ограничение: водить только в очках или контактных линзах. Полиция остановила вас, когда вы были за рулём без них. Что вам грозит?",
-   "o": ["Штраф (citation): если очки или линзы указаны в правах, водить без них нельзя", "Ничего, если вы не нарушили других правил: очки нужны только для экзамена", "Ничего, если вы ехали днём и видимость была хорошей", "Только требование возить очки с собой, без наказания"], "m": [0],
-   "e": "Если в правах указано, что нужны очки или контактные линзы, водить без них нельзя: за это выписывают штраф (citation). Учебник, стр. 5.",
-   "en": {"q": "Your license says you must wear glasses or contact lenses. An officer stops you while you are driving without them. What can happen?", "o": ["You may get a citation", "Nothing, if you broke no other rule", "Nothing, if it was daytime with good visibility", "Only a reminder to carry them"]}},
-  {"key": "N3", "topic": 4, "type": "order",
+   "o": [
+    "Штраф (citation): если очки или линзы указаны в правах, водить без них нельзя",
+    "Ничего, если вы не нарушили других правил: очки нужны только для экзамена",
+    "Ничего, если вы ехали днём и видимость была хорошей",
+    "Только требование возить очки с собой, без наказания"
+   ],
+   "m": [
+    0
+   ],
+   "e": "Если в правах указано, что нужны очки или контактные линзы, водить без них нельзя: за это могут выписать штраф (citation). Учебник, стр. 5.",
+   "en": {
+    "q": "Your license says you must wear glasses or contact lenses. An officer stops you while you are driving without them. What can happen?",
+    "o": [
+     "You may get a citation",
+     "Nothing, if you broke no other rule",
+     "Nothing, if it was daytime with good visibility",
+     "Only a reminder to carry them"
+    ]
+   }
+  },
+  {
+   "key": "N3",
+   "topic": 4,
+   "type": "order",
    "q": "У вас отказали тормоза",
-   "o": ["Несколько раз нажать на педаль тормоза", "Если не помогло, медленно потянуть стояночный тормоз, чтобы не заблокировать задние колёса", "Если не помогло и это, переходить на пониженные передачи", "Искать безопасное место, чтобы остановиться"],
-   "e": "Сначала несколько раз нажмите на педаль. Не помогло — медленно тяните стояночный тормоз и будьте готовы отпустить его при заносе. Затем переходите на пониженные передачи и ищите безопасное место для остановки. Без тормозов дальше не ехать. Учебник, стр. 39.",
-   "en": {"q": "Your brakes fail (put the steps in order)", "o": ["Pump the brake pedal several times", "If that does not help, pull the parking brake slowly so the rear wheels do not lock", "If that does not help either, shift to lower gears", "Find a safe place to stop"]}},
-  {"key": "N4", "topic": 3, "type": "single",
+   "o": [
+    "Несколько раз нажать на педаль тормоза",
+    "Медленно потянуть стояночный тормоз, чтобы не заблокировать задние колёса",
+    "Переходить на пониженные передачи и искать безопасное место",
+    "Остановиться вне проезжей части и дальше без тормозов не ехать"
+   ],
+   "e": "Сначала несколько раз нажмите на педаль. Если не помогло, медленно тяните стояночный тормоз и будьте готовы отпустить его при заносе. Затем переходите на пониженные передачи и ищите безопасное место, чтобы остановиться вне проезжей части. Без тормозов дальше не ехать. Учебник, стр. 39.",
+   "en": {
+    "q": "Your brakes fail (put the steps in order)",
+    "o": [
+     "Pump the brake pedal several times",
+     "Pull the parking brake slowly so the rear wheels do not lock",
+     "Shift to lower gears and look for a safe place",
+     "Stop off the roadway and do not drive on without brakes"
+    ]
+   }
+  },
+  {
+   "key": "N4",
+   "topic": 3,
+   "type": "single",
    "q": "Вы хотите повернуть направо во въезд, который находится сразу за перекрёстком. Когда включить поворотник?",
-   "o": ["Когда уже въедете на перекрёсток", "За 3 секунды до перекрёстка, как перед любым поворотом", "Не включать: въезд во двор — это не поворот на улицу", "Только у самого въезда, когда начнёте поворачивать"], "m": [0],
-   "e": "Не включайте поворотник слишком рано: если до места поворота есть перекрёсток или другой въезд, водители решат, что вы поворачиваете там. Включите сигнал, когда уже будете на перекрёстке. Учебник, стр. 39.",
-   "en": {"q": "You want to turn right into a driveway just past an intersection. When should you signal?", "o": ["Once you are in the intersection", "3 seconds before the intersection, as before any turn", "No signal is needed for a driveway", "Only at the driveway, as you start to turn"]}},
-  {"key": "N5", "topic": 3, "type": "number",
+   "o": [
+    "Дождаться перекрёстка и включить сигнал там",
+    "За 3 секунды до перекрёстка, как всегда",
+    "Не включать: въезд во двор — не поворот",
+    "Только у самого въезда, когда начнёте поворачивать"
+   ],
+   "m": [
+    0
+   ],
+   "e": "Не включайте поворотник слишком рано: если до места поворота есть перекрёсток или другой въезд, водители решат, что вы поворачиваете там. Включите сигнал, когда доедете до перекрёстка. Учебник, стр. 39.",
+   "en": {
+    "q": "You want to turn right into a driveway just past an intersection. When should you signal?",
+    "o": [
+     "Wait until you reach the intersection and signal there",
+     "3 seconds before the intersection, as always",
+     "No signal: a driveway is not a street",
+     "Only at the driveway, as you start to turn"
+    ]
+   }
+  },
+  {
+   "key": "N5",
+   "topic": 3,
+   "type": "number",
    "q": "По закону Коннектикута поворотник перед поворотом должен гореть непрерывно не меньше последних ___ футов",
-   "n": [100],
-   "e": "Закон требует сигналить непрерывно не меньше последних 100 футов перед поворотом (Conn. Gen. Stat. §14-242). Учебник советует включать сигнал не меньше чем за 3 секунды: на скорости это больше 100 футов. Учебник, стр. 39.",
-   "en": {"q": "Under Connecticut law, you must signal continuously for at least the last ___ feet before turning", "n": [100]}},
-  {"key": "N6", "topic": 11, "type": "multi",
+   "n": [
+    100
+   ],
+   "e": "Закон требует сигналить непрерывно не меньше последних 100 футов перед поворотом (Conn. Gen. Stat. §14-242). Учебник советует включать сигнал не меньше чем за 3 секунды: на скорости выше примерно 23 миль/ч это больше 100 футов. Учебник, стр. 39.",
+   "en": {
+    "q": "Under Connecticut law, you must signal continuously for at least the last ___ feet before turning",
+    "n": [
+     100
+    ]
+   }
+  },
+  {
+   "key": "N6",
+   "topic": 11,
+   "type": "multi",
    "q": "Давление в шинах низкое или колёса не отбалансированы. К чему это приводит?",
-   "o": ["Шины изнашиваются быстрее", "Машина расходует больше топлива", "Машина хуже слушается руля и хуже тормозит", "Тормозной путь становится короче: мягкая шина лучше цепляется за дорогу"], "m": [0, 1, 2],
+   "o": [
+    "Шины изнашиваются быстрее",
+    "Машина расходует больше топлива",
+    "Машина хуже слушается руля и хуже тормозит",
+    "Тормозной путь становится короче"
+   ],
+   "m": [
+    0,
+    1,
+    2
+   ],
    "e": "Низкое давление и несбалансированные колёса ускоряют износ шин, увеличивают расход топлива, ухудшают управление и торможение. Давление проверяйте манометром; нужное значение указано на табличке в проёме двери или в инструкции к машине. Учебник, стр. 11.",
-   "en": {"q": "Low tire pressure or unbalanced wheels can cause:", "o": ["Faster tire wear", "Higher fuel use", "Worse steering and braking", "Shorter stopping distance, because a soft tire grips better"]}},
-  {"key": "N7", "topic": 18, "type": "single", "img": "exit44",
+   "en": {
+    "q": "Low tire pressure or unbalanced wheels can cause:",
+    "o": [
+     "Faster tire wear",
+     "Higher fuel use",
+     "Worse steering and braking",
+     "Shorter stopping distance"
+    ]
+   }
+  },
+  {
+   "key": "N7",
+   "topic": 18,
+   "type": "single",
+   "img": "exit44",
    "q": "Что означает число на этом знаке над трассой?",
-   "o": ["Номер съезда (exit)", "Расстояние до съезда в милях", "Номер трассы", "Ограничение скорости на съезде"], "m": [0],
-   "e": "Зелёные знаки над трассой — указатели направлений. Крупное число рядом со словом EXIT — номер съезда. Во многих местах номера съездов привязаны к милевым столбам (milepost), поэтому по ним можно прикинуть расстояние. Учебник, стр. 51.",
-   "en": {"q": "What does the number on this overhead sign mean?", "o": ["The exit number", "Miles to the exit", "The route number", "The speed limit on the ramp"]}},
-  {"key": "N8", "topic": 3, "type": "single",
+   "o": [
+    "Номер съезда (exit)",
+    "Расстояние до съезда в милях",
+    "Номер трассы",
+    "Ограничение скорости на съезде"
+   ],
+   "m": [
+    0
+   ],
+   "e": "Зелёные знаки над трассой — указатели направлений. Крупное число рядом со словом EXIT — номер съезда. Милевые столбы (milepost) стоят через каждую милю: по номеру столба и номеру съезда можно вычислить, сколько ехать до нужного съезда. Учебник, стр. 51.",
+   "en": {
+    "q": "What does the number on this overhead sign mean?",
+    "o": [
+     "The exit number",
+     "Miles to the exit",
+     "The route number",
+     "The speed limit on the ramp"
+    ]
+   }
+  },
+  {
+   "key": "N8",
+   "topic": 3,
+   "type": "single",
    "q": "Водитель впереди высунул левую руку из окна и опустил её вниз. Что он показывает?",
-   "o": ["Что тормозит или останавливается", "Что поворачивает направо", "Что поворачивает налево", "Что пропускает вас вперёд"], "m": [0],
-   "e": "Сигналы рукой подают левой рукой из окна: рука вытянута в сторону — поворот налево, согнута вверх — направо, опущена вниз — остановка или торможение. Conn. Gen. Stat. §14-244; учебник, стр. 39.",
-   "en": {"q": "The driver ahead puts the left arm out of the window, pointing down. What does it mean?", "o": ["Slowing down or stopping", "Turning right", "Turning left", "Letting you go first"]}},
-  {"key": "N9", "type": "sign", "img": "farm",
+   "o": [
+    "Что тормозит или останавливается",
+    "Что поворачивает направо",
+    "Что поворачивает налево",
+    "Что пропускает вас вперёд"
+   ],
+   "m": [
+    0
+   ],
+   "e": "Сигналы рукой подают левой рукой из окна: рука вытянута в сторону — поворот налево, поднята вверх — направо, опущена вниз — остановка или торможение. Conn. Gen. Stat. §14-244; учебник, стр. 39.",
+   "en": {
+    "q": "The driver ahead puts the left arm out of the window, pointing down. What does it mean?",
+    "o": [
+     "Slowing down or stopping",
+     "Turning right",
+     "Turning left",
+     "Letting you go first"
+    ]
+   }
+  },
+  {
+   "key": "N9",
+   "type": "sign",
+   "img": "farm",
    "name": "Сельхозтехника на дороге (Farm Machinery)",
    "e": "Впереди на дорогу могут выезжать или ехать тракторы и другая медленная техника. Будьте готовы сбавить скорость. Обгоняйте, только когда это безопасно.",
-   "en": {"name": "Farm machinery may be on the road ahead"}},
-  {"key": "G1", "topic": "extra", "type": "single",
+   "en": {
+    "name": "Farm machinery may be on the road ahead"
+   }
+  },
+  {
+   "key": "G1",
+   "topic": "extra",
+   "type": "single",
    "q": "Вы долго едете по однообразной трассе и замечаете, что взгляд «застыл» на дороге впереди, а внимание притупилось. Что помогает?",
-   "o": ["Постоянно переводить взгляд: вдаль, в зеркала, по сторонам, а при усталости остановиться и отдохнуть", "Включить музыку погромче, чтобы взбодриться", "Чаще перестраиваться из полосы в полосу, чтобы не заскучать", "Разговаривать по громкой связи до конца поездки"], "m": [0],
+   "o": [
+    "Чаще переводить взгляд и делать остановки для отдыха",
+    "Включить музыку погромче, чтобы взбодриться",
+    "Чаще перестраиваться, чтобы не заскучать",
+    "Разговаривать по громкой связи до конца поездки"
+   ],
+   "m": [
+    0
+   ],
    "e": "Это «дорожный гипноз» (highway hypnosis): на монотонной трассе водитель словно засыпает с открытыми глазами. Постоянно переводите взгляд, проверяйте зеркала, делайте остановки для отдыха. Громкая музыка и разговоры отвлекают, а лишние перестроения опасны. Совет по безопасности, не из учебника CT.",
-   "en": {"q": "On a long, monotonous highway you notice your eyes are fixed on the road ahead and you feel less alert. What helps?", "o": ["Keep moving your eyes: far ahead, mirrors, sides; stop and rest if tired", "Turn the music up loud to wake up", "Change lanes often to stay busy", "Talk on a hands-free call for the rest of the trip"]}},
-  {"key": "G2", "topic": "extra", "type": "single",
+   "en": {
+    "q": "On a long, monotonous highway you notice your eyes are fixed on the road ahead and you feel less alert. What helps?",
+    "o": [
+     "Keep moving your eyes and stop to rest",
+     "Turn the music up loud to wake up",
+     "Change lanes often to stay busy",
+     "Talk on a hands-free call for the rest of the trip"
+    ]
+   }
+  },
+  {
+   "key": "G2",
+   "topic": "extra",
+   "type": "single",
    "q": "Ночью фары машины сзади слепят вас в салонном зеркале. Что лучше сделать?",
-   "o": ["Переключить салонное зеркало в ночной режим (рычажок «день/ночь»)", "Резко притормозить, чтобы водитель сзади отстал", "Повернуть зеркало так, чтобы в нём не было видно машин сзади", "Включить дальний свет, чтобы водитель сзади понял, что мешает"], "m": [0],
+   "o": [
+    "Переключить салонное зеркало в ночной режим",
+    "Резко притормозить, чтобы водитель сзади отстал",
+    "Повернуть зеркало так, чтобы в нём не было видно машин сзади",
+    "Включить дальний свет, чтобы водитель сзади понял, что мешает"
+   ],
+   "m": [
+    0
+   ],
    "e": "У многих салонных зеркал есть рычажок «день/ночь»: в ночном режиме блики гаснут, а машины сзади остаются видны. Настройте зеркала до начала поездки. Резко тормозить «в наказание» опасно, а отвёрнутое зеркало лишает вас обзора. Совет по безопасности, не из учебника CT.",
-   "en": {"q": "At night, headlights from the car behind glare in your inside mirror. What is best?", "o": ["Flip the inside mirror to its night setting (day/night lever)", "Brake suddenly so the driver behind backs off", "Turn the mirror so you cannot see the cars behind", "Turn on your high beams to show the driver behind"]}},
-  {"key": "G3", "topic": "extra", "type": "single",
+   "en": {
+    "q": "At night, headlights from the car behind glare in your inside mirror. What is best?",
+    "o": [
+     "Flip the inside mirror to its night setting",
+     "Brake suddenly so the driver behind backs off",
+     "Turn the mirror so you cannot see the cars behind",
+     "Turn on your high beams to show the driver behind"
+    ]
+   }
+  },
+  {
+   "key": "N10",
+   "topic": 4,
+   "type": "single",
    "q": "Почему нельзя поворачивать ключ зажигания в положение LOCK, пока машина едет?",
-   "o": ["Заблокируется руль, и машиной нельзя будет управлять", "Заблокируется педаль газа", "Сразу сработают подушки безопасности", "Машина автоматически включит аварийную сигнализацию и остановится"], "m": [0],
-   "e": "В положении LOCK блокируется руль: на ходу машина станет неуправляемой. Кроме того, при выключенном двигателе пропадают усилители руля и тормозов, и рулить и тормозить становится намного тяжелее. Совет по безопасности, не из учебника CT.",
-   "en": {"q": "Why must you never turn the ignition key to LOCK while the car is moving?", "o": ["The steering wheel locks and you cannot steer", "The gas pedal locks", "The airbags deploy at once", "The car turns on the hazard lights and stops by itself"]}},
-  {"key": "G4", "topic": "extra", "type": "single",
-   "q": "Из-под капота пошёл пар. О чём это, скорее всего, говорит?",
-   "o": ["Двигатель перегрелся: что-то не так с системой охлаждения", "Короткое замыкание в электрике", "Отказала система ABS", "Так испаряется вода после дождя, ехать можно дальше"], "m": [0],
+   "o": [
+    "Заблокируется руль, и машиной нельзя будет управлять",
+    "Заблокируется педаль газа",
+    "Сразу сработают подушки безопасности",
+    "Заглохнет двигатель, и машина мгновенно остановится"
+   ],
+   "m": [
+    0
+   ],
+   "e": "В положении LOCK блокируется руль: на ходу машина станет неуправляемой. Учебник, стр. 40 (Steering Wheel Locks).",
+   "en": {
+    "q": "Why must you never turn the ignition key to LOCK while the car is moving?",
+    "o": [
+     "The steering wheel locks and you cannot steer",
+     "The gas pedal locks",
+     "The airbags deploy at once",
+     "The engine dies and the car stops instantly"
+    ]
+   }
+  },
+  {
+   "key": "G4",
+   "topic": "extra",
+   "type": "single",
+   "q": "В ясную сухую погоду из-под капота идёт густой пар. О чём это, скорее всего, говорит?",
+   "o": [
+    "Перегрев двигателя: проблема с охлаждением",
+    "Короткое замыкание в электропроводке двигателя",
+    "Отказала антиблокировочная система тормозов (ABS)",
+    "Пар от горячего двигателя безвреден, ехать можно дальше"
+   ],
+   "m": [
+    0
+   ],
    "e": "Пар из-под капота обычно означает перегрев двигателя. Съезжайте в безопасное место и заглушите двигатель. Не открывайте крышку радиатора на горячем двигателе: может обжечь паром и кипятком. Совет по безопасности, не из учебника CT.",
-   "en": {"q": "Steam is coming from under the hood. What does it most likely mean?", "o": ["The engine has overheated: something is wrong with the cooling system", "A short circuit in the electrical system", "The ABS has failed", "Rainwater is evaporating, you can keep driving"]}},
-  {"key": "G5", "topic": "extra", "type": "multi",
+   "en": {
+    "q": "On a clear, dry day thick steam is coming from under the hood. What does it most likely mean?",
+    "o": [
+     "The engine is overheating: a cooling problem",
+     "A short circuit in the engine wiring",
+     "The anti-lock brakes (ABS) have failed",
+     "Steam from a hot engine is harmless, keep driving"
+    ]
+   }
+  },
+  {
+   "key": "G5",
+   "topic": "extra",
+   "type": "multi",
    "q": "Вы едете по загородной дороге. На что нужно обращать особое внимание?",
-   "o": ["Железнодорожные переезды без шлагбаума и огней, только со знаком-крестом (crossbuck)", "Перекрёстки и выезды, скрытые за холмами, деревьями и поворотами", "Медленная техника и животные на дороге", "Полосы разгона: за городом они обычно длиннее, чем в городе"], "m": [0, 1, 2],
-   "e": "За городом чаще встречаются переезды без шлагбаума и огней: у знака-креста сбавьте скорость, посмотрите в обе стороны и прислушайтесь. Перекрёстки и выезды бывают скрыты рельефом и деревьями, на дороге могут оказаться трактор или животные. Про полосы разгона ничего особого сказать нельзя: они бывают разной длины. Совет по безопасности, не из учебника CT.",
-   "en": {"q": "You are driving on a rural road. What needs extra attention?", "o": ["Railroad crossings with no gates or lights, only a crossbuck", "Intersections and driveways hidden by hills, trees and curves", "Slow farm vehicles and animals on the road", "Acceleration lanes, which are usually longer outside cities"]}},
-  {"key": "G6", "topic": "extra", "type": "single",
-   "q": "Где опасно разворачиваться, даже если знака, запрещающего разворот, нет?",
-   "o": ["На повороте или у вершины холма, где водители с обеих сторон не увидят вас вовремя", "На широкой прямой улице, где далеко видно в обе стороны", "На перекрёстке со светофором, если разворот там не запрещён", "На тихой улице жилого района, где мало машин"], "m": [0],
-   "e": "Если обзор закрыт поворотом или холмом, считайте, что из-за него вот-вот появится машина (учебник, стр. 24). Разворачиваться там опасно: водители с обеих сторон не успеют вас заметить и остановиться. Разворот на скоростной дороге (expressway) запрещён всегда (учебник, стр. 37). Совет по безопасности.",
-   "en": {"q": "Where is a U-turn dangerous even if no sign prohibits it?", "o": ["On a curve or near the top of a hill, where drivers from either direction cannot see you in time", "On a wide straight street with a clear view both ways", "At a signal-controlled intersection where U-turns are not prohibited", "On a quiet residential street with little traffic"]}}
+   "o": [
+    "Переезды без шлагбаума и огней, только со знаком crossbuck",
+    "Перекрёстки и выезды, скрытые за холмами, деревьями и поворотами",
+    "Медленная техника и животные на дороге",
+    "Пешеходные переходы со светофорами: за городом их особенно много"
+   ],
+   "m": [
+    0,
+    1,
+    2
+   ],
+   "e": "За городом чаще встречаются переезды без шлагбаума и огней: у знака-креста (crossbuck) сбавьте скорость, посмотрите в обе стороны и прислушайтесь. Перекрёстки и выезды бывают скрыты холмами и деревьями, на дороге могут оказаться трактор или животные. Об ограниченном обзоре — учебник, стр. 24; акцент на загородных дорогах — наш совет.",
+   "en": {
+    "q": "You are driving on a rural road. What needs extra attention?",
+    "o": [
+     "Railroad crossings with no gates or lights, only a crossbuck",
+     "Intersections and driveways hidden by hills, trees and curves",
+     "Slow farm vehicles and animals on the road",
+     "Signal-controlled crosswalks, which are especially common outside cities"
+    ]
+   }
+  },
+  {
+   "key": "N11",
+   "topic": 8,
+   "type": "single",
+   "q": "Где нельзя разворачиваться, даже если знака, запрещающего разворот, нет?",
+   "o": [
+    "На повороте или у вершины холма, где вас не видно издалека",
+    "На широкой прямой улице, где далеко видно в обе стороны",
+    "На перекрёстке со светофором, если разворот там не запрещён",
+    "На тихой улице жилого района, где мало машин"
+   ],
+   "m": [
+    0
+   ],
+   "e": "Закон запрещает разворачиваться на повороте или у вершины подъёма, если водители с обеих сторон не видят вас за 500 футов (Conn. Gen. Stat. §14-242). На скоростной дороге (expressway) разворот запрещён всегда (учебник, стр. 37). За поворотом или холмом считайте, что навстречу идёт машина (учебник, стр. 24).",
+   "en": {
+    "q": "Where may you not make a U-turn even if no sign prohibits it?",
+    "o": [
+     "On a curve or near the top of a hill where you cannot be seen from far away",
+     "On a wide straight street with a clear view both ways",
+     "At a signal-controlled intersection where U-turns are not prohibited",
+     "On a quiet residential street with little traffic"
+    ]
+   }
+  }
  ]
 }
