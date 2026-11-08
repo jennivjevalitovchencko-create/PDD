@@ -14,7 +14,7 @@ function load(saved={}){
 }
 const {a}=load();
 assert.equal(a.Q.length,640);
-assert.equal(a.EXQ.length,206);
+assert.equal(a.EXQ.length,207);
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -35,7 +35,7 @@ for(const id of [634,635]){assert.equal(a.Q[id].m.length,2);assert(!a.EXQ.includ
 const svgOf=f=>fs.readFileSync(path.join(__dirname,'../editorial/svg',f),'utf8').replace(/\r/g,'').trim();
 for(const [id,start,key,file] of [
  [636,'Вы полностью остановились у знака STOP',[2],'row-new-1-two-way-stop.svg'],
- [637,'Вы выезжаете передним ходом с парковки магазина',[0,1],'row-new-2-driveway-sidewalk.svg']]){
+ [637,'Вы выезжаете с парковки магазина',[0,1],'row-new-2-driveway-sidewalk-v2.svg']]){
  const q=a.Q[id];
  assert(q[0].startsWith(start),'New question text '+id);
  assert.equal(q[1].length,4,'New question options '+id);
@@ -49,7 +49,35 @@ for(const [id,start,key,file] of [
  assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
  assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);
 }
-assert.equal(a.RT[1].ids.length,28,'Right-of-way topic size');
+assert.equal(a.RT[1].ids.length,27,'Right-of-way topic size');
+// Right-of-way topic review 2026-11-08: every edited question equals editorial/review/row-edits-2026-11-08.json
+const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
+for(const e of rowSpec.edits){
+ const q=a.Q[e.id];
+ if(e.q)assert.equal(q[0],e.q,'ROW text '+e.id);
+ if(e.o)assert.deepEqual([...q[1]],e.o,'ROW options '+e.id);
+ if(e.m){assert.deepEqual([...q.m],e.m,'ROW key '+e.id);assert.equal(q[2],e.m[0],'ROW primary key '+e.id)}
+ if(e.e)assert.equal(q[3],e.e,'ROW explanation '+e.id);
+ if(e.format)assert(!q.n,'ROW format changed '+e.id);
+ if(e.moveTo!=null){assert(a.RT[e.moveTo].ids.includes(e.id)&&!a.RT[1].ids.includes(e.id),'ROW moved '+e.id)}
+ else assert(a.RT[1].ids.includes(e.id),'ROW topic '+e.id);
+}
+assert.equal(a.Q[422][1].length,2,'Q422 stays true/false');
+assert(!/^Неверно/.test(a.Q[422][3]),'Q422 explanation must not repeat the verdict');
+assert(a.RT[1].t.includes('если подъезжаете почти одновременно, уступаете тому, кто справа'),'Right-of-way theory');
+assert(a.EXQ.includes(307),'Q307 single-choice now in exam pool');
+// Progress reset for edited questions: old answers are dropped once, other progress stays, rerun is idempotent
+{
+ const old=load({r:'{"64":1,"65":0,"66":1,"637":1}',w:'[65,66,637]',st:'[64]'});
+ assert(!('64' in old.a.R)&&!('65' in old.a.R)&&!('637' in old.a.R),'Edited questions reset');
+ assert.equal(old.a.R['66'],1,'Unchanged question progress kept');
+ assert.deepEqual([...old.a.W],[66],'Edited questions removed from repeat list');
+ assert.equal(old.storage.st,'[64]','Starred kept');
+ const marks=JSON.parse(old.storage.qv);
+ assert.equal(marks['64'],'2026-11-08','Revision mark saved');
+ const again=load({...old.storage,r:'{"64":1,"66":1}'});
+ assert.equal(again.a.R['64'],1,'Answer given after the change is kept on reload');
+}
 // Approved crash scenario questions C1/C2 (editorial/crash/PDD-crash-scenarios-2026-11-05.md): text, options, key and explanation must equal the approved record
 const crashMd=fs.readFileSync(path.join(__dirname,'../editorial/crash/PDD-crash-scenarios-2026-11-05.md'),'utf8').replace(/\r/g,'');
 const crashSub=(s,title)=>{const i=s.indexOf('### '+title);assert(i>=0,'Editorial subsection '+title);const j=s.indexOf('\n### ',i+4);return s.slice(i+4+title.length,j<0?undefined:j).trim()};
@@ -74,23 +102,24 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
 }
 assert.equal(a.RT[4].ids.length,17,'Alcohol/police/emergencies topic size');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
-const restored=load({w:'null',r:'{"64":1}'});
+// Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
+const restored=load({w:'null',r:'{"66":1}'});
 assert(Array.isArray(restored.a.W)&&restored.a.W.length===0,'Malformed repeat list not normalized');
-assert.equal(restored.a.R['64'],1,'Unrelated progress lost');
+assert.equal(restored.a.R['66'],1,'Unrelated progress lost');
 for(const raw of ['null','[]','[1]','42','"x"','true','{']){
- const saved={r:raw,w:'[64]',st:'[64]',d:'[1]'};
+ const saved={r:raw,w:'[66]',st:'[66]',d:'[1]'};
  const checked=load(saved);
  assert.doesNotThrow(()=>checked.a.openTopics(),'Topics with malformed r='+raw);
  assert(checked.a.R&&typeof checked.a.R==='object'&&!Array.isArray(checked.a.R),'Progress map type for '+raw);
  assert.equal(Object.keys(checked.a.R).length,0,'Malformed progress falls back to empty map');
  for(const [key,value] of Object.entries(saved))assert.equal(checked.storage[key],value,'Loading must not overwrite '+key);
 }
-const validSaved={r:'{"64":1,"68":0}',w:'[64]',st:'[68]',d:'[1]'};
+const validSaved={r:'{"66":1,"297":0}',w:'[66]',st:'[297]',d:'[1]'};
 const valid=load(validSaved);
 assert.doesNotThrow(()=>valid.a.openTopics(),'Topics with valid saved progress');
-assert.equal(valid.a.R['64'],1,'Correct answer progress preserved');
-assert.equal(valid.a.R['68'],0,'Incorrect answer progress preserved');
+assert.equal(valid.a.R['66'],1,'Correct answer progress preserved');
+assert.equal(valid.a.R['297'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
-console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
