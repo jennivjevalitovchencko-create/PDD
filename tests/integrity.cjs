@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,openTopics:()=>go("sign")};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,openTopics:()=>go("sign")};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -54,7 +54,7 @@ assert.equal(a.RT[1].ids.length,27,'Right-of-way topic size');
 const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
 for(const e of rowSpec.edits){
  const q=a.Q[e.id];
- if(e.q)assert.equal(q[0],e.q,'ROW text '+e.id);
+ if(e.q&&e.id!==294)assert.equal(q[0],e.q,'ROW text '+e.id); // Q294 text later adapted to its driver-view picture (checked below)
  if(e.o)assert.deepEqual([...q[1]],e.o,'ROW options '+e.id);
  if(e.m){assert.deepEqual([...q.m],e.m,'ROW key '+e.id);assert.equal(q[2],e.m[0],'ROW primary key '+e.id)}
  if(e.e)assert.equal(q[3],e.e,'ROW explanation '+e.id);
@@ -122,4 +122,23 @@ assert.equal(valid.a.R['297'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
-console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+// Driver's-view pictures (editorial/img/driver-view, frame approved 2026-11-08): app copies embedded byte-for-byte, frame built, progress reset
+{
+ const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
+ assert.deepEqual(Object.keys(a.DVI).sort(),files.map(f=>f.replace(/.jpg$/,'')),'DVI matches app images');
+ for(const f of files)assert.equal(a.DVI[f.replace(/.jpg$/,'')],'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,f)).toString('base64'),'DVI image '+f);
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,213,294],'Driver-view questions');
+ for(const [id,d] of Object.entries(a.DV)){
+  const q=a.Q[id],prefix='data:image/svg+xml;charset=utf-8,';
+  assert(typeof q[4]==='string'&&q[4].startsWith(prefix)&&q.dv===1&&q.sc===1,'Driver-view image '+id);
+  const svg=decodeURIComponent(q[4].slice(prefix.length));
+  assert(typeof d[1]==='number'&&d[1]>=0&&d[1]<=80,'Dashboard speed '+id);
+  assert(svg.includes(a.DVI[d[0]])&&svg.includes(a.DVI.dash),'Scene and dashboard in frame '+id);
+  if(d[4])assert(svg.includes(a.DVI[d[4]]),'Mirror scene '+id);
+  assert.equal(a.QV[id],'2026-11-08-img','Progress reset mark '+id);
+ }
+ assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
+ assert.deepEqual([...a.Q[213].m],[0,1],'Q213 key');
+ assert.equal(a.Q[294][0],'Вы подъезжаете к перекрёстку двух дорог без знаков и светофоров. Что верно?','Q294 text for its picture');
+}
+console.log('PASS: driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
