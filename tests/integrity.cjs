@@ -141,4 +141,11 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
  assert.deepEqual([...a.Q[213].m],[0,1],'Q213 key');
  assert.equal(a.Q[294][0],'Вы подъезжаете к перекрёстку двух дорог без знаков и светофоров. Что верно?','Q294 text for its picture');
 }
-console.log('PASS: driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+// Parking distances follow the law (CGS §14-251 as amended by P.A. 25-65, eff. 2025-10-01): 30 ft from STOP/YIELD, intersections and marked crosswalks; hydrant 10 ft. User decision 2026-11-08: law only.
+{
+ assert(!/25 футов[^'"]{0,40}(Stop|STOP)|(Stop|STOP)[^'"]{0,40}25 футов|пешеходнS* (безопаснS* )?зон/.test(script),'No 25-ft STOP / pedestrian safety zone rules left');
+ for(const id of [291,622])assert(JSON.stringify(a.Q[id].n).includes('30')&&a.Q[id][1][0].endsWith(': 30'),'Number answer 30 for Q'+id);
+ assert(a.Q[70][1][a.Q[70][2]].startsWith('Нельзя ближе 30 футов'),'Q70 key 30 ft');
+ for(const id of [20,69,70,72,282,291,436,597,622])assert(a.QV[id],'Parking question progress reset '+id);
+}
+console.log('PASS: parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
