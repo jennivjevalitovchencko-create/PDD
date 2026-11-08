@@ -13,7 +13,7 @@ function load(saved={}){
  return {a:c.audit,storage};
 }
 const {a}=load();
-assert.equal(a.Q.length,638);
+assert.equal(a.Q.length,640);
 assert.equal(a.EXQ.length,206);
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
@@ -50,6 +50,30 @@ for(const [id,start,key,file] of [
  assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);
 }
 assert.equal(a.RT[1].ids.length,28,'Right-of-way topic size');
+// Approved crash scenario questions C1/C2 (editorial/crash/PDD-crash-scenarios-2026-11-05.md): text, options, key and explanation must equal the approved record
+const crashMd=fs.readFileSync(path.join(__dirname,'../editorial/crash/PDD-crash-scenarios-2026-11-05.md'),'utf8').replace(/\r/g,'');
+const crashSub=(s,title)=>{const i=s.indexOf('### '+title);assert(i>=0,'Editorial subsection '+title);const j=s.indexOf('\n### ',i+4);return s.slice(i+4+title.length,j<0?undefined:j).trim()};
+for(const [id,code] of [[638,'C1'],[639,'C2']]){
+ const i=crashMd.indexOf('\n## '+code+'.');
+ assert(i>=0,'Editorial section '+code);
+ const sec=crashMd.slice(i,crashMd.indexOf('\n---',i));
+ const opts=crashSub(sec,'Варианты (порядок до перемешивания)');
+ const options=[...opts.matchAll(/^(\d)\. (.+)$/gm)].map(m=>m[2].trim());
+ const key=JSON.parse(opts.match(/\*\*Ключ:\*\* `(\[[\d,]+\])`/)[1]);
+ const q=a.Q[id];
+ assert.equal(q[0],crashSub(sec,'Условие'),'Crash question text '+code);
+ assert.deepEqual([...q[1]],options,'Crash question options '+code);
+ assert.deepEqual([...q.m],key,'Crash question key '+code);
+ assert.deepEqual(key,[0,1],'Crash approved key '+code);
+ assert.equal(q[2],key[0],'Crash question primary key '+code);
+ assert.equal(q[3],crashSub(sec,'Объяснение для приложения'),'Crash question explanation '+code);
+ assert(!q[4]&&!q.sc,'Crash question has no image '+code);
+ assert(a.RT[4].n==='Алкоголь, полиция, аварийные ситуации'&&a.RT[4].ids.includes(id),'Crash question topic '+code);
+ assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
+ assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
+}
+assert.equal(a.RT[4].ids.length,17,'Alcohol/police/emergencies topic size');
+assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 const restored=load({w:'null',r:'{"64":1}'});
 assert(Array.isArray(restored.a.W)&&restored.a.W.length===0,'Malformed repeat list not normalized');
 assert.equal(restored.a.R['64'],1,'Unrelated progress lost');
@@ -69,4 +93,4 @@ assert.equal(valid.a.R['68'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
-console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
