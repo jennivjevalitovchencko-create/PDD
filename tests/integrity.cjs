@@ -9,12 +9,12 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,openTopics:()=>go("sign")};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,openTopics:()=>go("sign")};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
-assert.equal(a.Q.length,640);
-assert.equal(a.EXQ.length,207);
+assert.equal(a.Q.length,655);
+assert.equal(a.EXQ.length,211);
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -100,7 +100,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
  assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
 }
-assert.equal(a.RT[4].ids.length,17,'Alcohol/police/emergencies topic size');
+assert.equal(a.RT[4].ids.length,18,'Alcohol/police/emergencies topic size (+N3 brake failure order)');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 // Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
 const restored=load({w:'null',r:'{"66":1}'});
@@ -148,4 +148,21 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
  assert(a.Q[70][1][a.Q[70][2]].startsWith('Нельзя ближе 30 футов'),'Q70 key 30 ft');
  for(const id of [20,69,70,72,282,291,436,597,622])assert(a.QV[id],'Parking question progress reset '+id);
 }
-console.log('PASS: parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+// New questions 2026-11-09 (editorial/new-questions/new-questions-2026-11-09.json): app text equals the spec, extras stay out of the exam
+{
+ const spec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/new-questions/new-questions-2026-11-09.json'),'utf8'));
+ const XT=a.RT.findIndex(x=>x.n===spec.topicExtra.n);assert(XT>0&&a.RT[XT].t===spec.topicExtra.t,'Extra topic');
+ for(const d of spec.questions){
+  if(d.type==='sign'){const s=a.SG3.find(x=>x[1]===d.name);assert(s&&s[2]===d.e&&s[0].startsWith('data:image/svg+xml'),'Sign '+d.key);assert(a.CD.some(c=>c.a===d.name),'Sign card '+d.key);continue}
+  const ids=a.Q.map((q,i)=>q.k===d.key?i:-1).filter(i=>i>=0);assert.equal(ids.length,1,'One question '+d.key);const id=ids[0],q=a.Q[id];
+  assert.equal(q[3],d.e,'Explanation '+d.key);
+  if(d.type==='order'){assert.equal(q[0],d.q+' (нажимайте шаги по порядку)');assert.deepEqual([...q[1]],d.o);assert.equal(q.o,1)}
+  else if(d.type==='number'){assert.equal(q[0],d.q+' (введите число)');assert.deepEqual([...q.n],d.n)}
+  else{assert.equal(q[0],d.q,'Text '+d.key);assert.deepEqual([...q[1]],d.o,'Options '+d.key);assert.deepEqual([...q.m],d.m,'Key '+d.key)}
+  const t=d.topic==='extra'?XT:d.topic;assert(a.RT[t].ids.includes(id)&&a.MQ.includes(id),'Topic and pool '+d.key);
+  if(d.topic==='extra')assert(q.xt===1&&!a.EXQ.includes(id),'Extra kept out of exam '+d.key);
+  if(d.img)assert(typeof q[4]==='string'&&q[4].startsWith('data:image/svg+xml'),'Image '+d.key);
+  assert(d.en&&(d.en.q||d.en.name),'English kept in spec '+d.key);
+ }
+}
+console.log('PASS: new questions N1-N9 and extra topic G1-G6, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
