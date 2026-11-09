@@ -1,0 +1,1343 @@
+[
+{
+"q": 114,
+"topic": 10,
+"rules": [
+"A-058",
+"C-061"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 115,
+"topic": 10,
+"rules": [
+"A-060",
+"C-060"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 116,
+"topic": 10,
+"rules": [
+"A-059",
+"C-061"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 117,
+"topic": 10,
+"rules": [
+"A-059",
+"A-062",
+"A-064",
+"A-060"
+],
+"fmt": "multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 118,
+"topic": 10,
+"rules": [
+"C-081",
+"A-121",
+"C-079"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 119,
+"topic": 10,
+"rules": [
+"A-031",
+"A-045"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 269,
+"topic": 10,
+"rules": [
+"C-057",
+"A-043"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 441,
+"topic": 10,
+"rules": [
+"C-057"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 460,
+"topic": 10,
+"rules": [
+"C-080"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 461,
+"topic": 10,
+"rules": [
+"C-083",
+"C-084",
+"C-081",
+"C-082"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 462,
+"topic": 10,
+"rules": [
+"C-076",
+"C-077",
+"C-069"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 463,
+"topic": 10,
+"rules": [
+"A-030"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 464,
+"topic": 10,
+"rules": [
+"A-065",
+"A-063",
+"A-064"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 471,
+"topic": 10,
+"rules": [
+"A-037"
+],
+"fmt": "single",
+"level": 3,
+"dup": [
+147
+],
+"flag": ""
+},
+{
+"q": 472,
+"topic": 10,
+"rules": [
+"C-080"
+],
+"fmt": "single",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 474,
+"topic": 10,
+"rules": [
+"A-034",
+"A-035"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 475,
+"topic": 10,
+"rules": [
+"A-035"
+],
+"fmt": "number",
+"level": 1,
+"dup": [
+150
+],
+"flag": ""
+},
+{
+"q": 479,
+"topic": 10,
+"rules": [
+"A-061"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 480,
+"topic": 10,
+"rules": [
+"A-064",
+"C-059"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 120,
+"topic": 11,
+"rules": [
+"B-187",
+"B-186",
+"D-002"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 121,
+"topic": 11,
+"rules": [
+"B-188",
+"B-189"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 122,
+"topic": 11,
+"rules": [
+"B-192",
+"B-191"
+],
+"fmt": "single",
+"level": 3,
+"dup": [
+262
+],
+"flag": ""
+},
+{
+"q": 123,
+"topic": 11,
+"rules": [
+"B-197"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+249
+],
+"flag": ""
+},
+{
+"q": 124,
+"topic": 11,
+"rules": [
+"B-195",
+"A-080"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 125,
+"topic": 11,
+"rules": [
+"B-020",
+"D-020",
+"D-021"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 126,
+"topic": 11,
+"rules": [
+"B-190",
+"NEW: шипованные шины портят покрытие, поэтому во многих местах и на некоторых дорогах запрещены (учебник стр. 25)"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 127,
+"topic": 11,
+"rules": [
+"B-185",
+"B-182"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 249,
+"topic": 11,
+"rules": [
+"B-197"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+123
+],
+"flag": ""
+},
+{
+"q": 262,
+"topic": 11,
+"rules": [
+"B-194",
+"B-193",
+"B-192"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+122
+],
+"flag": ""
+},
+{
+"q": 267,
+"topic": 11,
+"rules": [
+"B-195"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 420,
+"topic": 11,
+"rules": [
+"D-068"
+],
+"fmt": "tf",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 449,
+"topic": 11,
+"rules": [
+"D-112"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 465,
+"topic": 11,
+"rules": [
+"D-113"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 466,
+"topic": 11,
+"rules": [
+"D-121",
+"D-120"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+482
+],
+"flag": ""
+},
+{
+"q": 467,
+"topic": 11,
+"rules": [
+"D-076",
+"D-082",
+"D-081",
+"D-070"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 468,
+"topic": 11,
+"rules": [
+"A-078",
+"A-079"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 469,
+"topic": 11,
+"rules": [
+"B-184"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 476,
+"topic": 11,
+"rules": [
+"D-081"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 481,
+"topic": 11,
+"rules": [
+"B-189",
+"B-187"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 482,
+"topic": 11,
+"rules": [
+"D-121"
+],
+"fmt": "order",
+"level": 4,
+"dup": [
+466
+],
+"flag": ""
+},
+{
+"q": 645,
+"topic": 11,
+"rules": [
+"A-081",
+"A-082"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 128,
+"topic": 12,
+"rules": [
+"B-096",
+"B-142",
+"B-103"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 129,
+"topic": 12,
+"rules": [
+"B-100",
+"B-098"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+421
+],
+"flag": ""
+},
+{
+"q": 130,
+"topic": 12,
+"rules": [
+"B-106",
+"B-124",
+"B-097"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 131,
+"topic": 12,
+"rules": [
+"B-104"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 132,
+"topic": 12,
+"rules": [
+"B-110",
+"B-109",
+"B-102"
+],
+"fmt": "multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 133,
+"topic": 12,
+"rules": [
+"B-111"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 134,
+"topic": 12,
+"rules": [
+"B-107",
+"B-108"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+510
+],
+"flag": ""
+},
+{
+"q": 261,
+"topic": 12,
+"rules": [
+"B-095",
+"B-098",
+"B-102"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 268,
+"topic": 12,
+"rules": [
+"B-101"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 421,
+"topic": 12,
+"rules": [
+"B-100"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [
+129
+],
+"flag": "граница «кабина» / «вся передняя часть» спорная: в учебнике entire front, кабина и есть перед — ответ «Неверно» неочевиден"
+},
+{
+"q": 440,
+"topic": 12,
+"rules": [
+"B-101"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 483,
+"topic": 12,
+"rules": [
+"NEW: если грузовик замедляется, останавливается, сигналит или меняет полосу — причина есть: снизить скорость, держать позицию, не обгонять, пока не безопасно (учебник стр. 20 «Other Hints»)"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 495,
+"topic": 12,
+"rules": [
+"B-105"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 496,
+"topic": 12,
+"rules": [
+"B-098"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 497,
+"topic": 12,
+"rules": [
+"B-114"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 498,
+"topic": 12,
+"rules": [
+"B-112"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 506,
+"topic": 12,
+"rules": [
+"B-099"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 510,
+"topic": 12,
+"rules": [
+"B-108"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [
+134
+],
+"flag": ""
+},
+{
+"q": 514,
+"topic": 12,
+"rules": [
+"B-103",
+"B-100",
+"B-098",
+"B-146"
+],
+"fmt": "order",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 135,
+"topic": 13,
+"rules": [
+"B-060",
+"D-014",
+"B-061"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 136,
+"topic": 13,
+"rules": [
+"B-069",
+"B-063"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+515
+],
+"flag": ""
+},
+{
+"q": 137,
+"topic": 13,
+"rules": [
+"B-071",
+"B-070"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 138,
+"topic": 13,
+"rules": [
+"B-059"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 139,
+"topic": 13,
+"rules": [
+"B-076"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 140,
+"topic": 13,
+"rules": [
+"B-078",
+"B-079"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 141,
+"topic": 13,
+"rules": [
+"B-080"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 142,
+"topic": 13,
+"rules": [
+"B-073"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 264,
+"topic": 13,
+"rules": [
+"B-062",
+"B-039"
+],
+"fmt": "number",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 428,
+"topic": 13,
+"rules": [
+"B-062",
+"B-140"
+],
+"fmt": "tf",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 484,
+"topic": 13,
+"rules": [
+"B-056",
+"B-066",
+"B-064"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 485,
+"topic": 13,
+"rules": [
+"B-049",
+"B-072"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 486,
+"topic": 13,
+"rules": [
+"B-075",
+"B-015",
+"NEW: у мотоцикла малый профиль — его скорость и расстояние до него трудно оценить; перед левым поворотом внимательно смотреть вперёд и по сторонам (учебник стр. 18)"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [
+507
+],
+"flag": ""
+},
+{
+"q": 487,
+"topic": 13,
+"rules": [
+"B-077"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": "вариант 3 «мотоциклист обязан их объезжать» — такой обязанности в учебнике нет; неверный вариант (ровный асфальт) нелепый"
+},
+{
+"q": 488,
+"topic": 13,
+"rules": [
+"B-066",
+"NEW: на мокрой дороге, песке и гравии велосипед не может тормозить так же быстро и поворачивать так же резко; эти условия влияют на велосипед сильнее, чем на машину (учебник стр. 17)"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": "вариант 1 искажает учебник: там «как и машины, велосипеды в этих условиях тормозят хуже», а не «хуже машин»"
+},
+{
+"q": 499,
+"topic": 13,
+"rules": [
+"B-064"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 500,
+"topic": 13,
+"rules": [
+"B-081"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 501,
+"topic": 13,
+"rules": [
+"B-067",
+"B-086",
+"B-062"
+],
+"fmt": "single",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 502,
+"topic": 13,
+"rules": [
+"B-068"
+],
+"fmt": "single",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 507,
+"topic": 13,
+"rules": [
+"B-075"
+],
+"fmt": "number",
+"level": 1,
+"dup": [
+486
+],
+"flag": ""
+},
+{
+"q": 511,
+"topic": 13,
+"rules": [
+"B-057"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 515,
+"topic": 13,
+"rules": [
+"B-069",
+"B-060"
+],
+"fmt": "order",
+"level": 4,
+"dup": [
+136
+],
+"flag": ""
+},
+{
+"q": 143,
+"topic": 14,
+"rules": [
+"A-020",
+"A-017",
+"NEW: теоретический тест основан на информации из учебника (учебник стр. 5)"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [
+509
+],
+"flag": ""
+},
+{
+"q": 144,
+"topic": 14,
+"rules": [
+"A-016"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 145,
+"topic": 14,
+"rules": [
+"A-018"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 146,
+"topic": 14,
+"rules": [
+"A-022",
+"A-023",
+"A-021"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 147,
+"topic": 14,
+"rules": [
+"A-037",
+"A-044"
+],
+"fmt": "single",
+"level": 3,
+"dup": [
+471
+],
+"flag": ""
+},
+{
+"q": 148,
+"topic": 14,
+"rules": [
+"A-044",
+"A-045",
+"A-014"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 149,
+"topic": 14,
+"rules": [
+"A-014",
+"A-054"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 150,
+"topic": 14,
+"rules": [
+"A-035",
+"A-034"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [
+475
+],
+"flag": ""
+},
+{
+"q": 151,
+"topic": 14,
+"rules": [
+"A-050",
+"A-051",
+"A-052"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [
+513
+],
+"flag": ""
+},
+{
+"q": 258,
+"topic": 14,
+"rules": [
+"NEW: с 01.01.2026 перед экзаменом на learner's permit нужно пройти бесплатный онлайн-курс Work Zone Safety Course и получить сертификат (ct.gov/dmv; в учебнике 2023 нет)",
+"A-017"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [
+430
+],
+"flag": ""
+},
+{
+"q": 430,
+"topic": 14,
+"rules": [
+"NEW: с 01.01.2026 перед экзаменом на learner's permit нужно пройти бесплатный онлайн-курс Work Zone Safety Course (ct.gov/dmv; в учебнике 2023 нет)"
+],
+"fmt": "tf",
+"level": 1,
+"dup": [
+258
+],
+"flag": ""
+},
+{
+"q": 489,
+"topic": 14,
+"rules": [
+"A-056"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 490,
+"topic": 14,
+"rules": [
+"A-054",
+"A-055"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [
+508
+],
+"flag": ""
+},
+{
+"q": 491,
+"topic": 14,
+"rules": [
+"A-039",
+"A-038"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 492,
+"topic": 14,
+"rules": [
+"A-050",
+"A-052"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 493,
+"topic": 14,
+"rules": [
+"A-003",
+"A-004",
+"A-006",
+"A-007"
+],
+"fmt": "multi",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 494,
+"topic": 14,
+"rules": [
+"A-048",
+"A-049",
+"NEW: на экзамене держать «space cushion» вокруг машины по скорости, дороге и потоку (учебник стр. 7)"
+],
+"fmt": "multi",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 503,
+"topic": 14,
+"rules": [
+"A-040"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 504,
+"topic": 14,
+"rules": [
+"A-053"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 505,
+"topic": 14,
+"rules": [
+"A-057"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 508,
+"topic": 14,
+"rules": [
+"A-055"
+],
+"fmt": "number",
+"level": 1,
+"dup": [
+490
+],
+"flag": ""
+},
+{
+"q": 509,
+"topic": 14,
+"rules": [
+"A-020"
+],
+"fmt": "number",
+"level": 1,
+"dup": [
+143
+],
+"flag": ""
+},
+{
+"q": 512,
+"topic": 14,
+"rules": [
+"A-001",
+"A-002"
+],
+"fmt": "tf",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 513,
+"topic": 14,
+"rules": [
+"A-051"
+],
+"fmt": "tf",
+"level": 2,
+"dup": [
+151
+],
+"flag": ""
+},
+{
+"q": 516,
+"topic": 14,
+"rules": [
+"A-017",
+"A-044",
+"A-045",
+"A-055"
+],
+"fmt": "order",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 640,
+"topic": 14,
+"rules": [
+"A-074"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 641,
+"topic": 14,
+"rules": [
+"A-028"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+}
+]

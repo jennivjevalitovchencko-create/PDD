@@ -1,0 +1,1362 @@
+[
+{
+"q": 185,
+"topic": 20,
+"rules": [
+"A-080",
+"B-195"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 186,
+"topic": 20,
+"rules": [
+"A-095",
+"A-092",
+"A-091"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": "в объяснении «неверно второе утверждение учебника», а в вопросе оно стоит первым — путает"
+},
+{
+"q": 187,
+"topic": 20,
+"rules": [
+"B-041",
+"D-026",
+"B-040"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+278
+],
+"flag": ""
+},
+{
+"q": 188,
+"topic": 20,
+"rules": [
+"B-095"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+261
+],
+"flag": ""
+},
+{
+"q": 189,
+"topic": 20,
+"rules": [
+"D-021",
+"D-020"
+],
+"fmt": "single",
+"level": 2,
+"dup": [
+64,
+209
+],
+"flag": "верный ответ «первой едет машина справа» неполон: так только при одновременном прибытии (ключ учебника)"
+},
+{
+"q": 190,
+"topic": 20,
+"rules": [
+"D-144",
+"B-146",
+"B-147"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+100
+],
+"flag": ""
+},
+{
+"q": 191,
+"topic": 20,
+"rules": [
+"D-077",
+"D-078",
+"D-079",
+"C-016"
+],
+"fmt": "single",
+"level": 2,
+"dup": [
+74
+],
+"flag": ""
+},
+{
+"q": 192,
+"topic": 20,
+"rules": [
+"E-065"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+39
+],
+"flag": ""
+},
+{
+"q": 193,
+"topic": 20,
+"rules": [
+"E-074"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 194,
+"topic": 20,
+"rules": [
+"E-010",
+"E-009"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 195,
+"topic": 21,
+"rules": [
+"B-046",
+"D-013",
+"B-178",
+"D-011"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 196,
+"topic": 21,
+"rules": [
+"B-050",
+"B-137",
+"B-139"
+],
+"fmt": "picture-multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 197,
+"topic": 21,
+"rules": [
+"B-062",
+"B-140",
+"B-152",
+"B-065",
+"B-064"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 198,
+"topic": 21,
+"rules": [
+"B-069",
+"B-071",
+"B-060",
+"B-147"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+137
+],
+"flag": ""
+},
+{
+"q": 199,
+"topic": 21,
+"rules": [
+"B-075",
+"B-076",
+"D-017",
+"B-015",
+"B-123"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+486,
+139
+],
+"flag": ""
+},
+{
+"q": 200,
+"topic": 21,
+"rules": [
+"B-102",
+"B-109",
+"B-110"
+],
+"fmt": "picture-single",
+"level": 3,
+"dup": [
+132
+],
+"flag": ""
+},
+{
+"q": 201,
+"topic": 21,
+"rules": [
+"B-095",
+"B-096",
+"B-097",
+"B-098",
+"B-101"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+128
+],
+"flag": ""
+},
+{
+"q": 202,
+"topic": 21,
+"rules": [
+"D-028",
+"D-026",
+"D-027",
+"B-041"
+],
+"fmt": "picture-single",
+"level": 3,
+"dup": [
+285,
+531
+],
+"flag": ""
+},
+{
+"q": 203,
+"topic": 21,
+"rules": [
+"B-042",
+"B-043",
+"B-146"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+113,
+273
+],
+"flag": ""
+},
+{
+"q": 204,
+"topic": 21,
+"rules": [
+"B-048",
+"B-046"
+],
+"fmt": "picture-multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 205,
+"topic": 21,
+"rules": [
+"B-054",
+"B-053",
+"D-015",
+"E-043"
+],
+"fmt": "picture-single",
+"level": 3,
+"dup": [
+161
+],
+"flag": "4-й вариант про собаку-поводыря не относится к ситуации (у пешехода трость) — нелепый неверный вариант"
+},
+{
+"q": 206,
+"topic": 21,
+"rules": [
+"D-029",
+"D-031",
+"D-030"
+],
+"fmt": "picture-multi",
+"level": 3,
+"dup": [
+427
+],
+"flag": ""
+},
+{
+"q": 207,
+"topic": 21,
+"rules": [
+"D-030",
+"D-029",
+"B-050"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+283
+],
+"flag": ""
+},
+{
+"q": 208,
+"topic": 21,
+"rules": [
+"D-034",
+"D-018",
+"D-036",
+"D-037",
+"D-038"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+66
+],
+"flag": ""
+},
+{
+"q": 209,
+"topic": 21,
+"rules": [
+"D-020",
+"D-021",
+"D-007"
+],
+"fmt": "picture-order",
+"level": 4,
+"dup": [
+189,
+64
+],
+"flag": ""
+},
+{
+"q": 210,
+"topic": 21,
+"rules": [
+"E-132",
+"B-025",
+"B-024"
+],
+"fmt": "picture-multi",
+"level": 3,
+"dup": [],
+"flag": ""
+},
+{
+"q": 211,
+"topic": 21,
+"rules": [
+"B-159",
+"B-155",
+"B-115",
+"E-007"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 212,
+"topic": 21,
+"rules": [
+"B-118",
+"B-117",
+"B-116",
+"B-113"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 213,
+"topic": 21,
+"rules": [
+"B-147",
+"B-149",
+"B-074",
+"B-148"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [],
+"flag": ""
+},
+{
+"q": 214,
+"topic": 21,
+"rules": [
+"B-170",
+"B-171",
+"B-050",
+"D-022",
+"B-172"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+522
+],
+"flag": ""
+},
+{
+"q": 215,
+"topic": 21,
+"rules": [
+"B-126",
+"B-078",
+"B-077",
+"B-073"
+],
+"fmt": "picture-multi",
+"level": 4,
+"dup": [
+140
+],
+"flag": ""
+},
+{
+"q": 649,
+"topic": 22,
+"rules": [
+"NEW: на монотонной трассе («дорожный гипноз») постоянно переводить взгляд, проверять зеркала и делать остановки для отдыха (совет, не из учебника)",
+"C-042",
+"C-044"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 650,
+"topic": 22,
+"rules": [
+"NEW: если фары сзади слепят в салонном зеркале — переключить его в ночной режим, а не отворачивать (совет, не из учебника)",
+"A-093"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 652,
+"topic": 22,
+"rules": [
+"NEW: пар из-под капота — перегрев двигателя: съехать, заглушить, не открывать крышку радиатора на горячем двигателе (совет, не из учебника)",
+"D-097"
+],
+"fmt": "single",
+"level": 2,
+"dup": [],
+"flag": ""
+},
+{
+"q": 653,
+"topic": 22,
+"rules": [
+"B-024",
+"E-128",
+"B-175",
+"B-084",
+"B-178"
+],
+"fmt": "multi",
+"level": 3,
+"dup": [],
+"flag": "неверный вариант угадывается («за городом переходов со светофорами особенно много» — заведомо нелепо)"
+},
+{
+"q": 26,
+"topic": "signs",
+"rules": [
+"E-059",
+"E-056",
+"E-057"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+8
+],
+"flag": ""
+},
+{
+"q": 27,
+"topic": "signs",
+"rules": [
+"E-061",
+"E-060"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+9
+],
+"flag": ""
+},
+{
+"q": 28,
+"topic": "signs",
+"rules": [
+"E-080",
+"E-081"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 29,
+"topic": "signs",
+"rules": [
+"E-082"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 30,
+"topic": "signs",
+"rules": [
+"E-083",
+"E-079"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 31,
+"topic": "signs",
+"rules": [
+"E-079",
+"E-084"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 32,
+"topic": "signs",
+"rules": [
+"E-087"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 33,
+"topic": "signs",
+"rules": [
+"E-088",
+"E-089"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 34,
+"topic": "signs",
+"rules": [
+"E-090",
+"D-061"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 35,
+"topic": "signs",
+"rules": [
+"E-091"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 36,
+"topic": "signs",
+"rules": [
+"E-093"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 37,
+"topic": "signs",
+"rules": [
+"E-097"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+220
+],
+"flag": "варианты берутся случайно из названий других знаков — может выпасть «переход с табличкой-стрелкой» (Q220), тоже по сути верный"
+},
+{
+"q": 38,
+"topic": "signs",
+"rules": [
+"E-101"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+241
+],
+"flag": "варианты берутся случайно из названий других знаков — может выпасть «Конец разделённой дороги» (Q241): по учебнику Two-Way Road Way означает именно это"
+},
+{
+"q": 39,
+"topic": "signs",
+"rules": [
+"E-065",
+"E-098"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+192
+],
+"flag": ""
+},
+{
+"q": 40,
+"topic": "signs",
+"rules": [
+"E-100"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 41,
+"topic": "signs",
+"rules": [
+"E-068",
+"E-069"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+11
+],
+"flag": ""
+},
+{
+"q": 42,
+"topic": "signs",
+"rules": [
+"E-096"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 43,
+"topic": "signs",
+"rules": [
+"E-102"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 44,
+"topic": "signs",
+"rules": [
+"E-094"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 45,
+"topic": "signs",
+"rules": [
+"E-103"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 46,
+"topic": "signs",
+"rules": [
+"E-104"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 47,
+"topic": "signs",
+"rules": [
+"E-105"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 48,
+"topic": "signs",
+"rules": [
+"E-107"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 49,
+"topic": "signs",
+"rules": [
+"E-108"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 50,
+"topic": "signs",
+"rules": [
+"E-116"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 51,
+"topic": "signs",
+"rules": [
+"E-116"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 52,
+"topic": "signs",
+"rules": [
+"E-077"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+13
+],
+"flag": ""
+},
+{
+"q": 53,
+"topic": "signs",
+"rules": [
+"E-076"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 54,
+"topic": "signs",
+"rules": [
+"E-118"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 55,
+"topic": "signs",
+"rules": [
+"E-122",
+"B-027"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": "варианты берутся случайно из названий других знаков — для знаков Q227/Q228 вариант «Дорожные работы» тоже по сути верен"
+},
+{
+"q": 56,
+"topic": "signs",
+"rules": [
+"E-124"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 57,
+"topic": "signs",
+"rules": [
+"E-125",
+"E-123"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 58,
+"topic": "signs",
+"rules": [
+"E-127",
+"E-067"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+10
+],
+"flag": "варианты берутся случайно из названий других знаков — «Железнодорожный переезд» и «Крест Railroad Crossing» (Q59) могут оказаться верными одновременно"
+},
+{
+"q": 59,
+"topic": "signs",
+"rules": [
+"E-128"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": "варианты берутся случайно из названий других знаков — вариант «Железнодорожный переезд» (Q58) для крестовины тоже по сути верен"
+},
+{
+"q": 217,
+"topic": "signs",
+"rules": [
+"E-085"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 218,
+"topic": "signs",
+"rules": [
+"E-086"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 219,
+"topic": "signs",
+"rules": [
+"E-095"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 220,
+"topic": "signs",
+"rules": [
+"E-097",
+"E-066"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+37
+],
+"flag": ""
+},
+{
+"q": 221,
+"topic": "signs",
+"rules": [
+"E-106"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 222,
+"topic": "signs",
+"rules": [
+"E-110"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 223,
+"topic": "signs",
+"rules": [
+"E-111"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 224,
+"topic": "signs",
+"rules": [
+"E-112"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 225,
+"topic": "signs",
+"rules": [
+"E-113"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 226,
+"topic": "signs",
+"rules": [
+"E-114"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 227,
+"topic": "signs",
+"rules": [
+"NEW: знак Shoulder Work — работы на обочине (MUTCD; в учебнике нет)",
+"E-122"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 228,
+"topic": "signs",
+"rules": [
+"NEW: знак Utility Work Ahead — впереди работы коммунальных служб (MUTCD; в учебнике нет)",
+"E-122"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 229,
+"topic": "signs",
+"rules": [
+"E-129"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 230,
+"topic": "signs",
+"rules": [
+"NEW: знак NO PARKING ANY TIME — стоянка запрещена в любое время (MUTCD; в учебнике нет)",
+"D-064"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 231,
+"topic": "signs",
+"rules": [
+"NEW: знак NO STOPPING ANY TIME — остановка запрещена в любое время (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 232,
+"topic": "signs",
+"rules": [
+"NEW: знак Tow-Away Zone — неправильно поставленную машину эвакуируют (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 233,
+"topic": "signs",
+"rules": [
+"NEW: знак STOP HERE ON RED — место остановки на красный (MUTCD; в учебнике нет)",
+"E-012"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 234,
+"topic": "signs",
+"rules": [
+"E-079",
+"E-084"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 235,
+"topic": "signs",
+"rules": [
+"E-086",
+"E-084"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 236,
+"topic": "signs",
+"rules": [
+"E-076"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 237,
+"topic": "signs",
+"rules": [
+"NEW: знак Roundabout Ahead — впереди кольцо (MUTCD; в учебнике нет)",
+"D-033"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 238,
+"topic": "signs",
+"rules": [
+"NEW: знак Low Clearance — ограничение высоты проезда (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 239,
+"topic": "signs",
+"rules": [
+"NEW: знак Added Lane — добавляется полоса (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 240,
+"topic": "signs",
+"rules": [
+"NEW: знак Narrow Bridge — впереди узкий мост (MUTCD; в учебнике нет)",
+"B-143"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 241,
+"topic": "signs",
+"rules": [
+"NEW: знак Divided Highway Ends — конец разделённой дороги (MUTCD; в учебнике нет)",
+"E-101"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [
+38
+],
+"flag": "по учебнику это значение у знака Two-Way Road Way (Q38) — два знака с одним смыслом"
+},
+{
+"q": 242,
+"topic": "signs",
+"rules": [
+"NEW: знак Hill — крутой спуск (MUTCD; в учебнике нет)",
+"B-177"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 243,
+"topic": "signs",
+"rules": [
+"NEW: знак Bump — неровность на дороге (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 244,
+"topic": "signs",
+"rules": [
+"NEW: знак Dip — впадина на дороге (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 245,
+"topic": "signs",
+"rules": [
+"NEW: знак School Bus Stop Ahead — впереди остановка школьного автобуса (MUTCD; в учебнике нет)",
+"D-029"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 246,
+"topic": "signs",
+"rules": [
+"NEW: знак Deer Crossing — олени на дороге (MUTCD; в учебнике нет)"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 648,
+"topic": "signs",
+"rules": [
+"NEW: знак Farm Machinery — сельхозтехника на дороге (MUTCD; в учебнике нет)",
+"B-084"
+],
+"fmt": "picture-single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 8,
+"topic": "signs",
+"rules": [
+"E-056"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+26
+],
+"flag": ""
+},
+{
+"q": 9,
+"topic": "signs",
+"rules": [
+"E-061",
+"E-060"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+27
+],
+"flag": "только у верного варианта английское пояснение «(yield)» — ответ угадывается"
+},
+{
+"q": 10,
+"topic": "signs",
+"rules": [
+"E-067",
+"E-127"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+58
+],
+"flag": ""
+},
+{
+"q": 11,
+"topic": "signs",
+"rules": [
+"E-068",
+"E-069"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+41
+],
+"flag": ""
+},
+{
+"q": 12,
+"topic": "signs",
+"rules": [
+"E-073",
+"E-122"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": ""
+},
+{
+"q": 13,
+"topic": "signs",
+"rules": [
+"E-077",
+"E-076"
+],
+"fmt": "single",
+"level": 1,
+"dup": [
+52
+],
+"flag": "в объяснении «Учебник, стр. 44» — неверно (цвета стр. 47, парки стр. 51); пояснение в скобках только у верного варианта"
+},
+{
+"q": 14,
+"topic": "signs",
+"rules": [
+"E-076"
+],
+"fmt": "single",
+"level": 1,
+"dup": [],
+"flag": "верный вариант самый длинный и единственный с пояснением в скобках — угадывается"
+}
+]

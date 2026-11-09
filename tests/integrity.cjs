@@ -166,4 +166,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
   assert(d.en&&(d.en.q||d.en.name),'English kept in spec '+d.key);
  }
 }
+// Rule-map tagging fixes 2026-11-09: no two same-meaning sign names among the options; 'регулировщик', not 'флагман'
+assert(!/флагман/i.test(script),'No флагман');
+for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Что означает этот знак?')continue;const G=[['Впереди пешеходный переход','Пешеходный переход с табличкой-стрелкой'],['Двустороннее движение','Конец разделённой дороги (Divided Highway Ends)'],['Дорожные работы','Работы на обочине (Shoulder Work)','Работы коммунальных служб (Utility Work Ahead)'],['Железнодорожный переезд','Крест «Railroad Crossing»','Переезд со шлагбаумом и мигающими огнями']];const c=q[1][q[2]];for(const g of G)if(g.includes(c))assert(q[1].filter(o=>g.includes(o)).length===1,'A same-meaning sign offered as a wrong option: '+q[1].join(' / '))}}
 console.log('PASS: new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
