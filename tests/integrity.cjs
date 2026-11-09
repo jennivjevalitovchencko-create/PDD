@@ -54,7 +54,7 @@ assert.equal(a.RT[1].ids.length,27,'Right-of-way topic size');
 const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
 for(const e of rowSpec.edits){
  const q=a.Q[e.id];
- if(e.q&&e.id!==294)assert.equal(q[0],e.q,'ROW text '+e.id); // Q294 text later adapted to its driver-view picture (checked below)
+ if(e.q&&!(e.id in a.DV))assert.equal(q[0],e.q,'ROW text '+e.id); // questions with a driver-view picture get a short text (checked below)
  if(e.o)assert.deepEqual([...q[1]],e.o,'ROW options '+e.id);
  if(e.m){assert.deepEqual([...q.m],e.m,'ROW key '+e.id);assert.equal(q[2],e.m[0],'ROW primary key '+e.id)}
  if(e.e)assert.equal(q[3],e.e,'ROW explanation '+e.id);
@@ -138,8 +138,9 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
   assert.equal(a.QV[id],'2026-11-08-img','Progress reset mark '+id);
  }
  assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
+ const DT=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
+ for(const id of Object.keys(a.DV))assert.equal(a.Q[id][0],DT[id].short,'Short text with picture '+id);
  assert.deepEqual([...a.Q[213].m],[0,1],'Q213 key');
- assert.equal(a.Q[294][0],'Вы подъезжаете к перекрёстку двух дорог без знаков и светофоров. Что верно?','Q294 text for its picture');
 }
 // Parking distances follow the law (CGS §14-251 as amended by P.A. 25-65, eff. 2025-10-01): 30 ft from STOP/YIELD, intersections and marked crosswalks; hydrant 10 ft. User decision 2026-11-08: law only.
 {
