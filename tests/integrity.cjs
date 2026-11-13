@@ -130,7 +130,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
  const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
  assert.deepEqual(Object.keys(a.DVI).sort(),files.map(f=>f.replace(/.jpg$/,'')),'DVI matches app images');
  for(const f of files)assert.equal(a.DVI[f.replace(/.jpg$/,'')],'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,f)).toString('base64'),'DVI image '+f);
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,213,294],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294],'Driver-view questions');
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],prefix='data:image/svg+xml;charset=utf-8,';
   assert(typeof q[4]==='string'&&q[4].startsWith(prefix)&&q.dv===1&&q.sc===1,'Driver-view image '+id);
@@ -138,7 +138,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
   assert(typeof d[1]==='number'&&d[1]>=0&&d[1]<=80,'Dashboard speed '+id);
   assert(svg.includes(a.DVI[d[0]])&&svg.includes(a.DVI.dash),'Scene and dashboard in frame '+id);
   if(d[4])assert(svg.includes(a.DVI[d[4]]),'Mirror scene '+id);
-  assert.equal(a.QV[id],'2026-11-08-img','Progress reset mark '+id);
+  assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
  }
  assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
  const DT=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
@@ -178,12 +178,13 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
 // Question fixes from the rule-map review (editorial/rules/fixes-*.json): the app equals the reviewed text, progress is reset
 {
  const dir=path.join(__dirname,'../editorial/rules');
- const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e));
+ const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img));
  for(const f of fixes){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
   if(f.q)assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id);
   if(f.o)assert.deepEqual(q.p?Array.from(q.p,x=>x.join(' → ')):[...q[1]],f.o,'Fix options '+f.id);
   if(f.m){assert.deepEqual([...q.m],f.m,'Fix key '+f.id);assert.equal(q[2],f.m[0],'Fix primary key '+f.id)}
   if(f.e)assert.equal(q[3],f.e,'Fix explanation '+f.id);
+  if(f.img)assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
