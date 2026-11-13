@@ -13,6 +13,8 @@ function load(saved={}){
  return {a:c.audit,storage};
 }
 const {a}=load();
+// Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
+const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,655);
 assert.equal(a.EXQ.length,213);
 assert.equal(a.SIGNQ.length,54);
@@ -54,6 +56,7 @@ assert.equal(a.RT[1].ids.length,27,'Right-of-way topic size');
 const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
 for(const e of rowSpec.edits){
  const q=a.Q[e.id];
+ if(FIXED.has(e.id))continue; // re-edited in the rule-map review, checked against fixes-*.json
  if(e.q&&!(e.id in a.DV))assert.equal(q[0],e.q,'ROW text '+e.id); // questions with a driver-view picture get a short text (checked below)
  if(e.o)assert.deepEqual([...q[1]],e.o,'ROW options '+e.id);
  if(e.m){assert.deepEqual([...q.m],e.m,'ROW key '+e.id);assert.equal(q[2],e.m[0],'ROW primary key '+e.id)}
@@ -151,13 +154,16 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
 }
 // New questions 2026-11-09 (editorial/new-questions/new-questions-2026-11-09.json): app text equals the spec, extras stay out of the exam
 {
- const spec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/new-questions/new-questions-2026-11-09.json'),'utf8'));
+ const nqDir=path.join(__dirname,'../editorial/new-questions'),specs=fs.readdirSync(nqDir).filter(f=>/^new-questions-.*\.json$/.test(f)).sort().map(f=>JSON.parse(fs.readFileSync(path.join(nqDir,f),'utf8')));
+ const spec={topicExtra:specs.find(x=>x.topicExtra).topicExtra,questions:specs.flatMap(x=>Array.isArray(x)?x:x.questions)};
+ assert.equal(new Set(spec.questions.map(d=>d.key)).size,spec.questions.length,'Unique keys of new questions');
  const XT=a.RT.findIndex(x=>x.n===spec.topicExtra.n);assert(XT>0&&a.RT[XT].t===spec.topicExtra.t,'Extra topic');
  for(const d of spec.questions){
   if(d.type==='sign'){const s=a.SG3.find(x=>x[1]===d.name);assert(s&&s[2]===d.e&&s[0].startsWith('data:image/svg+xml'),'Sign '+d.key);assert(a.CD.some(c=>c.a===d.name),'Sign card '+d.key);continue}
-  const ids=a.Q.map((q,i)=>q.k===d.key?i:-1).filter(i=>i>=0);assert.equal(ids.length,1,'One question '+d.key);const id=ids[0],q=a.Q[id];
+  const ids=a.Q.map((q,i)=>q.k===d.key?i:-1).filter(i=>i>=0);assert.equal(ids.length,1,'One question '+d.key);const id=ids[0],q=a.Q[id];if(FIXED.has(id))continue;
   assert.equal(q[3],d.e,'Explanation '+d.key);
-  if(d.type==='order'){assert.equal(q[0],d.q+' (нажимайте шаги по порядку)');assert.deepEqual([...q[1]],d.o);assert.equal(q.o,1)}
+  if(d.type==='tf'){assert.equal(q[0],d.q+' (верно или неверно?)');assert.equal(q[2],d.v?0:1,'TF key '+d.key);assert.equal(q.t,1)}
+  else if(d.type==='order'){assert.equal(q[0],d.q+' (нажимайте шаги по порядку)');assert.deepEqual([...q[1]],d.o);assert.equal(q.o,1)}
   else if(d.type==='number'){assert.equal(q[0],d.q+' (введите число)');assert.deepEqual([...q.n],d.n)}
   else{assert.equal(q[0],d.q,'Text '+d.key);assert.deepEqual([...q[1]],d.o,'Options '+d.key);assert.deepEqual([...q.m],d.m,'Key '+d.key)}
   const t=d.topic==='extra'?XT:d.topic;assert(a.RT[t].ids.includes(id)&&a.MQ.includes(id),'Topic and pool '+d.key);
@@ -169,4 +175,15 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
 // Rule-map tagging fixes 2026-11-09: no two same-meaning sign names among the options; 'регулировщик', not 'флагман'
 assert(!/флагман/i.test(script),'No флагман');
 for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Что означает этот знак?')continue;const G=[['Впереди пешеходный переход','Пешеходный переход с табличкой-стрелкой'],['Двустороннее движение','Конец разделённой дороги (Divided Highway Ends)'],['Дорожные работы','Работы на обочине (Shoulder Work)','Работы коммунальных служб (Utility Work Ahead)'],['Железнодорожный переезд','Крест «Railroad Crossing»','Переезд со шлагбаумом и мигающими огнями']];const c=q[1][q[2]];for(const g of G)if(g.includes(c))assert(q[1].filter(o=>g.includes(o)).length===1,'A same-meaning sign offered as a wrong option: '+q[1].join(' / '))}}
-console.log('PASS: new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+// Question fixes from the rule-map review (editorial/rules/fixes-*.json): the app equals the reviewed text, progress is reset
+{
+ const dir=path.join(__dirname,'../editorial/rules');
+ const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e));
+ for(const f of fixes){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
+  if(f.q)assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id);
+  if(f.o)assert.deepEqual(q.p?Array.from(q.p,x=>x.join(' → ')):[...q[1]],f.o,'Fix options '+f.id);
+  if(f.m){assert.deepEqual([...q.m],f.m,'Fix key '+f.id);assert.equal(q[2],f.m[0],'Fix primary key '+f.id)}
+  if(f.e)assert.equal(q[3],f.e,'Fix explanation '+f.id);
+  assert(a.QV[f.id],'Fix progress reset '+f.id);}
+}
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
