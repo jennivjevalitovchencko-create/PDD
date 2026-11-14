@@ -15,8 +15,8 @@ function load(saved={}){
 const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
-assert.equal(a.Q.length,655);
-assert.equal(a.EXQ.length,213);
+assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
+assert.equal(a.EXQ.length,234); // +21 single-choice R-questions join the exam pool
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -51,7 +51,7 @@ for(const [id,start,key,file] of [
  assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
  assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);
 }
-assert.equal(a.RT[1].ids.length,27,'Right-of-way topic size');
+assert.equal(a.RT[1].ids.length,31,'Right-of-way topic size'); // +R19,R20,R37,R38
 // Right-of-way topic review 2026-11-08: every edited question equals editorial/review/row-edits-2026-11-08.json
 const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
 for(const e of rowSpec.edits){
@@ -103,7 +103,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
  assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
 }
-assert.equal(a.RT[4].ids.length,19,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock)');
+assert.equal(a.RT[4].ids.length,25,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock, +R1–R6)');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 // Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
 const restored=load({w:'null',r:'{"66":1}'});
