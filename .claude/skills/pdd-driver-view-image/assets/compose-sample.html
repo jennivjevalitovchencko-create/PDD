@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Вид из-за руля 4</title>
+<style>
+body{margin:0;background:#101513;color:#e8ece9;font:16px/1.4 -apple-system,Segoe UI,Arial,sans-serif;padding:14px;max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+h2{font-size:18px;margin:6px 0}p{margin:0 0 8px;color:#aab3ad;font-size:14px}
+svg{display:block;width:100%;height:auto;border-radius:12px}
+</style></head><body>
+<script>
+// Windshield view: scene 1600x900 at y=sy; compact modern cluster (scaled by ds) centred below.
+function frame(scene,speed,left,right,rear){
+ const W=1600,sy=56,ds=0.66,dw=1600*ds,dx=(W-dw)/2,dy=sy+900-80-107*ds*1.0, H=Math.round(dy+660*ds)+70;
+ const k=1600/600*ds,cx=dx+299*k,cy=dy+150*k,len=58*k,a=(133+Math.min(speed,80)/80*274)*Math.PI/180;
+ const OLD='M30,112 Q90,104 132,112 Q142,114 142,128 L142,210 Q142,224 128,224 L36,224 Q22,224 22,210 L22,128 Q22,114 30,112 Z';
+ const hide=(f)=>`<path d="${OLD}" transform="translate(${dx},${dy}) scale(${k}) ${f?'translate(598,0) scale(-1,1)':''}" fill="#101215"/>`;
+ const top2=dy+60*ds; const my=top2+140, mh=H-my-30;
+ const M=`M70,${mh*0.2} Q180,${mh*0.08} 284,4 Q300,0 300,18 L298,${mh-18} Q297,${mh} 280,${mh} L30,${mh} Q6,${mh} 6,${mh-24} L6,${mh*0.62} Q8,${mh*0.26} 70,${mh*0.2} Z`;
+ const gT=(f)=>`translate(${f?W-24:24},${my}) scale(${f?-1.6:1.6},1)`;
+ const glass=(f)=>{const id='sg'+f+scene.replace(/\W/g,'');const img=rear?`<clipPath id="${id}"><path d="${M}" transform="${gT(f)} translate(10,12) scale(0.94,0.86)"/></clipPath><g clip-path="url(#${id})"><image href="${rear}" x="${f?W-24-560-(1600*0.62-560)*0:24-60}" y="${my-150}" width="${1600*0.62}" height="${900*0.62}" transform="${f?'translate(-380,0)':''}" preserveAspectRatio="none"/><rect x="0" y="${my}" width="${W}" height="${mh}" fill="#fff" opacity=".06"/></g>`:'';return `<g transform="${gT(f)}"><path d="${M}" fill="#0b0c0e" stroke="#2a2e34" stroke-width="4"/><path d="${M}" transform="translate(10,12) scale(0.94,0.86)" fill="url(#mg)"/></g>${img}`};
+ const nx=cx+Math.cos(a)*len,ny=cy+Math.sin(a)*len,on='#35e06a';
+ // big readable icon panels between each side mirror and the speedometer (own vector icons)
+ const IC={
+  high:'<path d="M24,9 Q36,9 36,20 Q36,31 24,31 Z" fill="none" stroke="CLR" stroke-width="3.2"/><path d="M4,11 H19 M4,17 H19 M4,23 H19 M4,29 H19" stroke="CLR" stroke-width="3.2" stroke-linecap="round"/>',
+  low:'<path d="M24,9 Q36,9 36,20 Q36,31 24,31 Z" fill="none" stroke="CLR" stroke-width="3.2"/><path d="M19,10 L5,14 M19,16 L5,20 M19,22 L5,26 M19,28 L5,32" stroke="CLR" stroke-width="3.2" stroke-linecap="round"/>',
+  belt:'<circle cx="17" cy="6.5" r="4.8" fill="CLR"/><path d="M10,9 L12.5,31 L28,32" fill="none" stroke="CLR" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17,14 Q19,22 19,27 L30,27 L31,37" fill="none" stroke="CLR" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13,13 L26,25" stroke="#0c0e11" stroke-width="6.5" stroke-linecap="round"/><path d="M13,13 L26,25" stroke="CLR" stroke-width="3" stroke-linecap="round"/>',
+  abs:'<circle cx="20" cy="20" r="11.5" fill="none" stroke="CLR" stroke-width="3"/><text x="20" y="22.9" font-size="8" font-weight="700" font-family="Arial" text-anchor="middle" fill="CLR">ABS</text><path d="M6,10 Q1,20 6,30 M34,10 Q39,20 34,30" fill="none" stroke="CLR" stroke-width="3" stroke-linecap="round"/>',
+  brake:'<circle cx="20" cy="20" r="11.5" fill="none" stroke="CLR" stroke-width="3"/><path d="M20,13 V22" stroke="CLR" stroke-width="3.6" stroke-linecap="round"/><circle cx="20" cy="27" r="2.2" fill="CLR"/><path d="M6,10 Q1,20 6,30 M34,10 Q39,20 34,30" fill="none" stroke="CLR" stroke-width="3" stroke-linecap="round"/>',
+  esp:'<path d="M10,14 L13,7 Q14,5 17,5 L23,5 Q26,5 27,7 L30,14 L32,15 L32,20 L8,20 L8,15 Z" fill="CLR"/><circle cx="13" cy="16.5" r="1.8" fill="#0c0e11"/><circle cx="27" cy="16.5" r="1.8" fill="#0c0e11"/><path d="M14,23 C9,27 18,30 12,37 M26,23 C21,27 30,30 24,37" fill="none" stroke="CLR" stroke-width="3.4" stroke-linecap="round"/>',
+  engine:'<path d="M6,16 H10 V12 H15 V9 H25 V12 H29 L32,15 H35 V27 H32 L29,30 H13 L10,27 H6 Z" fill="none" stroke="CLR" stroke-width="3" stroke-linejoin="round"/><path d="M3,18 V25" stroke="CLR" stroke-width="3" stroke-linecap="round"/>',
+  tire:'<path d="M9,8 Q3,20 9,31 L31,31 Q37,20 31,8" fill="none" stroke="CLR" stroke-width="3" stroke-linecap="round"/><path d="M8,35 L11,32 L14,35 L17,32 L20,35 L23,32 L26,35 L29,32 L32,35" fill="none" stroke="CLR" stroke-width="2.4" stroke-linejoin="round"/><path d="M20,12 V22" stroke="CLR" stroke-width="3.4" stroke-linecap="round"/><circle cx="20" cy="26.5" r="2" fill="CLR"/>'};
+ const icon=(n,x,y,sz)=>`<g transform="translate(${x-sz/2},${y-sz/2}) scale(${sz/40})">${IC[n].replace(/CLR/g,'#cfd5dc')}</g>`;
+ const arrow=(x,y,d,onn)=>`<path d="M${x-d*44},${y} l${d*34},-30 v18 h${d*48} v24 h${-d*48} v18 z" fill="${onn?'#35e06a':'#4a5058'}"/>`;
+ const panel=(f)=>{const c=f?W-586:586,y1=my+34,y2=my+128,y3=my+222,a=f?-1:1;return `<rect x="${c-80}" y="${my-14}" width="160" height="${H-my-26}" rx="26" fill="#0c0e11"/>${icon(f?'low':'high',c-40,y1,58)}${icon(f?'esp':'belt',c+40,y1,58)}${arrow(c,y2,a,f?right:left)}${icon(f?'engine':'abs',c-40,y3,58)}${icon(f?'tire':'brake',c+40,y3,58)}`};
+ // big windshield: thin pillars, rounded top corners, gently curved roof line
+ const ws=`M26,${H} L26,170 Q26,60 150,52 Q800,22 1450,52 Q1574,60 1574,170 L1574,${H} Z`;
+ // dashboard top: low at the sides, cluster hood rising in the middle
+ const top=dy+60*ds;
+ const dash=`M0,${H} L0,${top+95} Q120,${top+102} 300,${top+104} Q${dx+40},${top+104} ${dx+120},${top+78} Q800,${top+30} ${W-dx-120},${top+78} Q${W-dx-40},${top+104} 1300,${top+104} Q1480,${top+102} 1600,${top+95} L1600,${H} Z`;
+ return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+ <defs><clipPath id="cd${scene}"><path d="${dash}"/></clipPath>
+  <linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".06"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9ced4"/><stop offset="1" stop-color="#8d949c"/></linearGradient>
+  <linearGradient id="dk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient></defs>
+ <rect width="${W}" height="${H}" fill="#07080a"/>
+ <image href="${scene}" x="0" y="${sy}" width="1600" height="900"/>
+ <g clip-path="url(#cd${scene})"><rect x="0" y="${top-40}" width="1600" height="${H}" fill="url(#dk)"/><image href="dashboard-modern-1600x800.jpg" x="${dx}" y="${dy}" width="${dw}" height="${800*ds}"/></g>
+ <line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="#ff4d4d" stroke-width="6" stroke-linecap="round"/>
+ <circle cx="${cx}" cy="${cy}" r="12" fill="#0d1a2a" stroke="#7fb8ff" stroke-width="2.5"/>
+${hide(0)}${hide(1)}${glass(0)}${glass(1)}
+ ${panel(0)}${panel(1)}
+ <rect x="786" y="0" width="28" height="12" rx="4" fill="#16181b"/>
+ <rect x="470" y="4" width="660" height="190" rx="70" fill="#0e1012" stroke="#2c3036" stroke-width="4"/>
+ <rect x="486" y="18" width="628" height="162" rx="60" fill="url(#mg)"/>${rear?`<clipPath id="rv${scene.replace(/\W/g,"")}"><rect x="486" y="18" width="628" height="162" rx="60"/></clipPath><image href="${rear}" x="${800-747*0.75}" y="${99-300*0.75}" width="${1600*0.75}" height="${900*0.75}" clip-path="url(#rv${scene.replace(/\W/g,"")})"/>`:""}
+ </svg>`}
+</script>
+<div><h2>Q213 · перестроение влево</h2><p>Левый поворотник, 55 миль/ч. В зеркалах пусто — но мотоцикл может быть в слепой зоне.</p><div id="f1"></div></div>
+<div><h2>Q68 · сзади скорая</h2><p>Вид назад — в зеркале заднего вида и в боковых. Скорость 25 миль/ч, правый поворотник (прижимаемся к краю).</p><div id="f2"></div></div>
+<script>document.getElementById('f1').innerHTML=frame('q213f.jpg',55,true,false,'q213r.jpg');document.getElementById('f2').innerHTML=frame('q68f.jpg',25,false,true,'q68r.jpg')</script>
+</body></html>
