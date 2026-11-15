@@ -5955,8 +5955,8 @@
 },
 {
 "id": "C-067",
-"rule": "Алкоголь прежде всего поражает суждение: вы не понимаете, что выпили слишком много, пока не поздно; он замедляет реакцию, ухудшает зрение, внимательность, оценку расстояний и скоростей",
-"en": "Alcohol first affects judgment — you can't tell you've had too much; it slows reactions, reduces vision and alertness, and impairs judging distance and speed",
+"rule": "Алкоголь ухудшает суждение: вы не понимаете, что выпили слишком много, пока не станет поздно; он замедляет реакцию, ухудшает зрение, внимательность, оценку расстояний и скоростей",
+"en": "Alcohol affects judgment — you can't tell you've had too much; it slows reactions, reduces vision and alertness, and impairs judging distance and speed",
 "src": "учебник стр. 33",
 "kind": "manual",
 "imp": 3,
@@ -6002,7 +6002,7 @@
 },
 {
 "id": "C-070",
-"rule": "Одна стандартная порция алкоголя = 1,5 унции (44 мл) крепкого 80-градусного напитка, ИЛИ 12 унций (355 мл) пива, ИЛИ 5 унций (148 мл) вина",
+"rule": "Одна стандартная порция алкоголя = 1,5 унции (44 мл) крепкого напитка крепостью 80 proof (40% спирта), ИЛИ 12 унций (355 мл) пива, ИЛИ 5 унций (148 мл) вина",
 "en": "One drink = 1.5 oz of 80-proof liquor, 12 oz of beer, or a 5 oz glass of wine",
 "src": "учебник стр. 33",
 "kind": "manual",
@@ -7569,8 +7569,8 @@
 },
 {
 "id": "D-074",
-"rule": "Переключать дальний на ближний примерно за квартал до встречной машины.",
-"en": "Dim your high beams within about one block of an oncoming vehicle.",
+"rule": "Переключать дальний на ближний не позже чем за 500 футов до встречной машины (закон, CGS §14-96u); учебник советует — примерно за квартал.",
+"en": "Dim your high beams no later than 500 feet from an oncoming vehicle (law, CGS §14-96u); the manual advises about one block.",
 "src": "учебник стр. 38 «Lights»; CGS §14-96u(1)",
 "kind": "law",
 "imp": 3,
