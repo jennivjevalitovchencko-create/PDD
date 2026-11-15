@@ -16,7 +16,7 @@ const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
-assert.equal(a.EXQ.length,234); // +21 single-choice R-questions join the exam pool
+assert.equal(a.EXQ.length,233); // +21 single-choice R-questions join the exam pool; R21 (Q675) left it on 2026-11-15 when it got a picture (app rule: picture questions outside RULEQ are not in the exam)
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -130,7 +130,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
  const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
  assert.deepEqual(Object.keys(a.DVI).sort(),files.map(f=>f.replace(/.jpg$/,'')),'DVI matches app images');
  for(const f of files)assert.equal(a.DVI[f.replace(/.jpg$/,'')],'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,f)).toString('base64'),'DVI image '+f);
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294,675],'Driver-view questions');
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],prefix='data:image/svg+xml;charset=utf-8,';
   assert(typeof q[4]==='string'&&q[4].startsWith(prefix)&&q.dv===1&&q.sc===1,'Driver-view image '+id);
@@ -158,6 +158,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
  const spec={topicExtra:specs.find(x=>x.topicExtra).topicExtra,questions:specs.flatMap(x=>Array.isArray(x)?x:x.questions)};
  assert.equal(new Set(spec.questions.map(d=>d.key)).size,spec.questions.length,'Unique keys of new questions');
  const XT=a.RT.findIndex(x=>x.n===spec.topicExtra.n);assert(XT>0&&a.RT[XT].t===spec.topicExtra.t,'Extra topic');
+ const DVQ=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
  for(const d of spec.questions){
   if(d.type==='sign'){const s=a.SG3.find(x=>x[1]===d.name);assert(s&&s[2]===d.e&&s[0].startsWith('data:image/svg+xml'),'Sign '+d.key);assert(a.CD.some(c=>c.a===d.name),'Sign card '+d.key);continue}
   const ids=a.Q.map((q,i)=>q.k===d.key?i:-1).filter(i=>i>=0);assert.equal(ids.length,1,'One question '+d.key);const id=ids[0],q=a.Q[id];if(FIXED.has(id))continue;
@@ -165,7 +166,7 @@ assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
   if(d.type==='tf'){assert.equal(q[0],d.q+' (верно или неверно?)');assert.equal(q[2],d.v?0:1,'TF key '+d.key);assert.equal(q.t,1)}
   else if(d.type==='order'){assert.equal(q[0],d.q+' (нажимайте шаги по порядку)');assert.deepEqual([...q[1]],d.o);assert.equal(q.o,1)}
   else if(d.type==='number'){assert.equal(q[0],d.q+' (введите число)');assert.deepEqual([...q.n],d.n)}
-  else{assert.equal(q[0],d.q,'Text '+d.key);assert.deepEqual([...q[1]],d.o,'Options '+d.key);assert.deepEqual([...q.m],d.m,'Key '+d.key)}
+  else{assert.equal(q[0],id in a.DV?DVQ[id].short:d.q,'Text '+d.key);assert.deepEqual([...q[1]],d.o,'Options '+d.key);assert.deepEqual([...q.m],d.m,'Key '+d.key)}
   const t=d.topic==='extra'?XT:d.topic;assert(a.RT[t].ids.includes(id)&&a.MQ.includes(id),'Topic and pool '+d.key);
   if(d.topic==='extra')assert(q.xt===1&&!a.EXQ.includes(id),'Extra kept out of exam '+d.key);
   if(d.img)assert(typeof q[4]==='string'&&q[4].startsWith('data:image/svg+xml'),'Image '+d.key);
