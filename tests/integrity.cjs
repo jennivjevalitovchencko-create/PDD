@@ -16,7 +16,7 @@ const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
-assert.equal(a.EXQ.length,233); // +21 single-choice R-questions join the exam pool; R21 (Q675) left it on 2026-11-15 when it got a picture (app rule: picture questions outside RULEQ are not in the exam)
+assert.equal(a.EXQ.length,236); // +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -45,7 +45,7 @@ for(const [id,start,key,file] of [
  assert.equal(q[2],key[0],'New question primary key '+id);
  assert(a.RT[1].n==='Право проезда и перекрёстки'&&a.RT[1].ids.includes(id),'New question topic '+id);
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'New question practice pool '+id);
- assert(!a.EXQ.includes(id),'New question kept out of exam pool '+id);
+ assert.equal(a.EXQ.includes(id),key.length===1,'Exam pool: single-choice picture question in, multi-answer out '+id);
  assert.equal(q.sc,1,'Scenario image style '+id);
  const prefix='data:image/svg+xml;charset=utf-8,';
  assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
@@ -125,6 +125,7 @@ assert.equal(valid.a.R['297'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
+assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&!a.EXQ.includes(309),'Picture questions in exam, sign-group out');
 // Driver's-view pictures (editorial/img/driver-view, frame approved 2026-11-08): app copies embedded byte-for-byte, frame built, progress reset
 {
  const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
