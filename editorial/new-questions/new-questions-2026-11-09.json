@@ -106,13 +106,13 @@
    "key": "N5",
    "topic": 3,
    "type": "number",
-   "q": "По закону Коннектикута поворотник перед поворотом должен гореть непрерывно не меньше последних ___ футов",
+   "q": "По закону Коннектикута: самое меньшее за сколько футов до поворота нужно включить поворотник и держать его до поворота?",
    "n": [
     100
    ],
    "e": "Закон требует сигналить непрерывно не меньше последних 100 футов перед поворотом (Conn. Gen. Stat. §14-242). Учебник советует включать сигнал не меньше чем за 3 секунды: на скорости выше примерно 23 миль/ч это больше 100 футов. Учебник, стр. 39.",
    "en": {
-    "q": "Under Connecticut law, you must signal continuously for at least the last ___ feet before turning",
+    "q": "Under Connecticut law, at least how many feet before a turn must you turn on your signal and keep it on until you turn?",
     "n": [
      100
     ]
