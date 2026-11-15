@@ -125,7 +125,7 @@ assert.equal(valid.a.R['297'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
-assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&!a.EXQ.includes(309),'Picture questions in exam, sign-group out');
+assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К какой группе относится этот знак?'),'Picture questions in exam, sign-group out');
 // Driver's-view pictures (editorial/img/driver-view, frame approved 2026-11-08): app copies embedded byte-for-byte, frame built, progress reset
 {
  const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
