@@ -131,14 +131,15 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
  const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
  assert.deepEqual(Object.keys(a.DVI).sort(),files.map(f=>f.replace(/.jpg$/,'')),'DVI matches app images');
  for(const f of files)assert.equal(a.DVI[f.replace(/.jpg$/,'')],'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,f)).toString('base64'),'DVI image '+f);
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294,675],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],prefix='data:image/svg+xml;charset=utf-8,';
   assert(typeof q[4]==='string'&&q[4].startsWith(prefix)&&q.dv===1&&q.sc===1,'Driver-view image '+id);
   const svg=decodeURIComponent(q[4].slice(prefix.length));
   assert(typeof d[1]==='number'&&d[1]>=0&&d[1]<=80,'Dashboard speed '+id);
-  assert(svg.includes(a.DVI[d[0]])&&svg.includes(a.DVI.dash),'Scene and dashboard in frame '+id);
-  if(d[4])assert(svg.includes(a.DVI[d[4]]),'Mirror scene '+id);
+  assert(typeof a.DVI[d[0]]==='string'&&svg.includes(a.DVI[d[0]])&&svg.includes(a.DVI.dash),'Scene and dashboard in frame '+id);
+  if(d[4])assert(typeof a.DVI[d[4]]==='string'&&svg.includes(a.DVI[d[4]]),'Mirror scene '+id);
+  const o=d[6]||{};assert(svg.includes('#3d8bff')===!!o.high&&svg.includes('#35e06a')===!!(o.low||d[2]||d[3]),'Lit dashboard icons match DV options '+id);
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
  }
  assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
@@ -189,4 +190,4 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
   if(f.img)assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
-console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294, questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');

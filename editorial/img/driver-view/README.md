@@ -19,3 +19,7 @@ Approved frame style 2026-11-08 (user): see `compose-sample.html` (open locally)
 ## 16:10 format (user decision 2026-11-15)
 
 All driver-view scenes move to one 16:10 format: composition as 16:9 plus ~12% sky on top, which sits under the rear-view mirror (no dark band). `dvf()` takes an options object as the 8th DV element: `h` scene height (1000 for 16:10, default 900), `ry` rear-view mirror crop shift down, `low` low-beam icon lit. First: Q675 (R21) `['r21',0,0,0,'r21r',56,{h:1000,ry:80,low:1}]`. The five older 16:9 pictures (Q65, Q68, Q92, Q213, Q294) will be redone in 16:10 later.
+
+## R questions, release 2026-11-17
+
+Twelve more R questions got 16:10 ChatGPT scenes with rear views (user-approved 15–16.11): Q669 R15, Q671 R17, Q673 R19, Q677 R23, Q679 R25, Q682 R28, Q684 R30, Q686 R32, Q687 R33, Q689 R35, Q692 R38, Q695 R41. App copies: scenes 960×600 `-q:v 5`, rear views bottom 16:9 crop (R15: `crop=1586:892:0:100`), `hflip`, 800×450 `-q:v 6`. New `dvf()` option `high` lights the high-beam icon blue (R32, R33). Originals: `library/p16`–`p39`. `index.html` grew from 2.1 to about 5 MB; before many more pictures, consider loading them as separate files.
