@@ -126,22 +126,32 @@ for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[k
 const empty=load();
 assert.doesNotThrow(()=>empty.a.openTopics(),'Topics without saved progress');
 assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К какой группе относится этот знак?'),'Picture questions in exam, sign-group out');
-// Driver's-view pictures (editorial/img/driver-view, frame approved 2026-11-08): app copies embedded byte-for-byte, frame built, progress reset
+// Driver's-view pictures (editorial/img/driver-view, frame approved 2026-11-08): since 2026-11-17 every frame is pre-rendered to img/dv/q<id>.jpg
+// by editorial/img/driver-view/build-app.cjs (user decision, variant A); the app shows the file. Checks: no embedded JPEG left, file per question,
+// URL version = hash of the frame built from DV/dvf + app/*.jpg (so a changed frame without a rebuild fails here), sw.js precaches exactly these files.
 {
- const dir=path.join(__dirname,'../editorial/img/driver-view/app'),files=fs.readdirSync(dir).filter(f=>f.endsWith('.jpg')).sort();
- assert.deepEqual(Object.keys(a.DVI).sort(),files.map(f=>f.replace(/.jpg$/,'')),'DVI matches app images');
- for(const f of files)assert.equal(a.DVI[f.replace(/.jpg$/,'')],'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,f)).toString('base64'),'DVI image '+f);
+ const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
+ assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
  assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
+ assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
+ const imgs=B.images();assert(imgs.dash,'Dashboard image');
  for(const [id,d] of Object.entries(a.DV)){
-  const q=a.Q[id],prefix='data:image/svg+xml;charset=utf-8,';
-  assert(typeof q[4]==='string'&&q[4].startsWith(prefix)&&q.dv===1&&q.sc===1,'Driver-view image '+id);
-  const svg=decodeURIComponent(q[4].slice(prefix.length));
+  const q=a.Q[id],svg=F.svg[id];
+  assert.equal(q[4],F.url[id],'Driver-view picture path is current (run build-app.cjs) '+id);
+  assert(q[4]===DVP[id]&&q.dv===1&&q.sc===1,'Driver-view image '+id);
+  const file=path.join(__dirname,'..',q[4].replace(/\?.*$/,'')),buf=fs.readFileSync(file),sz=B.jpegSize(buf);
+  assert(sz.w===1600&&sz.h===+svg.match(/viewBox="0 0 \d+ (\d+)"/)[1],'Picture size '+id);
   assert(typeof d[1]==='number'&&d[1]>=0&&d[1]<=80,'Dashboard speed '+id);
-  assert(typeof a.DVI[d[0]]==='string'&&svg.includes(a.DVI[d[0]])&&svg.includes(a.DVI.dash),'Scene and dashboard in frame '+id);
-  if(d[4])assert(typeof a.DVI[d[4]]==='string'&&svg.includes(a.DVI[d[4]]),'Mirror scene '+id);
+  assert(typeof imgs[d[0]]==='string'&&svg.includes(imgs[d[0]])&&svg.includes(imgs.dash),'Scene and dashboard in frame '+id);
+  if(d[4])assert(typeof imgs[d[4]]==='string'&&svg.includes(imgs[d[4]]),'Mirror scene '+id);
   const o=d[6]||{};assert(svg.includes('#3d8bff')===!!o.high&&svg.includes('#35e06a')===!!(o.low||d[2]||d[3]),'Lit dashboard icons match DV options '+id);
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
  }
+ const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
+ assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
+ assert.deepEqual(P,Object.keys(a.DV).map(id=>DVP[id]),'sw.js precaches every driver-view picture');
+ assert.equal(m[1],B.cacheName(P),'sw.js cache name follows the picture set');
+ assert(/caches\.open\(C\)\.then\(c=>c\.add\(new Request\('\.\/'/.test(sw),'sw.js caches the app shell on install');
  assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
  const DT=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
  for(const id of Object.keys(a.DV))assert.equal(a.Q[id][0],DT[id].short,'Short text with picture '+id);
