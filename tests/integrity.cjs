@@ -93,6 +93,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  const key=JSON.parse(opts.match(/\*\*Ключ:\*\* `(\[[\d,]+\])`/)[1]);
  const q=a.Q[id];
  // C1 (Q638) got a driver-view picture 2026-11-18 (user: list items 6–16 accepted 17.11): the app shows the short text, the approved text is its full text
+ assert(!(id in a.DV)||id===638,'Only C1 (Q638) has an approved driver-view picture '+code);
  if(id in a.DV)assert.equal(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts[id].full,crashSub(sec,'Условие'),'Crash question full text '+code);
  else assert.equal(q[0],crashSub(sec,'Условие'),'Crash question text '+code);
  assert.deepEqual([...q[1]],options,'Crash question options '+code);
@@ -159,6 +160,8 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
  assert(!/((E|M))|машину E/.test(a.Q[213][0]+a.Q[213][1].join(' ')),'Q213 has no labels of the old scheme');
  const DT=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
  for(const id of Object.keys(a.DV))assert.equal(a.Q[id][0],DT[id].short,'Short text with picture '+id);
+ // the app skips PDD_FIX texts for questions in DVT, so DVT must cover exactly the DV questions (a fix text then lives only as "full" — update "short" by hand)
+ assert.deepEqual(Object.keys(JSON.parse(html.match(/const DVT=(\{[^}]*\});/)[1])).sort(),Object.keys(a.DV).sort(),'DVT covers exactly the driver-view questions');
  assert.deepEqual([...a.Q[213].m],[0,1],'Q213 key');
 }
 // Parking distances follow the law (CGS §14-251 as amended by P.A. 25-65, eff. 2025-10-01): 30 ft from STOP/YIELD, intersections and marked crosswalks; hydrant 10 ft. User decision 2026-11-08: law only.
