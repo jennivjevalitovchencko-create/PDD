@@ -4,10 +4,13 @@
 // Sources: app/*.jpg (compressed scenes, mirror views, dashboard) + DV and dvf() in index.html.
 // Output: img/dv/q<id>.jpg (1600 px wide, JPEG 4:4:4), the DVP map in index.html (path + ?v=<frame hash>)
 // and the precache list + cache name in sw.js. A frame is re-rendered only when its SVG changed (or --force).
-// Needs Microsoft Edge (headless screenshot of the same SVG the app drew before) and ffmpeg/ffprobe on PATH.
+// Needs a Chromium browser (headless screenshot of the same SVG the app drew before) and ffmpeg/ffprobe on PATH:
+// Windows PC — Microsoft Edge; Linux server (eva-server, since 2026-11-18) — google-chrome; override with EDGE=<path>.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),os=require('node:os'),{execFileSync}=require('node:child_process');
 const root=path.join(__dirname,'../../..'),appDir=path.join(__dirname,'app'),outDir=path.join(root,'img/dv');
-const EDGE=process.env.EDGE||'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const EDGE=process.env.EDGE||(process.platform==='win32'?'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe':'google-chrome');
+// The server is an LXC container where Chrome's sandbox cannot start; we only render our own local files, so it runs without it there.
+const NOSANDBOX=process.platform==='linux'?['--no-sandbox']:[];
 const Q=4; // ffmpeg -q:v (~JPEG quality 85, user 2026-11-17); measured: SSIM vs. PNG 0.987–0.994, 156–356 KB, indicators unchanged at 1:1
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 
@@ -40,7 +43,7 @@ function shot(svg,png){
  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'dv-'));
  fs.writeFileSync(path.join(tmp,'f.svg'),svg);
  fs.writeFileSync(path.join(tmp,'f.html'),`<!doctype html><html><body style="margin:0;background:#07080a;overflow:hidden"><img src="f.svg" width="${W}" height="${H}" style="display:block"></body></html>`);
- execFileSync(EDGE,['--headless=new','--disable-gpu','--hide-scrollbars','--force-device-scale-factor=1','--user-data-dir='+path.join(tmp,'profile'),`--window-size=${W},${H}`,'--screenshot='+png,'file:///'+path.join(tmp,'f.html').replace(/\\/g,'/')],{stdio:'ignore'});
+ execFileSync(EDGE,[...NOSANDBOX,'--headless=new','--disable-gpu','--hide-scrollbars','--force-device-scale-factor=1','--user-data-dir='+path.join(tmp,'profile'),`--window-size=${W},${H}`,'--screenshot='+png,'file:///'+path.join(tmp,'f.html').replace(/\\/g,'/')],{stdio:'ignore'});
  fs.rmSync(tmp,{recursive:true,force:true});
  const dim=execFileSync('ffprobe',['-v','error','-select_streams','v:0','-show_entries','stream=width,height','-of','csv=p=0',png]).toString().trim();
  if(dim!==`${W},${H}`)throw new Error(`screenshot is ${dim}, expected ${W},${H}`);
