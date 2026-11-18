@@ -10,7 +10,7 @@ svg{display:block;width:100%;height:auto;border-radius:12px}
 // Windshield view: scene 1600x900 at y=sy; compact modern cluster (scaled by ds) centred below.
 function frame(scene,speed,left,right,rear){
  const W=1600,sy=56,ds=0.66,dw=1600*ds,dx=(W-dw)/2,dy=sy+900-80-107*ds*1.0, H=Math.round(dy+660*ds)+70;
- const k=1600/600*ds,cx=dx+299*k,cy=dy+150*k,len=58*k,a=(133+Math.min(speed,80)/80*274)*Math.PI/180;
+ const k=1600/600*ds,cx=dx+299*k,cy=dy+150*k,len=58*k,G=[134.9,164.4,194.7,231.3,271.1,310.6,345.8,376.4,406.7],sv=Math.max(0,Math.min(speed,80))/10,gi=Math.min(7,Math.floor(sv)),a=(G[gi]+(G[gi+1]-G[gi])*(sv-gi))*Math.PI/180; // G: measured angles of the 0..80 marks (same as index.html dvf)
  const OLD='M30,112 Q90,104 132,112 Q142,114 142,128 L142,210 Q142,224 128,224 L36,224 Q22,224 22,210 L22,128 Q22,114 30,112 Z';
  const hide=(f)=>`<path d="${OLD}" transform="translate(${dx},${dy}) scale(${k}) ${f?'translate(598,0) scale(-1,1)':''}" fill="#101215"/>`;
  const top2=dy+60*ds; const my=top2+140, mh=H-my-30;
