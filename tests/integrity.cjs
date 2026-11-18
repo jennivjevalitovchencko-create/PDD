@@ -92,13 +92,15 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  const options=[...opts.matchAll(/^(\d)\. (.+)$/gm)].map(m=>m[2].trim());
  const key=JSON.parse(opts.match(/\*\*Ключ:\*\* `(\[[\d,]+\])`/)[1]);
  const q=a.Q[id];
- assert.equal(q[0],crashSub(sec,'Условие'),'Crash question text '+code);
+ // C1 (Q638) got a driver-view picture 2026-11-18 (user: list items 6–16 accepted 17.11): the app shows the short text, the approved text is its full text
+ if(id in a.DV)assert.equal(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts[id].full,crashSub(sec,'Условие'),'Crash question full text '+code);
+ else assert.equal(q[0],crashSub(sec,'Условие'),'Crash question text '+code);
  assert.deepEqual([...q[1]],options,'Crash question options '+code);
  assert.deepEqual([...q.m],key,'Crash question key '+code);
  assert.deepEqual(key,[0,1],'Crash approved key '+code);
  assert.equal(q[2],key[0],'Crash question primary key '+code);
  assert.equal(q[3],crashSub(sec,'Объяснение для приложения'),'Crash question explanation '+code);
- assert(!q[4]&&!q.sc,'Crash question has no image '+code);
+ assert(id in a.DV?q.dv===1:!q[4]&&!q.sc,'Crash question image only as an approved driver-view picture '+code);
  assert(a.RT[4].n==='Алкоголь, полиция, аварийные ситуации'&&a.RT[4].ids.includes(id),'Crash question topic '+code);
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
  assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
@@ -132,7 +134,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,68,92,213,294,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,67,68,92,97,99,132,160,176,213,294,564,612,638,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  for(const [id,d] of Object.entries(a.DV)){
@@ -142,10 +144,12 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   const file=path.join(__dirname,'..',q[4].replace(/\?.*$/,'')),buf=fs.readFileSync(file),sz=B.jpegSize(buf);
   assert(sz.w===1600&&sz.h===+svg.match(/viewBox="0 0 \d+ (\d+)"/)[1],'Picture size '+id);
   assert(typeof d[1]==='number'&&d[1]>=0&&d[1]<=80,'Dashboard speed '+id);
-  assert(typeof imgs[d[0]]==='string'&&svg.includes(imgs[d[0]])&&svg.includes(imgs.dash),'Scene and dashboard in frame '+id);
+  const o=d[6]||{};assert(typeof imgs[d[0]]==='string'&&svg.includes(imgs[d[0]])&&svg.includes(imgs.dash)===!o.plain,'Scene and dashboard in frame '+id);
+  assert.equal(q.pw===1,!!o.plain,'Plain picture (top view) keeps its 16:10 shape '+id);
   if(d[4])assert(typeof imgs[d[4]]==='string'&&svg.includes(imgs[d[4]]),'Mirror scene '+id);
-  const o=d[6]||{};assert(svg.includes('#3d8bff')===!!o.high&&svg.includes('#35e06a')===!!(o.low||d[2]||d[3]),'Lit dashboard icons match DV options '+id);
+  assert(svg.includes('#3d8bff')===!!o.high&&svg.includes('#35e06a')===!!(o.low||d[2]||d[3]),'Lit dashboard icons match DV options '+id);
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
+  if([67,97,99,132,160,176,564,612,638].includes(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
  }
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
@@ -190,14 +194,15 @@ assert(!/флагман/i.test(script),'No флагман');
 for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Что означает этот знак?')continue;const G=[['Впереди пешеходный переход','Пешеходный переход с табличкой-стрелкой'],['Двустороннее движение','Конец разделённой дороги (Divided Highway Ends)'],['Дорожные работы','Работы на обочине (Shoulder Work)','Работы коммунальных служб (Utility Work Ahead)'],['Железнодорожный переезд','Крест «Railroad Crossing»','Переезд со шлагбаумом и мигающими огнями']];const c=q[1][q[2]];for(const g of G)if(g.includes(c))assert(q[1].filter(o=>g.includes(o)).length===1,'A same-meaning sign offered as a wrong option: '+q[1].join(' / '))}}
 // Question fixes from the rule-map review (editorial/rules/fixes-*.json): the app equals the reviewed text, progress is reset
 {
- const dir=path.join(__dirname,'../editorial/rules');
+ const dir=path.join(__dirname,'../editorial/rules'),DTX=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
  const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img));
  for(const f of fixes){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
-  if(f.q)assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id);
+  if(f.q&&!(f.id in a.DV))assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id); // a picture question shows its short text; the fix text is its full text in question-texts.json
+  if(f.q&&f.id in a.DV)assert.equal(DTX[f.id].full,f.q,'Fix text kept as full text '+f.id);
   if(f.o)assert.deepEqual(q.p?Array.from(q.p,x=>x.join(' → ')):[...q[1]],f.o,'Fix options '+f.id);
   if(f.m){assert.deepEqual([...q.m],f.m,'Fix key '+f.id);assert.equal(q[2],f.m[0],'Fix primary key '+f.id)}
   if(f.e)assert.equal(q[3],f.e,'Fix explanation '+f.id);
   if(f.img)assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
-console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
