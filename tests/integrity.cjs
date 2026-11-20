@@ -39,7 +39,8 @@ for(const [id,start,key,file] of [
  [636,'Вы полностью остановились у знака STOP',[2],'row-new-1-two-way-stop.svg'],
  [637,'Вы выезжаете с парковки магазина',[0,1],'row-new-2-driveway-sidewalk-v2.svg']]){
  const q=a.Q[id];
- assert(q[0].startsWith(start),'New question text '+id);
+ assert(id in a.DV||q[0].startsWith(start),'New question text '+id); // with a driver-view picture (release 4) the short text is checked against question-texts.json below
+ if(id in a.DV)assert(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts[id].full.startsWith(start),'New question full text '+id);
  assert.equal(q[1].length,4,'New question options '+id);
  assert.deepEqual([...q.m],key,'New question key '+id);
  assert.equal(q[2],key[0],'New question primary key '+id);
@@ -48,8 +49,9 @@ for(const [id,start,key,file] of [
  assert.equal(a.EXQ.includes(id),key.length===1,'Exam pool: single-choice picture question in, multi-answer out '+id);
  assert.equal(q.sc,1,'Scenario image style '+id);
  const prefix='data:image/svg+xml;charset=utf-8,';
- assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
- assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);
+ if(id in a.DV){assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Driver-view picture replaces the scheme '+id);svgOf(file)} // release 4: picture instead of the approved scheme (the SVG file stays in editorial/svg)
+ else{assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
+ assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);}
 }
 assert.equal(a.RT[1].ids.length,31,'Right-of-way topic size'); // +R19,R20,R37,R38
 // Right-of-way topic review 2026-11-08: every edited question equals editorial/review/row-edits-2026-11-08.json
@@ -135,7 +137,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,67,68,90,92,97,99,132,160,176,195,196,197,213,294,564,612,638,647,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,67,68,85,90,92,97,99,132,139,160,176,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,213,214,215,275,294,300,531,564,612,637,638,647,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  for(const [id,d] of Object.entries(a.DV)){
@@ -152,6 +154,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
   if([67,97,99,132,160,176,564,612,638].includes(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
   if([90,195,196,197,647].includes(+id))assert.equal(a.QV[id],'2026-11-19-img','Release 3 progress reset '+id);
+  if([68,85,92,139,198,199,201,202,203,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id);assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
  }
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
@@ -210,4 +213,4 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
   if(f.img&&!(f.id in a.DV))assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
-console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + release 4 (26 questions, letters on Q201/Q208/Q209), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
