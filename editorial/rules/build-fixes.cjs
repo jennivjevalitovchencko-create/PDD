@@ -16,6 +16,8 @@ h=h.replace(re,'');if(h.split(anchor).length!==2)throw new Error('anchor');h=h.r
 const qv='const QV={';if(h.split(qv).length!==2)throw new Error('QV');
 const add=fixes.map(f=>f.id).filter(id=>!new RegExp(`[{,]${id}:'`).test(h.slice(h.indexOf(qv),h.indexOf('};',h.indexOf(qv)))));
 const rest=h.slice(h.indexOf(qv)+qv.length);let body=rest.slice(0,rest.indexOf('};'));
-for(const f of fixes){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body))body=body.replace(r,`$1${f.id}:'${date}-fix'`);else body=`${f.id}:'${date}-fix',`+body}
+// Only the newest fixes file gets a new reset mark; older fixes keep theirs (re-running must not reset progress of every fixed question)
+const newest=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,fs.readdirSync(__dirname).filter(f=>/^fixes-\d+\.json$/.test(f)).sort((x,y)=>parseInt(x.slice(6))-parseInt(y.slice(6))).pop()),'utf8')).map(x=>x.id));
+for(const f of fixes){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body)){if(newest.has(f.id))body=body.replace(r,`$1${f.id}:'${date}-fix'`)}else body=`${f.id}:'${date}-fix',`+body}
 h=h.slice(0,h.indexOf(qv)+qv.length)+body+rest.slice(rest.indexOf('};'));
 fs.writeFileSync(file,h);console.log('fixes applied:',fixes.length,'new QV marks:',add.length);

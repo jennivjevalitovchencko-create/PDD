@@ -16,7 +16,7 @@ const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
-assert.equal(a.EXQ.length,237); // 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
+assert.equal(a.EXQ.length,238); // 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -155,8 +155,8 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
   if([67,97,99,132,160,176,564,612,638].includes(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
   if([90,195,196,197,647].includes(+id))assert.equal(a.QV[id],'2026-11-19-img','Release 3 progress reset '+id);
-  if([68,85,92,139,198,199,201,202,203,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id);assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
-  if([5,6,8,9,10,11,12,13,14,15,18,37,64,65,113,164,189,192,193,211,212,213,294,298,331,470,527,528,529,605,634,635,636,646,648].includes(+id))assert.equal(a.QV[id],'2026-11-20-img','Batch 5 progress reset '+id);
+  if([68,85,92,139,198,199,201,202,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id); /* Q203: re-edited by law 2026-11-21 (fixes-5) */assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
+  if([5,6,8,9,10,11,12,13,14,15,18,37,64,65,164,189,192,193,211,212,213,294,298,331,527,528,529,605,634,635,636,646,648].includes(+id))assert.equal(a.QV[id],'2026-11-20-img','Batch 5 progress reset '+id); // Q113, Q470: re-edited by law 2026-11-21 (fixes-5), mark 2026-11-21-fix
   if([5,6,8,9,10,12,13,14,37,192,193,212,331,648].includes(+id))assert(o.plain&&q.pw===1,'Batch 5 sign picture without the dashboard '+id);
  }
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
@@ -206,7 +206,8 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
 {
  const dir=path.join(__dirname,'../editorial/rules'),DTX=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
  const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img));
- for(const f of fixes){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
+ // a later fixes file may edit the same field again (applied in order): check each field against its last edit
+ for(const f of fixes.map((x,i)=>{const o={...x};for(const k of ['q','o','m','e','img'])if(fixes.slice(i+1).some(y=>y.id===x.id&&y[k]))delete o[k];return o})){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
   if(f.q&&!(f.id in a.DV))assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id); // a picture question shows its short text; the fix text is its full text in question-texts.json
   if(f.q&&f.id in a.DV)assert.equal(DTX[f.id].full,f.q,'Fix text kept as full text '+f.id);
   if(f.o)assert.deepEqual(q.p?Array.from(q.p,x=>x.join(' → ')):[...q[1]],f.o,'Fix options '+f.id);
@@ -216,4 +217,14 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
   if(f.img&&!(f.id in a.DV))assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
-console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + release 4 (26 questions, letters on Q201/Q208/Q209) + batch 5 (35 questions: 21 scenes incl. letter A on Q636, Q212 top view with X/Y/Z, 13 sign pictures without the dashboard), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+// Topic theory is built from editorial/theory/*.md (node editorial/theory/build-theory.cjs); the app text must match the files exactly
+for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theory/topics.json'),'utf8'))){
+ assert.equal(a.RT[m.rt].n,m.n,'Theory topic name '+m.file);
+ assert.equal(a.RT[m.rt].t,fs.readFileSync(path.join(__dirname,'../editorial/theory',m.file),'utf8').split(String.fromCharCode(13)).join('').trim(),'Theory text '+m.file);
+ const T=a.RT[m.rt].t,B=T.split(/\n\s*\n/);
+ assert(!/<\/?[a-z]/i.test(T)&&!/^###|^\d+\. /m.test(T),'Only ##, paragraphs, - lists and ** in theory '+m.file);
+ assert.equal(T.replace(/\*\*(.+?)\*\*/g,'').includes('**'),false,'Balanced ** in '+m.file);
+ assert(B.every(x=>!(x.startsWith('## ')&&x.includes('\n'))),'Heading block without text '+m.file);
+ assert(B[B.length-1].startsWith('Учебник Connecticut DMV')&&B.slice(0,-1).every(x=>!x.startsWith('Учебник Connecticut DMV')),'Only the last line is the sources line '+m.file);
+}
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
