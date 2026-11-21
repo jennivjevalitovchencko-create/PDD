@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 // Apply reviewed question fixes (editorial/rules/fixes-*.json, action "edit") to index.html and reset progress (QV) of changed questions.
-// Run from the repo root: node editorial/rules/build-fixes.cjs
+// Run from the repo root: node editorial/rules/build-fixes.cjs [YYYY-MM-DD]
+// Files are applied in numeric order (fixes-2 before fixes-10). Without a date nothing is re-marked: only questions with no QV mark get one.
+// With a date, the questions of the newest fixes file get the mark <date>-fix (their progress is reset once) — pass the date only when releasing that file.
 const fs=require('node:fs'),path=require('node:path');
-const root=path.join(__dirname,'../..'),file=path.join(root,'index.html'),date=process.argv[2]||new Date().toISOString().slice(0,10);
-const fixes=fs.readdirSync(__dirname).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,f),'utf8')))
+const root=path.join(__dirname,'../..'),file=path.join(root,'index.html'),explicit=!!process.argv[2],date=process.argv[2]||new Date().toISOString().slice(0,10);
+const FILES=fs.readdirSync(__dirname).filter(f=>/^fixes-\d+\.json$/.test(f)).sort((x,y)=>parseInt(x.slice(6))-parseInt(y.slice(6)));
+const fixes=FILES.flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,f),'utf8')))
  .filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img)).map(({id,q,o,m,e,img})=>({id,q,o,m,e,img:img&&'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(root,'editorial/svg',img),'utf8').replace(/\r/g,'').trim())}));
 const block=`/*PDD-FIX-BEGIN: question fixes from the rule-map review (editorial/rules/fixes-*.json, built by build-fixes.cjs) */
 const PDD_FIX=${JSON.stringify(fixes)};
@@ -11,13 +14,13 @@ PDD_FIX.forEach(f=>{const q=Q[f.id];if(f.q&&!DVT[f.id])q[0]=q.t&&!/\\(верно
 /*PDD-FIX-END*/`;
 let h=fs.readFileSync(file,'utf8');
 // The block goes after the late Q[1..14] overrides (before function ov), so the fixes are applied last.
-const re=/\/\*PDD-FIX-BEGIN[\s\S]*?\/\*PDD-FIX-END\*\/\n?/,anchor='\nfunction ov(){';
+const re=/\/\*PDD-FIX-BEGIN[\s\S]*?\/\*PDD-FIX-END\*\/\r?\n?/,anchor='\nfunction ov(){';
 h=h.replace(re,'');if(h.split(anchor).length!==2)throw new Error('anchor');h=h.replace(anchor,()=>'\n'+block+anchor);
 const qv='const QV={';if(h.split(qv).length!==2)throw new Error('QV');
 const add=fixes.map(f=>f.id).filter(id=>!new RegExp(`[{,]${id}:'`).test(h.slice(h.indexOf(qv),h.indexOf('};',h.indexOf(qv)))));
 const rest=h.slice(h.indexOf(qv)+qv.length);let body=rest.slice(0,rest.indexOf('};'));
 // Only the newest fixes file gets a new reset mark; older fixes keep theirs (re-running must not reset progress of every fixed question)
-const newest=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,fs.readdirSync(__dirname).filter(f=>/^fixes-\d+\.json$/.test(f)).sort((x,y)=>parseInt(x.slice(6))-parseInt(y.slice(6))).pop()),'utf8')).map(x=>x.id));
-for(const f of fixes){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body)){if(newest.has(f.id))body=body.replace(r,`$1${f.id}:'${date}-fix'`)}else body=`${f.id}:'${date}-fix',`+body}
+const newest=new Set(FILES.length?JSON.parse(fs.readFileSync(path.join(__dirname,FILES[FILES.length-1]),'utf8')).filter(x=>x.action==='edit').map(x=>x.id):[]);
+for(const f of fixes){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body)){if(explicit&&newest.has(f.id))body=body.replace(r,`$1${f.id}:'${date}-fix'`)}else body=`${f.id}:'${date}-fix',`+body}
 h=h.slice(0,h.indexOf(qv)+qv.length)+body+rest.slice(rest.indexOf('};'));
 fs.writeFileSync(file,h);console.log('fixes applied:',fixes.length,'new QV marks:',add.length);
