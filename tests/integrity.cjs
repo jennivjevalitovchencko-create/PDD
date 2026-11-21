@@ -227,4 +227,6 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
  assert(B.every(x=>!(x.startsWith('## ')&&x.includes('\n'))),'Heading block without text '+m.file);
  assert(B[B.length-1].startsWith('Учебник Connecticut DMV')&&B.slice(0,-1).every(x=>!x.startsWith('Учебник Connecticut DMV')),'Only the last line is the sources line '+m.file);
 }
+// Newest fixes file (fixes-5, law review 2026-11-21): its questions carry the reset mark of that release
+for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
