@@ -205,7 +205,7 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
 // Question fixes from the rule-map review (editorial/rules/fixes-*.json): the app equals the reviewed text, progress is reset
 {
  const dir=path.join(__dirname,'../editorial/rules'),DTX=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
- const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort().flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img));
+ const fixes=fs.readdirSync(dir).filter(f=>/^fixes-\d+\.json$/.test(f)).sort((x,y)=>parseInt(x.slice(6))-parseInt(y.slice(6))).flatMap(f=>JSON.parse(fs.readFileSync(path.join(dir,f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img));
  // a later fixes file may edit the same field again (applied in order): check each field against its last edit
  for(const f of fixes.map((x,i)=>{const o={...x};for(const k of ['q','o','m','e','img'])if(fixes.slice(i+1).some(y=>y.id===x.id&&y[k]))delete o[k];return o})){const q=a.Q[f.id];assert(q,'Fixed question exists '+f.id);
   if(f.q&&!(f.id in a.DV))assert(q[0]===f.q||q[0].startsWith(f.q+' ('),'Fix text '+f.id); // a picture question shows its short text; the fix text is its full text in question-texts.json
