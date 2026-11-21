@@ -16,7 +16,7 @@ const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
-assert.equal(a.EXQ.length,236); // +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
+assert.equal(a.EXQ.length,237); // 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
 assert.equal(a.SIGNQ.length,54);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
@@ -32,7 +32,8 @@ for(const t of a.RT)for(const id of t.ids||[])assert(id>=0&&id<a.Q.length,'Topic
 assert(!script.includes("app.querySelectorAll('.opt')"),'NaN regression: broad selector');
 assert(script.includes("app.querySelectorAll('.opt[data-k]')"),'Answer selector missing');
 assert(script.includes('class="theory-help"'),'Compact theory icon missing');
-for(const id of [634,635]){assert.equal(a.Q[id].m.length,2);assert(!a.EXQ.includes(id))}
+for(const id of [635]){assert.equal(a.Q[id].m.length,2);assert(!a.EXQ.includes(id))}
+assert.deepEqual([...a.Q[634].m],[0]);assert(a.EXQ.includes(634)); // 2026-11-21: the fixed option 3 is false, key = option 1 only (user «да»), so Q634 is single-choice and joins the exam
 // Approved right-of-way scenario questions (editorial/PDD-right-of-way-new-questions-2026-11-05.md)
 const svgOf=f=>fs.readFileSync(path.join(__dirname,'../editorial/svg',f),'utf8').replace(/\r/g,'').trim();
 for(const [id,start,key,file] of [
@@ -79,7 +80,7 @@ assert(a.EXQ.includes(307),'Q307 single-choice now in exam pool');
  assert.deepEqual([...old.a.W],[66],'Edited questions removed from repeat list');
  assert.equal(old.storage.st,'[64]','Starred kept');
  const marks=JSON.parse(old.storage.qv);
- assert.equal(marks['64'],'2026-11-08','Revision mark saved');
+ assert.equal(marks['64'],'2026-11-20-img','Revision mark saved'); // Q64: 2026-11-08 edit, then the driver-view picture of batch 5
  const again=load({...old.storage,r:'{"64":1,"66":1}'});
  assert.equal(again.a.R['64'],1,'Answer given after the change is kept on reload');
 }
@@ -137,7 +138,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[65,67,68,85,90,92,97,99,132,139,160,176,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,213,214,215,275,294,300,531,564,612,637,638,647,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[5,6,8,9,10,11,12,13,14,15,18,37,64,65,67,68,85,90,92,97,99,113,132,139,160,164,176,189,192,193,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,294,298,300,331,470,527,528,529,531,564,605,612,634,635,636,637,638,646,647,648,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  for(const [id,d] of Object.entries(a.DV)){
@@ -155,6 +156,8 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   if([67,97,99,132,160,176,564,612,638].includes(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
   if([90,195,196,197,647].includes(+id))assert.equal(a.QV[id],'2026-11-19-img','Release 3 progress reset '+id);
   if([68,85,92,139,198,199,201,202,203,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id);assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
+  if([5,6,8,9,10,11,12,13,14,15,18,37,64,65,113,164,189,192,193,211,212,213,294,298,331,470,527,528,529,605,634,635,636,646,648].includes(+id))assert.equal(a.QV[id],'2026-11-20-img','Batch 5 progress reset '+id);
+  if([5,6,8,9,10,12,13,14,37,192,193,212,331,648].includes(+id))assert(o.plain&&q.pw===1,'Batch 5 sign picture without the dashboard '+id);
  }
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
@@ -192,7 +195,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   else{assert.equal(q[0],id in a.DV?DVQ[id].short:d.q,'Text '+d.key);assert.deepEqual([...q[1]],d.o,'Options '+d.key);assert.deepEqual([...q.m],d.m,'Key '+d.key)}
   const t=d.topic==='extra'?XT:d.topic;assert(a.RT[t].ids.includes(id)&&a.MQ.includes(id),'Topic and pool '+d.key);
   if(d.topic==='extra')assert(q.xt===1&&!a.EXQ.includes(id),'Extra kept out of exam '+d.key);
-  if(d.img)assert(typeof q[4]==='string'&&q[4].startsWith('data:image/svg+xml'),'Image '+d.key);
+  if(d.img)assert(id in a.DV?q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='):typeof q[4]==='string'&&q[4].startsWith('data:image/svg+xml'),'Image '+d.key); // batch 5: a driver-view picture replaces the SVG (N7 = Q648)
   assert(d.en&&(d.en.q||d.en.name),'English kept in spec '+d.key);
  }
 }
@@ -213,4 +216,4 @@ for(let run=0;run<30;run++){const r=load();for(const q of r.a.Q){if(q[0]!=='Чт
   if(f.img&&!(f.id in a.DV))assert(q.sc===1&&q[4]==='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(__dirname,'../editorial/svg',f.img),'utf8').replace(/\r/g,'').trim()),'Fix picture '+f.id);
   assert(a.QV[f.id],'Fix progress reset '+f.id);}
 }
-console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + release 4 (26 questions, letters on Q201/Q208/Q209), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
+console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + release 4 (26 questions, letters on Q201/Q208/Q209) + batch 5 (35 questions: 21 scenes incl. letter A on Q636, Q212 top view with X/Y/Z, 13 sign pictures without the dashboard), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
