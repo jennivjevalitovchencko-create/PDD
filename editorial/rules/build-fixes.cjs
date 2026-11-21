@@ -5,7 +5,7 @@
 // With a date, the questions of the newest fixes file get the mark <date>-fix (their progress is reset once) — pass the date only when releasing that file.
 const fs=require('node:fs'),path=require('node:path');
 const root=path.join(__dirname,'../..'),file=path.join(root,'index.html'),explicit=!!process.argv[2],date=process.argv[2]||new Date().toISOString().slice(0,10);
-if(explicit&&!/^d{4}-dd-dd$/.test(date))throw new Error('date must be YYYY-MM-DD: '+date);
+if(explicit&&!/^\d{4}-\d\d-\d\d$/.test(date))throw new Error('date must be YYYY-MM-DD: '+date);
 const FILES=fs.readdirSync(__dirname).filter(f=>/^fixes-\d+\.json$/.test(f)).sort((x,y)=>parseInt(x.slice(6))-parseInt(y.slice(6)));
 const fixes=FILES.flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,f),'utf8')))
  .filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e||x.img)).map(({id,q,o,m,e,img})=>({id,q,o,m,e,img:img&&'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fs.readFileSync(path.join(root,'editorial/svg',img),'utf8').replace(/\r/g,'').trim())}));
