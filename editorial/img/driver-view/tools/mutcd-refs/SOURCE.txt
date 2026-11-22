@@ -1,0 +1,4 @@
+Reference sign renders from Wikimedia Commons (File:MUTCD_<code>.svg, rendered PNG 960 px via Special:FilePath; W6-1 500 px).
+License: all marked "Public domain" on Commons (US federal works, MUTCD / FHWA), checked via the Commons API 2026-11-22.
+Composited onto ChatGPT scenes with ../sign-compose/comp.cjs (cover old bbox, aspect kept, colour gain, gblur 0.6, noise 3).
+User decision 2026-11-22: for every sign, use the MUTCD reference instead of a drawn one.
