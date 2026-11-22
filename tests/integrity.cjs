@@ -141,6 +141,8 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
  assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
+ // fixes-6 (released 2026-11-22) re-marked its questions <date>-fix, so the older picture-release marks below skip them (Q136, Q161, Q205, Q294, Q564, Q610); fixes-6 marks are checked at the end
+ const F6=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-6.json'),'utf8')).map(x=>x.id));
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],svg=F.svg[id];
   assert.equal(q[4],F.url[id],'Driver-view picture path is current (run build-app.cjs) '+id);
@@ -153,12 +155,12 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   if(d[4])assert(typeof imgs[d[4]]==='string'&&svg.includes(imgs[d[4]]),'Mirror scene '+id);
   assert(svg.includes('#3d8bff')===!!o.high&&svg.includes('#35e06a')===!!(o.low||d[2]||d[3]),'Lit dashboard icons match DV options '+id);
   assert(/^2026-11-\d\d-(img|fix)$/.test(a.QV[id]),'Progress reset mark '+id);
-  if([67,97,99,132,160,176,564,612,638].includes(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
+  if([67,97,99,132,160,176,564,612,638].includes(+id)&&!F6.has(+id))assert.equal(a.QV[id],'2026-11-18-img','Release 2026-11-18 progress reset '+id);
   if([90,195,196,197,647].includes(+id))assert.equal(a.QV[id],'2026-11-19-img','Release 3 progress reset '+id);
-  if([68,85,92,139,198,199,201,202,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id); /* Q203: re-edited by law 2026-11-21 (fixes-5) */assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
-  if([5,6,8,9,10,11,12,13,14,15,18,37,64,65,189,192,193,211,212,213,294,298,331,527,528,529,605,634,635,636,646,648].includes(+id))assert.equal(a.QV[id],'2026-11-20-img','Batch 5 progress reset '+id); // Q113, Q470: re-edited by law 2026-11-21 (fixes-5), mark 2026-11-21-fix; Q164: new picture in batch 6
+  if([68,85,92,139,198,199,201,202,204,205,206,207,208,209,210,214,215,275,300,531,637].includes(+id)){if(!F6.has(+id))assert.equal(a.QV[id],'2026-11-20-img','Release 4 progress reset '+id); /* Q203: re-edited by law 2026-11-21 (fixes-5) */assert(q.dv===1&&q[4].startsWith('img/dv/q'+id+'.jpg?v='),'Release 4 picture '+id)}
+  if([5,6,8,9,10,11,12,13,14,15,18,37,64,65,189,192,193,211,212,213,294,298,331,527,528,529,605,634,635,636,646,648].includes(+id)&&!F6.has(+id))assert.equal(a.QV[id],'2026-11-20-img','Batch 5 progress reset '+id); // Q113, Q470: re-edited by law 2026-11-21 (fixes-5), mark 2026-11-21-fix; Q164: new picture in batch 6
   if([5,6,8,9,10,12,13,14,37,192,193,212,331,648].includes(+id))assert(o.plain&&q.pw===1,'Batch 5 sign picture without the dashboard '+id);
-  if([4,7,17,63,74,86,87,88,89,91,93,96,101,125,127,128,133,136,137,142,159,161,164,167,178,191,194,281,303,466,484,498,501,550,560,561,609,610,611,613,614,618,619,643,650].includes(+id))assert.equal(a.QV[id],'2026-11-22-img','Batch 6 progress reset '+id); // items 53-92 + 100 (22.11); shared pictures: Q17=Q86, Q194=Q7, Q4=Q191=Q74
+  if([4,7,17,63,74,86,87,88,89,91,93,96,101,125,127,128,133,136,137,142,159,161,164,167,178,191,194,281,303,466,484,498,501,550,560,561,609,610,611,613,614,618,619,643,650].includes(+id)&&!F6.has(+id))assert.equal(a.QV[id],'2026-11-22-img','Batch 6 progress reset '+id); // items 53-92 + 100 (22.11); shared pictures: Q17=Q86, Q194=Q7, Q4=Q191=Q74
   if(+id===466)assert(o.plain&&q.pw===1,'Batch 6 top view without the dashboard 466');
  }
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
@@ -234,6 +236,9 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
  assert(B.every(x=>!(x.startsWith('## ')&&x.includes('\n'))),'Heading block without text '+m.file);
  assert(B[B.length-1].startsWith('Учебник Connecticut DMV')&&B.slice(0,-1).every(x=>!x.startsWith('Учебник Connecticut DMV')),'Only the last line is the sources line '+m.file);
 }
-// Newest fixes file (fixes-5, law review 2026-11-21): its questions carry the reset mark of that release
+// fixes-5 (law review 2026-11-21): its questions keep the reset mark of that release
 for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
+// Newest fixes file (fixes-6, released 2026-11-22, 30 questions): its questions carry the reset mark of that release (build-fixes.cjs 2026-11-22)
+{const f6=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-6.json'),'utf8'));assert.equal(f6.length,30,'fixes-6 has 30 questions');
+ for(const x of f6)assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);}
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
