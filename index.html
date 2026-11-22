@@ -3,9 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ПДД CT"><link rel="apple-touch-icon" href="icon.png"><meta name="theme-color" content="#0b6b3a">
 <style>
-:root{--bg:#f3f5f1;--card:#fff;--ink:#16211b;--mute:#5d6b62;--g:#0b6b3a;--gt:#fff;--ok:#dff3e6;--okb:#1f8a4c;--bad:#fbe3e6;--badb:#c8102e;--line:#d9dfd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--line:#2a372f}}
-:root[data-theme="dark"]{--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--line:#2a372f}
+:root{--bg:#f3f5f1;--card:#fff;--ink:#16211b;--mute:#5d6b62;--g:#0b6b3a;--gt:#fff;--ok:#dff3e6;--okb:#1f8a4c;--bad:#fbe3e6;--badb:#c8102e;--miss:#fff1dc;--missb:#c76a00;--line:#d9dfd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--miss:#3d2b12;--missb:#ffab40;--line:#2a372f}}
+:root[data-theme="dark"]{--bg:#101613;--card:#18211c;--ink:#e8efe9;--mute:#9aa99f;--g:#2f8f5b;--ok:#17402a;--okb:#4cc380;--bad:#47181f;--badb:#ff6b7f;--miss:#3d2b12;--missb:#ffab40;--line:#2a372f}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 header{background:var(--g);color:var(--gt);padding:14px 16px 10px}
 header h1{margin:0 0 8px;font-size:20px}
@@ -17,7 +17,7 @@ h2{font-size:19px;line-height:1.35;margin:6px 0 14px}
 .mute{color:var(--mute);font-size:14px;margin:0}
 .opt,.go{display:block;width:100%;text-align:left;margin:0 0 8px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
 .go{background:var(--g);color:var(--gt);border-color:var(--g);text-align:center;font-weight:600;margin-top:10px}
-.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.bad{background:var(--bad);border-color:var(--badb)}
+.opt.ok{background:var(--ok);border-color:var(--okb)}.opt.bad{background:var(--bad);border-color:var(--badb)}.opt.miss{background:var(--miss);border:2px dashed var(--missb)}
 .exp{padding:10px 12px;border-left:4px solid var(--g);background:var(--card);border-radius:6px;margin-top:6px}
 .card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
 .card svg{flex:none}.card b{display:block}
@@ -1392,7 +1392,7 @@ function ans(k,rp){const id=S.ids[S.i],q=Q[id],r=q.o||q.p?k.every((x,i)=>x==i):q
 if(rp){}else if(r){S.ok++;if(!S.ex)W=W.filter(x=>x!=id)}else{S.miss.push(id);if(S.mode=='w')S.ids.push(id);(S.pick=S.pick||{})[id]=k;if(!W.includes(id))W.push(id);bump(id)}
 if(!rp){R[id]=r?1:0;sr();save();tabs();(S.res=S.res||{})[S.i]=k;(S.rr=S.rr||{})[S.i]=r?1:0}
 if(S.ex){S.i++;return quiz()}
-app.querySelectorAll('.opt[data-k]').forEach(b=>{b.disabled=true;const n=+b.dataset.k;b.style.outline='';const c=q.o?k.indexOf(n)==n:M(q)?M(q).includes(n):n==q[2],p=q.o?true:M(q)?k.includes(n):n==k;if(c)b.classList.add('ok');else if(p)b.classList.add('bad');if(q.o)b.insertAdjacentHTML('afterbegin','<b>'+(c?'✓ ':'✗ (верное место '+(n+1)+') ')+'</b>');if(M(q)){b.insertAdjacentHTML('afterbegin',c?'<b>✓ Верно: </b>':p?'<b>✗ Неверно: </b>':'');if(c&&!p)b.style.borderStyle='dashed'}});
+app.querySelectorAll('.opt[data-k]').forEach(b=>{b.disabled=true;const n=+b.dataset.k;b.style.outline='';const c=q.o?k.indexOf(n)==n:M(q)?M(q).includes(n):n==q[2],p=q.o?true:M(q)?k.includes(n):n==k;if(c&&!p&&M(q))b.classList.add('miss');else if(c)b.classList.add('ok');else if(p)b.classList.add('bad');if(q.o)b.insertAdjacentHTML('afterbegin','<b>'+(c?'✓ ':'✗ (верное место '+(n+1)+') ')+'</b>');if(M(q)){b.insertAdjacentHTML('afterbegin',c&&!p?'<b>⚠ Пропущен верный ответ: </b>':c?'<b>✓ Верно: </b>':p?'<b>✗ Неверно: </b>':'')}});
 const xt=q.o?' Правильный порядок: '+q[1].map((x,i)=>(i+1)+') '+x).join('; ')+'.':q.p?' Верные пары: '+q.p.map(x=>x[0]+' → '+x[1]).join('; ')+'.':'';if(q.p){q.p.forEach((x,i)=>{const s=document.getElementById('mp'+i);if(s){s.value=k[i];s.disabled=true;s.parentNode.style.borderLeft='4px solid '+(k[i]==i?'#2e9e5b':'#d94a5a')}});const b2=document.getElementById('nb');if(b2)b2.disabled=true}const ni=document.getElementById('ni');if(ni){ni.disabled=true;ni.value=k;document.getElementById('nb').disabled=true}const im=QI[id]!=null?`<img class="qi" src="${SG[QI[id]][0]}" alt="" style="margin-top:12px">`:'';
 document.getElementById('fb').innerHTML=`<div class="exp${TO[id]!=null?' exp-with-help':''}">${TO[id]!=null?`<button class="theory-help" type="button" aria-label="Где об этом в теории" title="Где об этом в теории" onclick="gv(${TO[id]},1)">?</button>`:''}<b>${r?'Верно.':'Неверно.'}</b> ${q[3]}${xt}</div>${im}${W.includes(id)?'<p class="mute" style="margin:10px 0 0">✓ Добавлено в повторение</p>':'<button class="opt" id="un">На повторение →</button>'}<button class="go" id="nx">Дальше</button>`;
 const un=document.getElementById('un');if(un)un.onclick=()=>{if(!W.includes(id)){W.push(id);save();tabs()}bump(id);S.i++;quiz()};
