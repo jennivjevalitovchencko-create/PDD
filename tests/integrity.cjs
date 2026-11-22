@@ -74,14 +74,14 @@ assert(a.RT[1].t.includes('если подъезжаете почти однов
 assert(a.EXQ.includes(307),'Q307 single-choice now in exam pool');
 // Progress reset for edited questions: old answers are dropped once, other progress stays, rerun is idempotent
 {
- const old=load({r:'{"64":1,"65":0,"66":1,"637":1}',w:'[65,66,637]',st:'[64]'});
+ const old=load({r:'{"64":1,"65":0,"62":1,"637":1}',w:'[65,62,637]',st:'[64]'});
  assert(!('64' in old.a.R)&&!('65' in old.a.R)&&!('637' in old.a.R),'Edited questions reset');
- assert.equal(old.a.R['66'],1,'Unchanged question progress kept');
- assert.deepEqual([...old.a.W],[66],'Edited questions removed from repeat list');
+ assert.equal(old.a.R['62'],1,'Unchanged question progress kept');
+ assert.deepEqual([...old.a.W],[62],'Edited questions removed from repeat list');
  assert.equal(old.storage.st,'[64]','Starred kept');
  const marks=JSON.parse(old.storage.qv);
  assert.equal(marks['64'],'2026-11-20-img','Revision mark saved'); // Q64: 2026-11-08 edit, then the driver-view picture of batch 5
- const again=load({...old.storage,r:'{"64":1,"66":1}'});
+ const again=load({...old.storage,r:'{"64":1,"62":1}'});
  assert.equal(again.a.R['64'],1,'Answer given after the change is kept on reload');
 }
 // Approved crash scenario questions C1/C2 (editorial/crash/PDD-crash-scenarios-2026-11-05.md): text, options, key and explanation must equal the approved record
@@ -112,21 +112,21 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
 assert.equal(a.RT[4].ids.length,25,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock, +R1–R6)');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 // Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
-const restored=load({w:'null',r:'{"66":1}'});
+const restored=load({w:'null',r:'{"62":1}'});
 assert(Array.isArray(restored.a.W)&&restored.a.W.length===0,'Malformed repeat list not normalized');
-assert.equal(restored.a.R['66'],1,'Unrelated progress lost');
+assert.equal(restored.a.R['62'],1,'Unrelated progress lost');
 for(const raw of ['null','[]','[1]','42','"x"','true','{']){
- const saved={r:raw,w:'[66]',st:'[66]',d:'[1]'};
+ const saved={r:raw,w:'[62]',st:'[62]',d:'[1]'};
  const checked=load(saved);
  assert.doesNotThrow(()=>checked.a.openTopics(),'Topics with malformed r='+raw);
  assert(checked.a.R&&typeof checked.a.R==='object'&&!Array.isArray(checked.a.R),'Progress map type for '+raw);
  assert.equal(Object.keys(checked.a.R).length,0,'Malformed progress falls back to empty map');
  for(const [key,value] of Object.entries(saved))assert.equal(checked.storage[key],value,'Loading must not overwrite '+key);
 }
-const validSaved={r:'{"66":1,"297":0}',w:'[66]',st:'[297]',d:'[1]'};
+const validSaved={r:'{"62":1,"297":0}',w:'[62]',st:'[297]',d:'[1]'};
 const valid=load(validSaved);
 assert.doesNotThrow(()=>valid.a.openTopics(),'Topics with valid saved progress');
-assert.equal(valid.a.R['66'],1,'Correct answer progress preserved');
+assert.equal(valid.a.R['62'],1,'Correct answer progress preserved');
 assert.equal(valid.a.R['297'],0,'Incorrect answer progress preserved');
 for(const [key,value] of Object.entries(validSaved))assert.equal(valid.storage[key],value,'Valid storage preserved: '+key);
 const empty=load();
