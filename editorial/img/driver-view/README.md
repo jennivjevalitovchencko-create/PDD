@@ -75,3 +75,13 @@ Accepted by the user 19–21.11 (checks per the skill §9–§11; notes in `draf
 - Postponed (user 21.11): Q113/Q470 «закон Move Over» wording vs CGS 14-283b (slowing down is required only for emergency vehicles) — separate review after publishing.
 - `index.html`: the DVT and DV `forEach` lines now stand after `/*PDD-FIX-END*/` — the sign literals `Q[1]`, `Q[5]`–`Q[14]` below the old place rebuilt those questions and wiped the picture and short text.
 - QV mark `2026-11-20-img` (one release with release 4).
+
+## Batch 6 (list items 53–92 + 100), embedded 2026-11-22 on the server
+
+Accepted by the user 21–22.11 (all 41 pictures; checks per the skill §9–§13, reviewer done for all; notes and the FINAL MANIFEST in `drafts/items-53-92-notes.txt`). Scripts: `drafts/tools-2026-11-20/embed6-manifest.txt`, `embed6-copies.sh` (ffmpeg with `-nostdin` — inside a `while read` loop ffmpeg otherwise eats the manifest lines), `embed6.cjs`.
+- 40 scenes with the dashboard: Q86 (53), Q87 (54), Q281 (55), Q609 (56), Q303 (57), Q63 (58, ry 0, 45 mph), Q178 (59), Q96 (60, 25 mph — user decision), Q125 (61, v8), Q127 (62), Q93 (64), Q88 (65), Q89 (66), Q613 (67), Q7 (68), Q610 (69), Q611 (70, ry 200), Q614 (71), Q91 (72), Q101 (73), Q560 (74), Q561 (75), Q550 (76), Q133 (77), Q128 (78), Q74 (79), Q650 (80), Q643 (81), Q618 (82), Q619 (83), Q498 (84), Q142 (85), Q501 (86), Q484 (87), Q137 (88), Q136 (89), Q161 (90), Q159 (91), Q164 (92, v3 replaces the batch 5 picture; no `delogo` needed), Q167 (100, v4).
+- Shared pictures: Q17 = Q86, Q194 = Q7, Q4 and Q191 = Q74. Top view without the dashboard (`plain:1`): Q466 (63).
+- Sign faces composited from MUTCD references (Wikimedia Commons, public domain; user decision 22.11): items 56, 62, 64, 72, 74, 75, 76, 84, 92. Item 61 (Q125): the right cross street's centre line drawn by hand. No letters needed (no letter references in options).
+- Text changes with the user's «да» 22.11: Q87 option 1 «…пока она не погаснет и над вашей полосой не загорится зелёная стрелка или зелёный сигнал»; Q17 explanation «Сбавьте скорость и проезжайте осторожно. Стр. 45.» (was English); Q561 option 2 «…к встречному движению на вашей проезжей части после начала разделителя». Keys unchanged.
+- Q87, Q610, Q136, Q161 are also in the pending fixes-6 (law review, branch `pdd-theory-topics-2026-11-21b`): after fixes-6, re-check these pictures against the new text; fixes-6 must keep the Q87 option 1 wording above.
+- QV mark `2026-11-22-img`.
