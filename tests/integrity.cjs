@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,openTopics:()=>go("sign")};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,openTopics:()=>go("sign")};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -235,6 +235,16 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
  assert.equal(T.replace(/\*\*(.+?)\*\*/g,'').includes('**'),false,'Balanced ** in '+m.file);
  assert(B.every(x=>!(x.startsWith('## ')&&x.includes('\n'))),'Heading block without text '+m.file);
  assert(B[B.length-1].startsWith('Учебник Connecticut DMV')&&B.slice(0,-1).every(x=>!x.startsWith('Учебник Connecticut DMV')),'Only the last line is the sources line '+m.file);
+}
+// Sign-group theory GT[0..4] is built from editorial/theory/signs/<group>-*.md (build-theory.cjs, 23.11); colour lines "- [#rrggbb] …" render as swatches
+{const sd=path.join(__dirname,'../editorial/theory/signs'),SF=fs.readdirSync(sd).filter(f=>/^\d+-.*\.md$/.test(f));
+ assert.deepEqual(SF.map(f=>parseInt(f)).sort(),[0,1,2,3,4],'One theory file per sign group 0-4');
+ for(const f of SF){const g=a.GT[parseInt(f)],T=fs.readFileSync(path.join(sd,f),'utf8').replace(/\r\n?/g,'\n').trim();
+  assert.equal(g.t,T,'Sign theory text '+f);assert(T.length>1000,'Sign theory is full, not a stub '+f);
+  assert(!/<\/?[a-z]/i.test(T)&&!/^###|^\d+\. /m.test(T),'Only ##, paragraphs, - lists and ** in sign theory '+f);
+  assert(T.split(/\n\s*\n/).pop().startsWith('Учебник Connecticut DMV'),'Sources line last in '+f);
+  const H=a.FT(T);assert(!H.includes('**')&&!/\[#[0-9a-f]{6}\]/.test(H),'Sign theory renders (bold, swatches) '+f);}
+ assert.equal((a.FT(a.GT[0].t).match(/border-radius:5px;background:#/g)||[]).length,9,'Nine colour swatches in shapes and colours');
 }
 // fixes-5 (law review 2026-11-21): its questions keep the reset mark of that release
 for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);

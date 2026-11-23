@@ -12,5 +12,10 @@ const lines=MAP.map(m=>`RT[${m.rt}].t=${lit(read(m.file))};`);
 const re=/(\/\* PDD-THEORY:[^\n]*\*\/\r?\n)(?:RT\[\d+\]\.t=".*";\r?\n)+/;
 if(!re.test(html))throw new Error('PDD-THEORY block not found');
 const out=html.replace(re,(_,head)=>head+lines.join('\n')+'\n');
-if(out!==html)fs.writeFileSync(htmlPath,out);
-console.log('PDD-THEORY: '+MAP.length+' topics '+(out!==html?'written':'unchanged'));
+// Sign groups GT[0..4]: editorial/theory/signs/<group>-*.md (same markdown; a list line "- [#rrggbb] text" shows a colour swatch)
+const sdir=path.join(dir,'signs'),SF=fs.readdirSync(sdir).filter(f=>/^\d+-.*\.md$/.test(f)).sort((x,y)=>parseInt(x)-parseInt(y));
+const sre=/(\/\* PDD-SIGNS-THEORY:[^\n]*\*\/\r?\n)(?:GT\[\d+\]\.t=".*";\r?\n)+/;
+if(!sre.test(out))throw new Error('PDD-SIGNS-THEORY block not found');
+const out2=out.replace(sre,(_,head)=>head+SF.map(f=>`GT[${parseInt(f)}].t=${lit(fs.readFileSync(path.join(sdir,f),'utf8').replace(/\r\n?/g,'\n').trim())};`).join('\n')+'\n');
+if(out2!==html)fs.writeFileSync(htmlPath,out2);
+console.log('PDD-THEORY: '+MAP.length+' topics, '+SF.length+' sign groups '+(out2!==html?'written':'unchanged'));
