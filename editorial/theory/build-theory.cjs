@@ -14,6 +14,7 @@ if(!re.test(html))throw new Error('PDD-THEORY block not found');
 const out=html.replace(re,(_,head)=>head+lines.join('\n')+'\n');
 // Sign groups GT[0..4]: editorial/theory/signs/<group>-*.md (same markdown; a list line "- [#rrggbb] text" shows a colour swatch)
 const sdir=path.join(dir,'signs'),SF=fs.readdirSync(sdir).filter(f=>/^\d+-.*\.md$/.test(f)).sort((x,y)=>parseInt(x)-parseInt(y));
+if(SF.map(f=>parseInt(f)).join()!=='0,1,2,3,4')throw new Error('signs/: need exactly one file per sign group 0-4, got '+SF.join(', '));
 const sre=/(\/\* PDD-SIGNS-THEORY:[^\n]*\*\/\r?\n)(?:GT\[\d+\]\.t=".*";\r?\n)+/;
 if(!sre.test(out))throw new Error('PDD-SIGNS-THEORY block not found');
 const out2=out.replace(sre,(_,head)=>head+SF.map(f=>`GT[${parseInt(f)}].t=${lit(fs.readFileSync(path.join(sdir,f),'utf8').replace(/\r\n?/g,'\n').trim())};`).join('\n')+'\n');
