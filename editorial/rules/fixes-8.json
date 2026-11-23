@@ -1,0 +1,23 @@
+[
+ {
+  "id": 224,
+  "problem": "SG2[7] переименован: «Дорога плавно изгибается вправо (Road Curves to Right)», картинка без обрезанной подписи (MEDIUM, часть 49)",
+  "action": "mark",
+  "src": "index.html (данные знаков SG2, SYNG); учебник стр. 50",
+  "review": "PDD-full-review-2026-11, MEDIUM части 48–49; fixes-7 часть 2"
+ },
+ {
+  "id": 390,
+  "problem": "SG2[7] переименован — отличается от «Впереди поворот направо (Right Turn Ahead)» (MEDIUM, часть 49)",
+  "action": "mark",
+  "src": "index.html (данные знаков SG2, SYNG); учебник стр. 50",
+  "review": "PDD-full-review-2026-11, MEDIUM части 48–49; fixes-7 часть 2"
+ },
+ {
+  "id": 402,
+  "problem": "NO PARKING / NO STOPPING добавлены в SYNG: знак «остановка запрещена» больше не неверный вариант к «парковка запрещена» (MEDIUM, часть 49)",
+  "action": "mark",
+  "src": "index.html (данные знаков SG2, SYNG); учебник стр. 50",
+  "review": "PDD-full-review-2026-11, MEDIUM части 48–49; fixes-7 часть 2"
+ }
+]
