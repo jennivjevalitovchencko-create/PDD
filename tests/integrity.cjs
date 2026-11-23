@@ -15,9 +15,11 @@ function load(saved={}){
 const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
-assert.equal(a.Q.length,697); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json)
+assert.equal(a.Q.length,701); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json) + 4 manual signs 2026-11-23 (ids 697-700, appended last)
 assert.equal(a.EXQ.length,238); // 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
-assert.equal(a.SIGNQ.length,54);
+assert.equal(a.SIGNQ.length,58); // +4 manual signs 2026-11-23
+assert.deepEqual([...a.SIGNQ.slice(-11,-7)],[697,698,699,700],'Manual signs 2026-11-23 are the last questions (earlier IDs unchanged)');
+for(const id of [697,698,699,700])assert(a.Q[id][0]==='Что означает этот знак?'&&/^data:image\/png;base64,/.test(a.Q[id][4])&&a.Q[id][1][a.Q[id][2]]&&a.CD.some(c=>c.img===a.Q[id][4]),'Manual sign question and card '+id);
 for(const [i,q] of a.Q.entries()){
  assert(Array.isArray(q[1])&&q[1].length&&q[1].every(x=>typeof x==='string'&&x.trim()),'Options '+i);
  assert(typeof q[0]==='string'&&q[0].trim()&&typeof q[3]==='string','Question '+i);
