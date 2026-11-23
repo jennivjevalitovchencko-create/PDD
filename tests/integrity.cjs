@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,openTopics:()=>go("sign")};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,openTopics:()=>go("sign")};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -249,8 +249,21 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
  assert.equal((a.FT(a.GT[0].t).match(/border-radius:5px;background:#/g)||[]).length,9,'Nine colour swatches in shapes and colours');
 }
 // fixes-5 (law review 2026-11-21): its questions keep the reset mark of that release
-for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
-// Newest fixes file (fixes-6, released 2026-11-22, 30 questions): its questions carry the reset mark of that release (build-fixes.cjs 2026-11-22)
+const F7=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-7.json'),'utf8')).map(x=>x.id)); // fixes-7 re-edits Q257 and Q419 (new mark below)
+for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))if(!F7.has(x.id))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
+// fixes-6 (released 2026-11-22, 30 questions): its questions keep the reset mark of that release (build-fixes.cjs 2026-11-22)
 {const f6=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-6.json'),'utf8'));assert.equal(f6.length,30,'fixes-6 has 30 questions');
  for(const x of f6)assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);}
+// Newest fixes file (fixes-7, full review 2026-11, HIGH first): edits and "mark" entries (sign data / generator changed in index.html) carry the mark of build-fixes.cjs 2026-11-23
+{const f7=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-7.json'),'utf8'));
+ for(const x of f7)assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-7 progress reset '+x.id);
+ assert(!/\b00\b/.test(a.Q[257][1][0])&&a.Q[257][1][0].includes('$500')&&a.Q[257][1][0].includes('$1000'),'Q257 keeps the dollar amounts');
+ for(const q of a.Q)for(const s of [q[0],q[3],...q[1]])assert(!/(до|штраф|fine)\s+0{2,}/i.test(s),'No amount lost its leading digit: '+s.slice(0,80));
+ // «Какой знак означает…»: no distractor means the same as the key (SYNG), and the four renamed signs are told apart
+ const name=new Map(a.SP.map(s=>[s[0],s[1]]));let n=0;
+ for(const q of a.Q){if(!/^Какой знак означает «/.test(q[0]))continue;n++;const N=q[1].map(o=>name.get((o.match(/src='([^']*)'/)||[])[1]));assert(N.every(Boolean),'Sign options known '+q[0]);
+  assert.equal('Какой знак означает «'+N[q[2]]+'»?',q[0],'Key image matches '+q[0]);for(const [i,x] of N.entries())if(i!==q[2])assert(!a.SYN(x,N[q[2]]),'Synonym distractor in '+q[0]+': '+x);}
+ assert.equal(n,64,'Sign-name questions');
+ for(const s of ['Парк, место для пикника (Parks and Recreation)','Площадка отдыха у дороги (Rest Area)','Резкие повороты направо и налево (Right and Left Turns)','Плавные изгибы вправо и влево (Road Curves to Right and Left)'])assert(a.SP.some(x=>x[1]===s),'Sign name '+s);
+ assert(a.SP.find(x=>x[1]==='Слияние полос (Merge)')[2].includes('в обеих полосах'),'Merge: both lanes (manual p. 49)');}
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');

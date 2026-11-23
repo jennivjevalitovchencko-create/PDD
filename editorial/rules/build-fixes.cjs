@@ -18,10 +18,12 @@ let h=fs.readFileSync(file,'utf8');
 const re=/\/\*PDD-FIX-BEGIN[\s\S]*?\/\*PDD-FIX-END\*\/\r?\n?/,anchor='\n/* driver-view short texts and pictures:';
 h=h.replace(re,'');if(h.split(anchor).length!==2)throw new Error('anchor');h=h.replace(anchor,()=>'\n'+block+anchor);
 const qv='const QV={';if(h.split(qv).length!==2)throw new Error('QV');
-const add=fixes.map(f=>f.id).filter(id=>!new RegExp(`[{,]${id}:'`).test(h.slice(h.indexOf(qv),h.indexOf('};',h.indexOf(qv)))));
+// action "mark": the question changed through app data (sign tables, generators) edited directly in index.html — it only gets a QV mark
+const marks=FILES.flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,f),'utf8'))).filter(x=>x.action==='mark').map(({id})=>({id}));
+const add=[...fixes,...marks].map(f=>f.id).filter(id=>!new RegExp(`[{,]${id}:'`).test(h.slice(h.indexOf(qv),h.indexOf('};',h.indexOf(qv)))));
 const rest=h.slice(h.indexOf(qv)+qv.length);let body=rest.slice(0,rest.indexOf('};'));
 // Only the newest fixes file gets a new reset mark; older fixes keep theirs (re-running must not reset progress of every fixed question)
-const newest=new Set(FILES.length?JSON.parse(fs.readFileSync(path.join(__dirname,FILES[FILES.length-1]),'utf8')).filter(x=>x.action==='edit').map(x=>x.id):[]);
-for(const f of fixes){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body)){if(explicit&&newest.has(f.id))body=body.replace(r,`$1${f.id}:'${date}-fix'`)}else body=`${f.id}:'${date}-fix',`+body}
+const newest=new Set(FILES.length?JSON.parse(fs.readFileSync(path.join(__dirname,FILES[FILES.length-1]),'utf8')).filter(x=>x.action==='edit'||x.action==='mark').map(x=>x.id):[]);
+for(const f of [...fixes,...marks.filter(m=>!fixes.some(f=>f.id===m.id))]){const r=new RegExp(`(^|,)${f.id}:'[^']*'`);if(r.test(body)){if(explicit&&newest.has(f.id))body=body.replace(r,`$1${f.id}:'${date}-fix'`)}else body=`${f.id}:'${date}-fix',`+body}
 h=h.slice(0,h.indexOf(qv)+qv.length)+body+rest.slice(rest.indexOf('};'));
-fs.writeFileSync(file,h);console.log('fixes applied:',fixes.length,'new QV marks:',add.length);
+fs.writeFileSync(file,h);console.log('fixes applied:',fixes.length,'marks:',marks.length,'new QV marks:',add.length);
