@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,openTopics:()=>go("sign")};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,APP_VER,VER,openTopics:()=>go("sign")};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -266,4 +266,8 @@ for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rule
  assert.equal(n,64,'Sign-name questions');
  for(const s of ['Парк, место для пикника (Parks and Recreation)','Площадка отдыха у дороги (Rest Area)','Резкие повороты направо и налево (Right and Left Turns)','Плавные изгибы вправо и влево (Road Curves to Right and Left)'])assert(a.SP.some(x=>x[1]===s),'Sign name '+s);
  assert(a.SP.find(x=>x[1]==='Слияние полос (Merge)')[2].includes('в обеих полосах'),'Merge: both lanes (manual p. 49)');}
+// App version (PDD-VERSION, 2026-11-23): shown on home and «Ещё»; bumped once per release by editorial/release-version.cjs
+assert(Number.isInteger(a.APP_VER.n)&&a.APP_VER.n>=0&&/^\d{4}-\d\d-\d\d$/.test(a.APP_VER.d)&&a.APP_VER.w.trim(),'APP_VER');
+assert.equal(a.VER(),'Версия '+a.APP_VER.n+' от '+a.APP_VER.d.slice(8)+'.'+a.APP_VER.d.slice(5,7)+'.'+a.APP_VER.d.slice(0,4));
+assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$\{VER\(\)\}/g)||[]).length===2,'Version on home and in «Ещё»');
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
