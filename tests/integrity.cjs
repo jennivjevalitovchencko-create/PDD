@@ -105,7 +105,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  assert.deepEqual([...q.m],key,'Crash question key '+code);
  assert.deepEqual(key,[0,1],'Crash approved key '+code);
  assert.equal(q[2],key[0],'Crash question primary key '+code);
- assert.equal(q[3],crashSub(sec,'Объяснение для приложения'),'Crash question explanation '+code);
+ if(!FIXED.has(id))assert.equal(q[3],crashSub(sec,'Объяснение для приложения'),'Crash question explanation '+code); // fixes-8 (2026-11-23) rewrote the C1 explanation by the law; it is checked against the fix below
  assert(id in a.DV?q.dv===1:!q[4]&&!q.sc,'Crash question image only as an approved driver-view picture '+code);
  assert(a.RT[4].n==='Алкоголь, полиция, аварийные ситуации'&&a.RT[4].ids.includes(id),'Crash question topic '+code);
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
