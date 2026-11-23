@@ -144,7 +144,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  // fixes-6 (released 2026-11-22) re-marked its questions <date>-fix, so the older picture-release marks below skip them (Q136, Q161, Q205, Q294, Q564, Q610); fixes-6 marks are checked at the end
- const F6=new Set(['fixes-6.json','fixes-7.json','fixes-8.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // questions re-edited after the picture releases carry the newer fixes mark
+ const F6=new Set(['fixes-6.json','fixes-7.json','fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // questions re-edited after the picture releases carry the newer fixes mark
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],svg=F.svg[id];
   assert.equal(q[4],F.url[id],'Driver-view picture path is current (run build-app.cjs) '+id);
@@ -252,14 +252,14 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
  assert.equal((a.FT(a.GT[0].t).match(/border-radius:5px;background:#/g)||[]).length,9,'Nine colour swatches in shapes and colours');
 }
 // fixes-5 (law review 2026-11-21): its questions keep the reset mark of that release
-const F7=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-7.json'),'utf8')).map(x=>x.id)); // fixes-7 re-edits Q257 and Q419 (new mark below)
+const F7=new Set(['fixes-7.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // fixes-7 re-edits Q257 and Q419, fixes-9 (LOW) re-edits more (newer marks below)
 for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))if(!F7.has(x.id))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
 // fixes-6 (released 2026-11-22, 30 questions): its questions keep the reset mark of that release (build-fixes.cjs 2026-11-22)
 {const f6=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-6.json'),'utf8'));assert.equal(f6.length,30,'fixes-6 has 30 questions');
- const F8=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8')).map(x=>x.id));for(const x of f6)if(!F8.has(x.id))assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);} // re-edited in fixes-8 → newer mark
+ const F8=new Set(['fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id)));for(const x of f6)if(!F8.has(x.id))assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);} // re-edited in fixes-8 → newer mark
 // Newest fixes file (fixes-7, full review 2026-11, HIGH first): edits and "mark" entries (sign data / generator changed in index.html) carry the mark of build-fixes.cjs 2026-11-23
 {const f7=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-7.json'),'utf8'));
- for(const x of f7)assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-7 progress reset '+x.id);
+ const F9=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')).map(x=>x.id));for(const x of f7)if(!F9.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-7 progress reset '+x.id); // re-edited in fixes-9 → newer mark
  assert(!/\b00\b/.test(a.Q[257][1][0])&&a.Q[257][1][0].includes('$500')&&a.Q[257][1][0].includes('$1000'),'Q257 keeps the dollar amounts');
  for(const q of a.Q)for(const s of [q[0],q[3],...q[1]])assert(!/(до|штраф|fine)\s+0{2,}/i.test(s),'No amount lost its leading digit: '+s.slice(0,80));
  // «Какой знак означает…»: no distractor means the same as the key (SYNG), and the four renamed signs are told apart
@@ -276,5 +276,9 @@ assert(Number.isInteger(a.APP_VER.n)&&a.APP_VER.n>=0&&/^\d{4}-\d\d-\d\d$/.test(a
 assert.equal(a.VER(),'Версия '+a.APP_VER.n+' от '+a.APP_VER.d.slice(8)+'.'+a.APP_VER.d.slice(5,7)+'.'+a.APP_VER.d.slice(0,4));
 assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$\{VER\(\)\}/g)||[]).length===2,'Version on home and in «Ещё»');
 // fixes-8 (MEDIUM of the full review, released 2026-11-23 as «Версия 56»): every question of the file carries its reset mark
-{const f8=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8'));for(const x of f8)assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id);}
+{const f8=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8')),f9=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')),F9=new Set(f9.map(x=>x.id));
+ for(const x of f8)if(!F9.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id);
+ // fixes-9 (LOW of the full review, «Версия 57»): once released (APP_VER 57+, build-fixes.cjs <date>) every question of the file carries one new mark;
+ // the date must not be 2026-11-23: 19 questions of fixes-9 were already marked 2026-11-23-fix by fixes-8 and would keep old progress
+ if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}}
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
