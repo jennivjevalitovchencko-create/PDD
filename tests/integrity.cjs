@@ -16,7 +16,7 @@ const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,701); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json) + 4 manual signs 2026-11-23 (ids 697-700, appended last)
-assert.equal(a.EXQ.length,238); // 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
+assert.equal(a.EXQ.length,221); // 2026-11-23: the 17 «Какой знак означает…» questions about signs not in the CT manual (Q402–Q418) left the exam (user: as in the real test); 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
 assert.equal(a.SIGNQ.length,58); // +4 manual signs 2026-11-23
 assert.deepEqual([...a.SIGNQ.slice(-11,-7)],[697,698,699,700],'Manual signs 2026-11-23 are the last questions (earlier IDs unchanged)');
 for(const id of [697,698,699,700])assert(a.Q[id][0]==='Что означает этот знак?'&&/^data:image\/png;base64,/.test(a.Q[id][4])&&a.Q[id][1][a.Q[id][2]]&&a.CD.some(c=>c.img===a.Q[id][4]),'Manual sign question and card '+id);
@@ -267,6 +267,8 @@ for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rule
  for(const s of ['Парк, место для пикника (Parks and Recreation)','Площадка отдыха у дороги (Rest Area)','Резкие повороты направо и налево (Right and Left Turns)','Плавные изгибы вправо и влево (Road Curves to Right and Left)'])assert(a.SP.some(x=>x[1]===s),'Sign name '+s);
  assert(a.SP.find(x=>x[1]==='Слияние полос (Merge)')[2].includes('в обеих полосах'),'Merge: both lanes (manual p. 49)');}
 // App version (PDD-VERSION, 2026-11-23): shown on home and «Ещё»; bumped once per release by editorial/release-version.cjs
+for(let i=402;i<=418;i++)assert(/^Какой знак означает/.test(a.Q[i][0])&&a.Q[i].xt===1&&!a.EXQ.includes(i)&&a.ALL.includes(i),'Non-manual sign Q'+i+' is practice-only');
+assert(a.APP_VER.n>=55,'Version counts earlier releases: 55 GitHub Pages deployments up to 2026-11-23');
 assert(Number.isInteger(a.APP_VER.n)&&a.APP_VER.n>=0&&/^\d{4}-\d\d-\d\d$/.test(a.APP_VER.d)&&a.APP_VER.w.trim(),'APP_VER');
 assert.equal(a.VER(),'Версия '+a.APP_VER.n+' от '+a.APP_VER.d.slice(8)+'.'+a.APP_VER.d.slice(5,7)+'.'+a.APP_VER.d.slice(0,4));
 assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$\{VER\(\)\}/g)||[]).length===2,'Version on home and in «Ещё»');
