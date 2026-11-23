@@ -184,7 +184,10 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 }
 // Parking distances follow the law (CGS §14-251 as amended by P.A. 25-65, eff. 2025-10-01): 30 ft from STOP/YIELD, intersections and marked crosswalks; hydrant 10 ft. User decision 2026-11-08: law only.
 {
- assert(!/25 футов[^'"]{0,40}(Stop|STOP)|(Stop|STOP)[^'"]{0,40}25 футов|пешеходнS* (безопаснS* )?зон/.test(script),'No 25-ft STOP / pedestrian safety zone rules left');
+ // User decision 2026-11-23 (replaces 2026-11-08 «law only»): the answer follows the law, and the manual's 25 ft is named in the explanation with one standard sentence
+assert(!/пешеходнS* (безопаснS* )?зон/.test(script),'No pedestrian safety zone rules left');
+assert.equal((script.replace(/В учебнике 2023 года — 25 футов до знака STOP \(стр\. 37\), но действующий закон \(§14-251\(b\)\(3\)\) требует 30\./g,'').replace(/в учебнике 2023 года — 25 футов до знака STOP, но действующий закон требует 30/g,'').match(/25 футов[^'"]{0,40}(Stop|STOP)|(Stop|STOP)[^'"]{0,40}25 футов/g)||[]).length,0,'25 ft at STOP only in the standard manual-vs-law sentence');
+for(const id of [20,69,70,72,282,291,436,622])assert(a.Q[id][3].endsWith('В учебнике 2023 года — 25 футов до знака STOP (стр. 37), но действующий закон (§14-251(b)(3)) требует 30.'),'Manual 25 ft named in Q'+id);
  for(const id of [291,622])assert(JSON.stringify(a.Q[id].n).includes('30')&&a.Q[id][1][0].endsWith(': 30'),'Number answer 30 for Q'+id);
  assert(a.Q[70][1][a.Q[70][2]].startsWith('Нельзя ближе 30 футов'),'Q70 key 30 ft');
  for(const id of [20,69,70,72,282,291,436,597,622])assert(a.QV[id],'Parking question progress reset '+id);
