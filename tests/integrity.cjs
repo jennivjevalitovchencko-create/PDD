@@ -15,8 +15,8 @@ function load(saved={}){
 const {a}=load();
 // Questions later fixed in the rule-map review: their current text is checked against editorial/rules/fixes-*.json instead of older specs
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
-assert.equal(a.Q.length,701); // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json) + 4 manual signs 2026-11-23 (ids 697-700, appended last)
-assert.equal(a.EXQ.length,221); // 2026-11-23: the 17 «Какой знак означает…» questions about signs not in the CT manual (Q402–Q418) left the exam (user: as in the real test); 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
+assert.equal(a.Q.length,750); // 701 + 49 new questions fixes-10 (F113–F162 for the driver-view pictures 113–162, ids 701–749, appended last) // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json) + 4 manual signs 2026-11-23 (ids 697-700, appended last)
+assert.equal(a.EXQ.length,262); // 2026-11-25: +41 of the 49 fixes-10 questions (8 stay out: Полезно знать or law-only, exam:false → xt); 2026-11-23: the 17 «Какой знак означает…» questions about signs not in the CT manual (Q402–Q418) left the exam (user: as in the real test); 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
 assert.equal(a.SIGNQ.length,58); // +4 manual signs 2026-11-23
 assert.deepEqual([...a.SIGNQ.slice(-11,-7)],[697,698,699,700],'Manual signs 2026-11-23 are the last questions (earlier IDs unchanged)');
 for(const id of [697,698,699,700])assert(a.Q[id][0]==='Что означает этот знак?'&&/^data:image\/png;base64,/.test(a.Q[id][4])&&a.Q[id][1][a.Q[id][2]]&&a.CD.some(c=>c.img===a.Q[id][4]),'Manual sign question and card '+id);
@@ -56,7 +56,7 @@ for(const [id,start,key,file] of [
  else{assert(typeof q[4]==='string'&&q[4].startsWith(prefix),'Scheme data URI '+id);
  assert.equal(decodeURIComponent(q[4].slice(prefix.length)),svgOf(file),'Scheme matches approved SVG '+id);}
 }
-assert.equal(a.RT[1].ids.length,31,'Right-of-way topic size'); // +R19,R20,R37,R38
+assert.equal(a.RT[1].ids.filter(i=>i<701).length,31,'Right-of-way topic size'); // +R19,R20,R37,R38; fixes-10 (ids 701+) checked below
 // Right-of-way topic review 2026-11-08: every edited question equals editorial/review/row-edits-2026-11-08.json
 const rowSpec=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/review/row-edits-2026-11-08.json'),'utf8'));
 for(const e of rowSpec.edits){
@@ -111,7 +111,7 @@ for(const [id,code] of [[638,'C1'],[639,'C2']]){
  assert(a.MQ.includes(id)&&a.ALL.includes(id),'Crash question practice pool '+code);
  assert(!a.EXQ.includes(id),'Crash question kept out of exam pool '+code);
 }
-assert.equal(a.RT[4].ids.length,25,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock, +R1–R6)');
+assert.equal(a.RT[4].ids.filter(i=>i<701).length,25,'Alcohol/police/emergencies topic size (+N3 brake failure order, +N10 steering lock, +R1–R6)');
 assert(a.RT[4].t.includes('§14-224')&&a.RT[4].t.includes('повредили пустую машину'),'Crash theory in topic');
 // Progress samples use questions that the 2026-11-08 review did not edit (edited ones are reset by design).
 const restored=load({w:'null',r:'{"27":1}'});
@@ -281,4 +281,23 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  // fixes-9 (LOW of the full review, «Версия 57»): once released (APP_VER 57+, build-fixes.cjs <date>) every question of the file carries one new mark;
  // the date must not be 2026-11-23: 19 questions of fixes-9 were already marked 2026-11-23-fix by fixes-8 and would keep old progress
  if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}}
+// fixes-10 (2026-11-25, «Версия 58»): 49 new questions F113–F162 for the driver-view pictures 113–162, appended after the manual signs as ids 701–749
+// in file order (earlier ids unchanged); new topic «Исправность машины» appended after «Полезно знать»; «Полезно знать» and exam:false (law-only) stay out of the exam
+{const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8')),N=f10.filter(x=>x.action==='new');
+ assert.equal(N.length,49,'fixes-10 new questions');
+ const VT=a.RT.findIndex(t=>t.n==='Исправность машины'),XT=a.RT.findIndex(t=>t.n==='Полезно знать (не из учебника)');
+ assert.equal(VT,23,'«Исправность машины» is RT[23]');assert(XT>=0&&XT<VT,'«Исправность машины» after «Полезно знать»');
+ assert.equal(a.RT.length,24,'24 topics');
+ N.forEach((d,n)=>{const id=701+n,q=a.Q[id];
+  assert.equal(q.k,d.key,'fixes-10 order: '+d.key+' is Q'+id);
+  assert.equal(q[0],d.q,'fixes-10 text '+d.key);assert.deepEqual([...q[1]],d.o,'fixes-10 options '+d.key);
+  assert.deepEqual([...q.m],d.m,'fixes-10 key '+d.key);assert.equal(q[2],d.m[0],'fixes-10 primary key '+d.key);assert.equal(q[3],d.e,'fixes-10 explanation '+d.key);
+  const t=d.topic==='extra'?XT:d.topic==='vehicle'?VT:d.topic;
+  assert(a.RT[t].ids.includes(id)&&a.RT.filter(r=>(r.ids||[]).includes(id)).length===1,'fixes-10 one topic '+d.key);
+  assert(a.MQ.includes(id)&&a.ALL.includes(id),'fixes-10 in practice pools '+d.key);
+  const out=d.topic==='extra'||d.exam===false;
+  assert.equal(a.EXQ.includes(id),!out,'fixes-10 exam pool '+d.key);assert.equal(q.xt===1,out,'fixes-10 xt '+d.key);});
+ assert.deepEqual([...a.RT[VT].ids],N.map((d,n)=>d.topic==='vehicle'?701+n:-1).filter(i=>i>=0),'«Исправность машины» holds the vehicle questions');
+ assert.equal(a.RT[VT].ids.length,8,'«Исправность машины»: 8 questions (pictures 155–162)');
+ for(const e of f10.filter(x=>x.action==='edit'))assert(e.id<701,'fixes-10 edits touch old questions only');}
 console.log('PASS: rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
