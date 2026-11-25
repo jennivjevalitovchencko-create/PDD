@@ -276,11 +276,13 @@ assert(Number.isInteger(a.APP_VER.n)&&a.APP_VER.n>=0&&/^\d{4}-\d\d-\d\d$/.test(a
 assert.equal(a.VER(),'Версия '+a.APP_VER.n+' от '+a.APP_VER.d.slice(8)+'.'+a.APP_VER.d.slice(5,7)+'.'+a.APP_VER.d.slice(0,4));
 assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$\{VER\(\)\}/g)||[]).length===2,'Version on home and in «Ещё»');
 // fixes-8 (MEDIUM of the full review, released 2026-11-23 as «Версия 56»): every question of the file carries its reset mark
-{const f8=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8')),f9=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')),F9=new Set(f9.map(x=>x.id));
- for(const x of f8)if(!F9.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id);
+{const f8=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8')),f9=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')),F9=new Set(f9.map(x=>x.id)),F10E=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8')).filter(x=>x.action==='edit').map(x=>x.id));
+ for(const x of f8)if(!F9.has(x.id)&&!F10E.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id); // re-edited in fixes-10 (Q485) → newer mark
  // fixes-9 (LOW of the full review, «Версия 57»): once released (APP_VER 57+, build-fixes.cjs <date>) every question of the file carries one new mark;
  // the date must not be 2026-11-23: 19 questions of fixes-9 were already marked 2026-11-23-fix by fixes-8 and would keep old progress
- if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}}
+ if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)if(!F10E.has(x.id))assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}
+ // fixes-10 («Версия 58», build-fixes.cjs 2026-11-25): its edits of old questions (Q485 explanation for picture 146) carry a mark newer than fixes-9's
+ if(a.APP_VER.n>=58)for(const id of F10E){const m=a.QV[id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix'&&m!==a.QV[f9[0].id],'fixes-10 progress reset '+id+' '+m);}}
 // fixes-10 (2026-11-25, «Версия 58»): 49 new questions F113–F162 for the driver-view pictures 113–162 (ids 701–749) and 36 questions S01–S40 without pictures (ids 750–785), appended after the manual signs
 // in file order (earlier ids unchanged); new topic «Исправность машины» appended after «Полезно знать»; «Полезно знать» and exam:false (law-only) stay out of the exam
 {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8')),N=f10.filter(x=>x.action==='new');
