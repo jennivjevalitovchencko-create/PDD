@@ -290,6 +290,8 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  const VT=a.RT.findIndex(t=>t.n==='Исправность машины'),XT=a.RT.findIndex(t=>t.n==='Полезно знать (не из учебника)');
  assert.equal(VT,23,'«Исправность машины» is RT[23]');assert(XT>=0&&XT<VT,'«Исправность машины» after «Полезно знать»');
  assert.equal(a.RT.length,24,'24 topics');
+ // saved theory marks th/d are GT indices: GT = 5 sign groups + RT[0..22] + «Дополнительные знаки» (GT[XG], XG=28 since v57) + the new topic, so no old index moves (checker 25.11)
+ assert(a.GT.length===30&&/^Дополнительные знаки/.test(a.GT[28].n)&&a.GT[29]===a.RT[VT]&&a.RT.slice(0,23).every((t,i)=>a.GT[5+i]===t),'GT indices of old topics unchanged, new topic last');
  N.forEach((d,n)=>{const id=701+n,q=a.Q[id];
   assert.equal(q.k,d.key,'fixes-10 order: '+d.key+' is Q'+id);
   if(d.type==='tf'){assert(q.t===1&&q[0]===d.q+' (верно или неверно?)'&&q[2]===(d.v?0:1),'fixes-10 true/false '+d.key);assert.equal(d.exam,false,'true/false stays out of the exam '+d.key)}

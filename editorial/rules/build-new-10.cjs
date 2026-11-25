@@ -3,8 +3,9 @@
 // Run from the repo root: node editorial/rules/build-new-10.cjs
 // The questions are appended after every other question (after the manual signs 697-700), so earlier question IDs do not move:
 // the n-th "new" entry becomes Q[701+n-1]. Never reorder or delete "new" entries after a release — append only.
-// topic: an RT index, "extra" (Полезно знать, not in the exam) or "vehicle" (new topic «Исправность машины», appended after «Полезно знать»
-// so the saved theory marks (TH, GT indices) of the existing topics stay valid).
+// topic: an RT index, "extra" (Полезно знать, not in the exam) or "vehicle" (new topic «Исправность машины»). The new topic is created inside
+// this block — after «Дополнительные знаки» became GT[XG] (XG=28) and after the B5 line that uses RT[RT.length-1] — so it is RT[23] and GT[29]:
+// the saved theory marks th/d (GT indices) of every existing topic, including «Дополнительные знаки», keep pointing at the same topic (checker 25.11).
 // exam:false keeps a question out of the exam pool (xt) — for rules that are only in the law, not in the CT manual (the real test follows the manual).
 // Edits of existing questions in fixes-10.json (action "edit") are applied by build-fixes.cjs as usual.
 const fs=require('node:fs'),path=require('node:path');
@@ -21,8 +22,8 @@ const data=all.filter(x=>x.action==='new').map(d=>{
  else throw new Error(d.key+': unsupported type '+d.type);
  if(!d.q||!d.e)throw new Error(d.key+': q/e');
  return {key:d.key,topic:d.topic,type:d.type,q:d.q,o:d.o,m:d.m,v:d.v,e:d.e,nx:d.exam===false||undefined,img:d.svg?svg(d.svg):undefined}});
-const topic=`/*PDD-VEHICLE-TOPIC-BEGIN*/RT.push({n:${JSON.stringify(VEHICLE)},t:'',q:[]});/*PDD-VEHICLE-TOPIC-END*/`;
 const block=`/*PDD-NEW-10-BEGIN: new questions fixes-10 (editorial/rules/fixes-10.json, action "new", built by build-new-10.cjs). Appended after every other question, so earlier question IDs do not move. Extra-topic and law-only questions (xt) stay out of the exam pool. */
+if(!RT.some(t=>t.n===${JSON.stringify(VEHICLE)})){const v={n:${JSON.stringify(VEHICLE)},t:'',q:[],r:1,a:-1,x:[],ids:[]};RT.push(v);GT.push(v)}
 const PDD_NEW_10=${JSON.stringify(data)},VT10=RT.findIndex(t=>t.n===${JSON.stringify(VEHICLE)}),XT10=RT.findIndex(t=>t.n===${JSON.stringify(EXTRA)});
 PDD_NEW_10.forEach(d=>{let x;if(d.type==='tf'){x=[d.q+' (верно или неверно?)',['Верно','Неверно'],d.v?0:1,d.e];x.t=1}else{x=[d.q,d.o,d.m[0],d.e];x.m=d.m}
  if(d.img)x[4]=d.img;if(d.topic==='extra'||d.nx)x.xt=1;x.k=d.key;Q.push(x);MQ.push(Q.length-1);RT[d.topic==='extra'?XT10:d.topic==='vehicle'?VT10:d.topic].ids.push(Q.length-1)});
@@ -30,6 +31,6 @@ PDD_NEW_10.forEach(d=>{let x;if(d.type==='tf'){x=[d.q+' (верно или не�
 let h=fs.readFileSync(file,'utf8');
 const put=(re,anchor,text,after)=>{if(re.test(h)){h=h.replace(re,()=>text);return}
  if(h.split(anchor).length!==2)throw new Error('anchor not unique: '+anchor.slice(0,50));h=h.replace(anchor,()=>after?anchor+'\n'+text:text+'\n'+anchor)};
-put(/\/\*PDD-VEHICLE-TOPIC-BEGIN\*\/[\s\S]*?\/\*PDD-VEHICLE-TOPIC-END\*\//,'RT.forEach(r=>{r.r=1;r.a=-1;r.x=[];',topic,false);
+h=h.replace(/\/\*PDD-VEHICLE-TOPIC-BEGIN\*\/[\s\S]*?\/\*PDD-VEHICLE-TOPIC-END\*\/\r?\n?/,''); // the earlier draft created the topic before RT.forEach (shifted GT[XG])
 put(/\/\*PDD-NEW-10-BEGIN[\s\S]*?\/\*PDD-NEW-10-END\*\//,'/*PDD-SIGNS-2026-11-23-END*/',block,true);
 fs.writeFileSync(file,h);console.log('fixes-10 new questions written:',data.length);
