@@ -140,10 +140,11 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695],'Driver-view questions');
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,485,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,737,738,739,741,742,743,744,745,746,747,748,749],'Driver-view questions'); // + batch 7 (26.11): Q485, Q701–Q749 without Q736/Q740
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  // fixes-6 (released 2026-11-22) re-marked its questions <date>-fix, so the older picture-release marks below skip them (Q136, Q161, Q205, Q294, Q564, Q610); fixes-6 marks are checked at the end
+ const B7=new Set([485,...Array.from({length:49},(_,i)=>701+i).filter(i=>i!==736&&i!==740)]),B7P=new Set([742,743,744,745,747]); // batch 7 (26.11)
  const F6=new Set(['fixes-6.json','fixes-7.json','fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // questions re-edited after the picture releases carry the newer fixes mark
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],svg=F.svg[id];
@@ -164,7 +165,19 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   if([5,6,8,9,10,12,13,14,37,192,193,212,331,648].includes(+id))assert(o.plain&&q.pw===1,'Batch 5 sign picture without the dashboard '+id);
   if([4,7,17,63,74,86,87,88,89,91,93,96,101,125,127,128,133,136,137,142,159,161,164,167,178,191,194,281,303,466,484,498,501,550,560,561,609,610,611,613,614,618,619,643,650].includes(+id)&&!F6.has(+id))assert.equal(a.QV[id],'2026-11-22-img','Batch 6 progress reset '+id); // items 53-92 + 100 (22.11); shared pictures: Q17=Q86, Q194=Q7, Q4=Q191=Q74
   if(+id===466)assert(o.plain&&q.pw===1,'Batch 6 top view without the dashboard 466');
+  if(B7.has(+id)){assert.equal(a.QV[id],'2026-11-26-img','Batch 7 progress reset '+id);
+   assert.equal(d[0],'q'+id,'Batch 7 own scene '+id);
+   const app=path.join(__dirname,'../editorial/img/driver-view/app/q'+id+'.jpg');assert(fs.existsSync(app)&&imgs['q'+id]==='data:image/jpeg;base64,'+fs.readFileSync(app).toString('base64'),'Batch 7 scene copy in app/ '+id);
+   assert.equal(!!o.plain,B7P.has(+id),'Batch 7 close-ups without the dashboard (155–158, 160) '+id);
+   if(!o.plain)assert(d[4]==='q'+id+'r'&&o.ry===80,'Batch 7 mirror view '+id);
+   assert.equal(!!o.low,+id===749,'Batch 7 low-beam icon only on No.162 (Q749) '+id);}
  }
+ // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) and No.153 (Q740) still being fixed → text only
+ {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8'));
+  for(const id of B7){assert(a.DV[id],'Batch 7 picture embedded '+id);const n=id===485?146:id<734?id-588:id-587,d=id===485?f10.find(x=>x.id===485):f10.find(x=>x.key==='F'+n);
+   assert.equal(a.Q[id][0],d.short,'Batch 7 short text = fixes-10 short '+id);}
+  assert(!a.DV[736]&&!a.DV[740],'Q736 (No.149) and Q740 (No.153) wait for their pictures');
+  assert(a.DV[708][2]===1&&a.DV[708][1]===0,'Q708 (No.120): 0 mph, left signal');}
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
  assert.deepEqual(P,Object.keys(a.DV).map(id=>DVP[id]),'sw.js precaches every driver-view picture');
@@ -282,7 +295,7 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  // the date must not be 2026-11-23: 19 questions of fixes-9 were already marked 2026-11-23-fix by fixes-8 and would keep old progress
  if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)if(!F10E.has(x.id))assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}
  // fixes-10 («Версия 58», build-fixes.cjs 2026-11-25): its edits of old questions (Q485 explanation for picture 146) carry a mark newer than fixes-9's
- if(a.APP_VER.n>=58)for(const id of F10E){const m=a.QV[id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix'&&m!==a.QV[f9[0].id],'fixes-10 progress reset '+id+' '+m);}}
+ if(a.APP_VER.n>=58)for(const id of F10E){const m=a.QV[id];if(a.DV[id]&&m==='2026-11-26-img')continue; /* Q485: picture 146 in batch 7 — newer mark */assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix'&&m!==a.QV[f9[0].id],'fixes-10 progress reset '+id+' '+m);}}
 // fixes-10 (2026-11-25, «Версия 58»): 49 new questions F113–F162 for the driver-view pictures 113–162 (ids 701–749) and 36 questions S01–S40 without pictures (ids 750–785), appended after the manual signs
 // in file order (earlier ids unchanged); new topic «Исправность машины» appended after «Полезно знать»; «Полезно знать» and exam:false (law-only) stay out of the exam
 {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8')),N=f10.filter(x=>x.action==='new');
@@ -295,7 +308,7 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  N.forEach((d,n)=>{const id=701+n,q=a.Q[id];
   assert.equal(q.k,d.key,'fixes-10 order: '+d.key+' is Q'+id);
   if(d.type==='tf'){assert(q.t===1&&q[0]===d.q+' (верно или неверно?)'&&q[2]===(d.v?0:1),'fixes-10 true/false '+d.key);assert.equal(d.exam,false,'true/false stays out of the exam '+d.key)}
-  else{assert.equal(q[0],d.q,'fixes-10 text '+d.key);assert.deepEqual([...q[1]],d.o,'fixes-10 options '+d.key);
+  else{assert.equal(q[0],a.DV[id]?d.short:d.q,'fixes-10 text '+d.key); // with a driver-view picture (batch 7, 26.11) the app shows the "short" textassert.deepEqual([...q[1]],d.o,'fixes-10 options '+d.key);
   assert.deepEqual([...q.m],d.m,'fixes-10 key '+d.key);assert.equal(q[2],d.m[0],'fixes-10 primary key '+d.key);}assert.equal(q[3],d.e,'fixes-10 explanation '+d.key);
   const t=d.topic==='extra'?XT:d.topic==='vehicle'?VT:d.topic;
   assert(a.RT[t].ids.includes(id)&&a.RT.filter(r=>(r.ids||[]).includes(id)).length===1,'fixes-10 one topic '+d.key);

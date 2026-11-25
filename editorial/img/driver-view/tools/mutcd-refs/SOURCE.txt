@@ -2,3 +2,6 @@ Reference sign renders from Wikimedia Commons (File:MUTCD_<code>.svg, rendered P
 License: all marked "Public domain" on Commons (US federal works, MUTCD / FHWA), checked via the Commons API 2026-11-22.
 Composited onto ChatGPT scenes with ../sign-compose/comp.cjs (cover old bbox, aspect kept, colour gain, gblur 0.6, noise 3).
 User decision 2026-11-22: for every sign, use the MUTCD reference instead of a drawn one.
+Added 2026-11-26 (batch 7, same source and check, all "Public domain" via the Commons API): MUTCD_W2-2R (13-px transparent margin cropped), MUTCD_R3-5L,
+MUTCD_R2-1-35 (= File:Speed_Limit_35_sign.svg), MUTCD_W13-1P-25 (File:MUTCD_W13-1P.svg with the «3» replaced by the «2» of File:Speed_Limit_25_sign.svg — same glyph size),
+MUTCD_W12-2-10-6 and MUTCD_W12-2P-10-6 (File:MUTCD_W12-2.svg / File:MUTCD_W12-2P.svg with digits «0», «6» from File:Speed_Limit_60_sign.svg; background #fcd116).
