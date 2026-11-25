@@ -1,0 +1,1535 @@
+[
+ {
+  "action": "new",
+  "type": "single",
+  "exam": false,
+  "doubt": "Учебник (стр. 36) даёт только общее правило «справа»; случай примыкания (Т) есть только в законе §14-246a. Ответ по закону, цифр расхождения нет. Если exam-пул строго «из учебника» — можно поставить exam:false.",
+  "key": "F113",
+  "pic": 113,
+  "topic": 1,
+  "short": "Знаков и светофора нет. Что правильно?",
+  "q": "Ваша улица заканчивается Т-образным перекрёстком: впереди поперечная улица, знаков STOP и YIELD, светофора и стоп-линии нет. По поперечной улице слева к перекрёстку приближается машина, справа никого нет. Вы и она подъедете к перекрёстку примерно одновременно. Что правильно?",
+  "o": [
+   "Ехать первым: уступать нужно только машине справа, а справа никого нет",
+   "Ехать первым: вы раньше включили поворотник, значит, очерёдность за вами",
+   "Уступить машине слева: съезжающий с примыкающей улицы уступает транспорту, идущему по другой улице с любой стороны",
+   "Уступить машине слева только в том случае, если она едет быстрее вас"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Водитель на дороге, которая примыкает к другой и её не пересекает, обязан уступить транспорту, подъезжающему по другой дороге с любой стороны, если они приезжают примерно одновременно (§14-246a). Правило «уступи машине справа» (учебник, стр. 36, называет именно его) относится к перекрёстку, где дороги пересекаются, а здесь оно не работает: машине слева тоже нужно уступить. Поворотник и скорость очерёдность не меняют.",
+  "src": "§14-246a: «shall … grant the right-of-way at the point where such highways join to any vehicle approaching on the other highway from either direction when such vehicles are arriving at approximately the same time»; стр. 36: «At an intersection where there is no stop sign, yield sign or oncoming traffic signal, drivers must yield to vehicles coming from the right.»",
+  "en": {
+   "q": "Your street ends in a T-intersection: a cross street ahead, no STOP or YIELD sign, no signal, no stop line. A car approaches from the left on the cross street, nobody from the right. You and it will reach the intersection at about the same time. What is correct?",
+   "o": [
+    "Go first: you yield only to a vehicle on the right, and nobody is on the right",
+    "Go first: you turned on your signal earlier, so the order is yours",
+    "Yield to the car on the left: a driver on a street that ends at another street yields to traffic on that street from either direction",
+    "Yield to the car on the left only if it is faster than you"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "",
+  "key": "F114",
+  "pic": 114,
+  "topic": 1,
+  "short": "Вы хотите повернуть налево. Что правильно?",
+  "q": "Вы подъехали к перекрёстку со светофором и хотите повернуть налево. Горит круглый зелёный сигнал. По встречной полосе прямо на вас едет велосипедист, встречных машин и пешеходов нет. Что правильно?",
+  "o": [
+   "Пропустить велосипедиста, как пропустили бы встречную машину, и повернуть, когда он проедет",
+   "Поворачивать: велосипедист едет медленно, и вы успеете проехать раньше",
+   "Поворачивать: велосипедист обязан уступить, ведь вы за рулём машины, а у вас зелёный",
+   "Пропустить его только если для него размечена велополоса; на общей полосе он должен уступить вам"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Поворачивающий налево уступает встречному транспорту, который находится на перекрёстке или так близко, что создаёт опасность (§14-242(e)). Велосипедист по §14-286a(a) имеет те же права и обязанности, что и водитель, поэтому его надо пропустить, как встречную машину; наличие велополосы ничего не меняет. Учебник, стр. 15: встречный транспорт, включая велосипеды, всегда имеет преимущество. Тихая скорость велосипедиста не повод проскочить.",
+  "src": "§14-242(e): «shall yield the right-of-way to any vehicle approaching from the opposite direction … so close … as to constitute an immediate hazard»; §14-286a(a): «granted all of the rights and … subject to all of the duties applicable to the driver of any vehicle»; стр. 15: «oncoming traffic, including bicycles, always has the right-of-way»",
+  "en": {
+   "q": "You reach a signalised intersection and want to turn left. A round green light is on. A cyclist rides straight toward you in the oncoming lane; no oncoming cars or pedestrians. What is correct?",
+   "o": [
+    "Let the cyclist pass, as you would an oncoming car, and turn after he has gone by",
+    "Turn: the cyclist is slow and you will get through first",
+    "Turn: the cyclist must yield because you are in a car and have the green",
+    "Yield only if there is a marked bike lane; on a shared lane he must yield to you"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Встречная машина уже стоит посреди перекрёстка и ждёт; осторожный «подождать» тоже безопасен, но ключ задан (убедиться, что пропускает). Неверные варианты построены на «всегда/раньше включил», а не на «подождать».",
+  "key": "F115",
+  "pic": 115,
+  "topic": 1,
+  "short": "Вы хотите повернуть направо. Что правильно?",
+  "q": "Вы стоите на перекрёстке при круглом зелёном сигнале и хотите повернуть направо. Навстречу, на середине перекрёстка, стоит легковая машина с мигающим левым поворотником: она поворачивает налево, на ту же улицу, куда поворачиваете вы. Других машин и пешеходов нет. Что правильно?",
+  "o": [
+   "Поворачивать сразу: по закону она обязана уступить, поэтому следить за ней уже не нужно",
+   "Уступить ей: кто раньше включил поворотник, тот и едет первым",
+   "Посигналить и ехать: так она поймёт, что вам нужно проехать первым",
+   "Поворачивать, только убедившись, что водитель встречной машины вас видит и пропускает: по закону уступает она, а не вы"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Водитель, поворачивающий налево, уступает встречному транспорту, который находится на перекрёстке или создаёт опасность (§14-242(e)), поэтому у вас преимущество. Но учебник (стр. 21) требует не считать, что другой водитель даст вам место: убедитесь, что он действительно стоит и пропускает, и перед правым поворотом проверьте встречных, которые сворачивают на вашу улицу (стр. 15). Очерёдность поворотников значения не имеет, а гудок не заставляет уступить (стр. 38).",
+  "src": "§14-242(e); стр. 21: «Never assume another driver will share space with you or give you space»; стр. 15: «Before turning right, make sure that there is … no oncoming traffic turning into your path»; стр. 38: horn not for «encouraging someone to drive faster or get out of the way»",
+  "en": {
+   "q": "You are stopped at an intersection with a round green light and want to turn right. Oncoming, in the middle of the intersection, a car with a flashing left signal is turning left onto the same street you are turning onto. No other cars or pedestrians. What is correct?",
+   "o": [
+    "Turn at once: by law it must yield, so you no longer need to watch it",
+    "Yield to it: whoever signalled first goes first",
+    "Honk and go so it understands you go first",
+    "Turn only after making sure the oncoming driver sees you and lets you go: by law it yields, not you"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": false,
+  "doubt": "В учебнике CT скота нет (поэтому exam:false). §14-248b(b) говорит о размеченных путях (crossing path), а на картинке разметки нет; опора — §14-248a (сбавить или остановиться) и общая безопасность. Решать пользователю: оставить в экзамене как закон или перевести в «Полезно знать».",
+  "key": "F116",
+  "pic": 116,
+  "topic": 21,
+  "short": "Впереди через дорогу идут коровы. Что правильно?",
+  "q": "Вы едете по загородной двухполосной дороге с прерывистой жёлтой осевой. Впереди в вашей полосе стоит легковая машина со стоп-сигналами: перед ней фермер ведёт через дорогу несколько коров. Встречная полоса за стадом свободна. Что правильно?",
+  "o": [
+   "Объехать стоящую машину по встречной полосе: осевая прерывистая, а встречная свободна",
+   "Остановиться за стоящей машиной и ждать, пока стадо пройдёт, не объезжая её",
+   "Посигналить, чтобы фермер быстрее провёл стадо",
+   "Остановиться, только если на дороге есть знак «Cattle Crossing»; без знака коровы должны уступить вам"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Водитель, который видит скот на дороге, обязан сбавить скорость или остановиться, чтобы не задеть животных (§14-248a); тому, кто ведёт скот по обозначенному пути, нужно уступить, а обгонять остановившуюся перед таким путём машину нельзя (§14-248b(b)). Прерывистая линия не делает обгон безопасным: на встречной вы выедете перед стадом. Гудок только испугает животных (учебник, стр. 38: не торопить других сигналом).",
+  "src": "§14-248a: «the operator of any vehicle shall appropriately reduce speed or stop if necessary to avoid endangering or striking any animal crossing the roadway»; §14-248b(b): «No operator of a vehicle approaching from the rear shall overtake and pass any vehicle the operator of which has stopped at any crossing path marked … to permit guided cattle … to cross»",
+  "en": {
+   "q": "You drive on a rural two-lane road with a broken yellow centre line. Ahead in your lane a car is stopped with brake lights on: in front of it a farmer is leading several cows across the road. The oncoming lane beyond the herd is clear. What is correct?",
+   "o": [
+    "Pass the stopped car in the oncoming lane: the line is broken and the lane is clear",
+    "Stop behind the stopped car and wait for the herd to cross, without passing it",
+    "Honk so the farmer moves the herd faster",
+    "Stop only if there is a Cattle Crossing sign; without a sign the cows must yield to you"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "",
+  "key": "F117",
+  "pic": 117,
+  "topic": 1,
+  "short": "Полицейский у переезда показывает ладонью «стоять». Что правильно?",
+  "q": "Вы подъезжаете к железнодорожному переезду. Круглые красные фонари на столбе у переезда не горят, шлагбаума нет, поезда не видно. Перед рельсами стоит полицейский и показывает поднятой ладонью «стоять». Что правильно?",
+  "o": [
+   "Ехать: огни не горят и поезда нет, значит, переезд свободен",
+   "Проехать, если поезд далеко: полицейский просто подстраховывается",
+   "Остановиться и ждать: сигнал полицейского обязателен, даже когда огни не горят",
+   "Считать, что жесты полицейского относятся только к пешеходам, и сверяться с огнями переезда"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Водитель обязан полностью остановиться у переезда, когда его предупредил полицейский или мигающие огни (§14-249(a)). Сигналы полицейского нужно выполнять, даже если они расходятся с сигналом светофора (учебник, стр. 36), поэтому тёмные фонари ничего не отменяют. Ждите, пока поезд пройдёт или полицейский разрешит ехать. Жесты полицейского адресованы всем участникам движения, а не только пешеходам.",
+  "src": "§14-249(a): «shall bring his or her motor vehicle to a full stop at a railroad grade crossing when warned of an approaching locomotive or a train by a law enforcement officer or flashing lights»; стр. 36: «You must obey signals given by a law enforcement officer, even if the officer's signals contradict the traffic signal.»",
+  "en": {
+   "q": "You approach a railroad crossing. The red lights on the post are dark, there is no gate and no train in sight. A police officer in front of the tracks holds up a palm: stop. What is correct?",
+   "o": [
+    "Drive on: the lights are off and there is no train, so the crossing is clear",
+    "Cross if the train is far away: the officer is only being careful",
+    "Stop and wait: the officer's signal is mandatory even when the lights are off",
+    "Assume the officer's gestures are only for pedestrians and rely on the crossing lights"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Близнец существующего Q210 (там шлагбаум поднят и светофор за путями; тот же ключ и те же стр. 15, 21). Различие: городская улица без шлагбаума, другие ловушки (аварийка, «поезда нет»). Если дубль нежелателен — выбросить, а картинку №118 привязать к Q210.",
+  "key": "F118",
+  "pic": 118,
+  "topic": 21,
+  "short": "За рельсами стоит колонна машин. Что правильно?",
+  "q": "Вы едете по городской улице со скоростью 5 миль/ч и подъезжаете к железнодорожному переезду без шлагбаума: огни не горят, поезда не видно. Сразу за рельсами в вашей полосе стоит плотная колонна машин, последняя почти у самых путей: места для вашей машины за рельсами нет. Что правильно?",
+  "o": [
+   "Остановиться перед рельсами и ждать, пока за ними освободится место для всей вашей машины",
+   "Проехать пути и втиснуться в колонну, оставив хвост машины над рельсами: поезда ведь нет",
+   "Подождать на рельсах, включив аварийку: так другие поймут, что вы стоите вынужденно",
+   "Остановиться перед путями, только если виден поезд; пока поезда нет, стоять на рельсах можно"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Перед въездом на пути убедитесь, что за ними есть место для вашей машины целиком: останавливаться на путях нельзя (учебник, стр. 15 и 21). Не рассчитывайте, что поезда нет: именно это одна из главных причин гибели на переездах. Аварийка и отсутствие поезда не делают стоянку на рельсах безопасной.",
+  "src": "стр. 15: «Make sure there is room for your vehicle on the far side before you cross the tracks.»; стр. 21: «When you cross railroad tracks, make sure you can cross without having to stop on the tracks.»",
+  "en": {
+   "q": "You drive on a city street at 5 mph toward a railroad crossing with no gate: lights are off, no train in sight. Right after the tracks a dense line of cars is stopped in your lane, the last one almost at the rails: there is no room for your car beyond the tracks. What is correct?",
+   "o": [
+    "Stop before the tracks and wait until there is room beyond them for your whole vehicle",
+    "Cross and squeeze into the line, leaving your rear over the rails: there is no train anyway",
+    "Wait on the tracks with hazard lights on so others understand you are stopped by necessity",
+    "Stop before the tracks only if a train is visible; while there is no train, standing on the rails is fine"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Пара к Q636 (там вопрос, кому уступить после остановки); здесь — как улучшить обзор.",
+  "key": "F119",
+  "pic": 119,
+  "topic": 1,
+  "short": "Вы стоите у знака STOP, обзор закрыт. Что правильно?",
+  "q": "Вы остановились у стоп-линии перед знаком STOP. Слева и справа у самого угла вдоль поперечной улицы стоят высокие машины (фургон и пикап) и закрывают обзор в обе стороны: виден только асфальт прямо перед вами. Что правильно?",
+  "o": [
+   "Посигналить и ехать: водители поперечной улицы услышат вас и остановятся",
+   "Быстро пересечь улицу: чем меньше времени на перекрёстке, тем меньше риск",
+   "Ехать, если машин не слышно: нет звука — нет и транспорта",
+   "Медленно продвигаться вперёд, пока не увидите поперечную улицу, готовясь остановиться"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Если обзор поперечной улицы закрыт, медленно продвигайтесь вперёд, пока не увидите её (учебник, стр. 15): водители на поперечной улице увидят переднюю часть вашей машины раньше, чем вы их, и успеют сбавить скорость и предупредить вас. Гудок, быстрый рывок или «ничего не слышно» не заменяют того, чтобы увидеть дорогу. Тронуться можно только когда видите, что путь свободен.",
+  "src": "стр. 15: «If you are stopped and your view of a cross street is blocked, edge forward slowly until you can see. When you move forward slowly, crossing drivers can see the front of your vehicle before you can see them.»",
+  "en": {
+   "q": "You have stopped at the stop line before a STOP sign. Tall vehicles (a van and a pickup) parked at the corner on both sides of the cross street block your view each way: you see only the pavement just ahead. What is correct?",
+   "o": [
+    "Honk and go: cross-street drivers will hear you and stop",
+    "Cross quickly: the less time in the intersection, the lower the risk",
+    "Go if you hear no vehicles: no sound means no traffic",
+    "Edge forward slowly until you can see the cross street, ready to stop"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Про жест «проезжайте» в учебнике прямо нет (частично UNVERIFIED), ответ строится на стр. 15 и 21 и §14-242(e).",
+  "key": "F120",
+  "pic": 120,
+  "topic": 1,
+  "short": "Вы хотите повернуть налево, а встречный грузовик машет вам рукой. Что правильно?",
+  "q": "Вы стоите на перекрёстке широкой улицы (по две полосы в каждую сторону, двойная жёлтая осевая, круглый зелёный) в левой полосе и хотите повернуть налево. В левой встречной полосе стоит грузовик-фургон, водитель машет вам рукой: «проезжайте». Грузовик полностью закрывает от вас правую встречную полосу. Что правильно?",
+  "o": [
+   "Поворачивать сразу: если водитель грузовика вас пропускает, значит, пропустят и остальные",
+   "Поворачивать, только убедившись, что из-за грузовика никто не едет: он закрывает правую полосу, а водитель грузовика за других не отвечает",
+   "Не поворачивать, пока грузовик не уедет: жесту другого водителя нельзя верить никогда",
+   "Поворачивать, быстро набирая скорость, чтобы проскочить перед возможной машиной в закрытой полосе"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Встречный транспорт, включая тот, что вы не видите, имеет преимущество перед поворачивающим налево (§14-242(e); учебник, стр. 15). Жест водителя грузовика не отменяет этого: он не видит и не контролирует правую полосу, откуда может выехать машина. Не предполагайте, что другие уступят (стр. 21): продвиньтесь так, чтобы увидеть правую полосу, и поворачивайте, только когда она свободна.",
+  "src": "стр. 15: «Before you turn left across traffic, look for a safe opening in the traffic. Remember, oncoming traffic, including bicycles, always has the right-of-way.»; стр. 21: «Never assume another driver will share space with you or give you space.»; §14-242(e)",
+  "en": {
+   "q": "You are stopped in the left lane of a wide street (two lanes each way, double yellow centre line, round green) and want to turn left. A box truck waits in the left oncoming lane; its driver waves you through. The truck completely hides the right oncoming lane. What is correct?",
+   "o": [
+    "Turn at once: if the truck driver lets you go, everyone else will too",
+    "Turn only after making sure nobody is coming from behind the truck: it hides the right lane, and the truck driver is not responsible for others",
+    "Do not turn until the truck leaves: another driver's wave can never be trusted",
+    "Turn while accelerating hard to beat a possible car in the hidden lane"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Цифру 100 футов учебник не называет (только «опасно на перекрёстках»); взято из закона §14-235(2). Соседний Q211 тоже про обгон у перекрёстка (там 300 футов, нужны размышления о встречной).",
+  "key": "F121",
+  "pic": 121,
+  "topic": 8,
+  "short": "Вы едете 40 миль/ч за медленным грузовиком. Можно ли начать обгон?",
+  "q": "Вы едете со скоростью 40 миль/ч по загородной двухполосной дороге; со стороны вашей полосы осевая прерывистая, встречная полоса пуста. Впереди медленно едет грузовик-фургон, а примерно в 80 футах от вас сразу за ним справа примыкает боковая дорога: её начало закрывает грузовик, перед перекрёстком стоит жёлтый ромбовидный знак. Можно ли начать обгон?",
+  "o": [
+   "Можно: осевая прерывистая, а встречная полоса свободна",
+   "Можно, если вы начнёте обгон и закончите его раньше, чем доедете до перекрёстка",
+   "Нельзя: до перекрёстка меньше 100 футов, а грузовик закрывает боковую дорогу, откуда может выехать машина",
+   "Можно, если включить левый поворотник и посигналить грузовику"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Закон запрещает ехать по левой стороне дороги, когда до перекрёстка или переезда меньше 100 футов (§14-235). Прерывистая линия разрешает обгон только там, где он безопасен. Учебник, стр. 23: обгонять опасно там, где машина может выехать на дорогу или пересечь её, например на перекрёстке; грузовик к тому же закрывает боковую дорогу. Поворотник и гудок этого не меняют.",
+  "src": "§14-235: «No vehicle shall be driven to the left side of the highway … (2) when approaching within one hundred feet of or crossing any intersection or railroad grade crossing»; стр. 23: «It is dangerous to pass where a vehicle is likely to enter or cross the road. Such places include intersections, railroad crossings and shopping center entrances.»",
+  "en": {
+   "q": "You drive at 40 mph on a rural two-lane road; the centre line on your side is broken, the oncoming lane is empty. A slow box truck is ahead, and about 80 feet from you just behind it a side road joins on the right; the truck hides its start, and a yellow diamond sign stands before the junction. May you start to pass?",
+   "o": [
+    "Yes: the line is broken and the oncoming lane is clear",
+    "Yes, if you start and finish the pass before reaching the junction",
+    "No: it is less than 100 feet to the junction and the truck hides the side road, from which a car may pull out",
+    "Yes, if you signal left and honk at the truck"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Учебник, стр. 23, предупреждает, что справа обгонять опасно (другой водитель может вас не увидеть); закон §14-233(1) допускает. Ответ по закону, в пояснении слово «осторожно».",
+  "key": "F122",
+  "pic": 122,
+  "topic": 8,
+  "short": "Впереди машина ждёт левого поворота. Что правильно?",
+  "q": "Вы едете со скоростью 15 миль/ч по двухполосной дороге с двойной жёлтой осевой, навстречу плотный поток. Впереди в вашей полосе стоит машина с мигающим левым поворотником: водитель ждёт просвета, чтобы повернуть налево в переулок. Полоса здесь широкая: справа от стоящей машины остаётся асфальт шириной в целую машину, белая краевая линия ещё правее. Что правильно?",
+  "o": [
+   "Осторожно объехать её справа, оставаясь на асфальте проезжей части",
+   "Объехать справа по обочине: за белой линией места ещё больше",
+   "Объезжать справа нельзя ни при каких условиях: ждать, пока она повернёт",
+   "Посигналить, чтобы водитель повернул быстрее, а затем ехать следом"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Закон разрешает обогнать справа машину, которая поворачивает или собирается повернуть налево, если это безопасно и вы остаётесь на проезжей части, не съезжая на обочину (§14-233(1)). Здесь справа есть асфальт шириной в машину, поэтому объехать можно, осторожно. По обочине ехать нельзя никогда (учебник, стр. 23), а «никогда нельзя справа» — неверно: закон допускает этот случай.",
+  "src": "§14-233: «may overtake and pass upon the right … (1) When the vehicle overtaken is making or has signified the intention to make a left turn … Such movement shall not be made by driving off the pavement or main-traveled portion of the highway»; стр. 23: «Never pass on the shoulder, whether it is paved or not.»",
+  "en": {
+   "q": "You drive at 15 mph on a two-lane road with a double yellow centre line, dense oncoming traffic. Ahead in your lane a car with a flashing left signal waits to turn left into a lane. Your lane is wide: to the right of the stopped car there is pavement as wide as a car, the white edge line is further right. What is correct?",
+   "o": [
+    "Carefully pass it on the right, staying on the pavement of the roadway",
+    "Pass on the right using the shoulder: there is even more room beyond the white line",
+    "Passing on the right is never allowed: wait until it turns",
+    "Honk so the driver turns faster, then follow"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Близнец F122: тот же манёвр законен там, где есть асфальт.",
+  "key": "F123",
+  "pic": 123,
+  "topic": 8,
+  "short": "Впереди машина ждёт левого поворота. Что правильно?",
+  "q": "Вы едете со скоростью 10 миль/ч по двухполосной дороге с двойной жёлтой осевой, навстречу плотный поток. Впереди в вашей полосе стоит машина с мигающим левым поворотником: водитель ждёт просвета, чтобы повернуть налево. Полоса узкая: белая краевая линия проходит прямо справа от стоящей машины, за ней узкая гравийная обочина и трава, асфальта справа не остаётся. Что правильно?",
+  "o": [
+   "Объехать справа, заехав на обочину: машина стоит, помех нет",
+   "Объехать справа по обочине, но очень медленно и с аварийкой",
+   "Выехать на встречную полосу и объехать слева, как только появится просвет в потоке",
+   "Подождать, пока машина повернёт: асфальта справа нет, а по обочине объезжать нельзя"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Обгон справа разрешён только по проезжей части, без съезда на обочину (§14-233). Здесь асфальта справа нет, а по обочине, асфальтированной или нет, обгонять нельзя (учебник, стр. 23); аварийка и медленная скорость этого не меняют. Слева двойная жёлтая линия и плотный встречный поток. Поэтому остаётся ждать, пока машина повернёт.",
+  "src": "§14-233: «Such movement shall not be made by driving off the pavement or main-traveled portion of the highway»; стр. 23: «Never pass on the shoulder, whether it is paved or not. Other drivers will never expect you to be there and may pull off the road without looking.»",
+  "en": {
+   "q": "You drive at 10 mph on a two-lane road with a double yellow centre line, dense oncoming traffic. Ahead in your lane a car with a flashing left signal waits to turn left. Your lane is narrow: the white edge line runs right beside the stopped car, beyond it a narrow gravel shoulder and grass; no pavement is left on the right. What is correct?",
+   "o": [
+    "Pass on the right using the shoulder: the car is stopped, nothing is in the way",
+    "Pass on the right on the shoulder, but very slowly with hazard lights",
+    "Cross into the oncoming lane and pass on the left as soon as there is a gap in the traffic",
+    "Wait until the car turns: there is no pavement on the right and passing on the shoulder is not allowed"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "",
+  "key": "F124",
+  "pic": 124,
+  "topic": 8,
+  "short": "Вы хотите повернуть налево на грунтовку. Что правильно?",
+  "q": "Вы едете со скоростью 20 миль/ч по загородной двухполосной дороге с прерывистой жёлтой осевой и включили левый поворотник: примерно в 100 футах впереди слева примыкает грунтовая дорога. В зеркале вы видите, что идущая сзади легковая машина уже выехала на встречную полосу и обгоняет вас. Встречная полоса пуста. Что правильно?",
+  "o": [
+   "Поворачивать: ваш поворотник включён раньше, значит, обгоняющий обязан уступить",
+   "Пропустить обгоняющую машину, не прибавляя скорость и не поворачивая, и повернуть, когда она проедет",
+   "Прибавить скорость и повернуть раньше, чем машина закончит обгон",
+   "Резко затормозить и остановиться посреди полосы, чтобы обгоняющий проехал"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Перед поворотом убедитесь, что никто не собирается вас обогнать (учебник, стр. 23). Поворачивать налево можно только если это безопасно (§14-242(a)), а обгоняемый не должен прибавлять скорость до конца обгона (§14-232(a)(2)). Поэтому: держите скорость, пропустите обгоняющего и только потом поворачивайте. Поворотник приоритета не даёт, а резкое торможение создаёт новую опасность (стр. 36).",
+  "src": "стр. 23: «Make sure that nobody is about to pass you.»; §14-232(a)(2): «the driver of an overtaken vehicle shall give way to the right … and shall not increase the speed of his or her vehicle until completely passed»; §14-242(a): «unless such movement can be made with reasonable safety»",
+  "en": {
+   "q": "You drive at 20 mph on a rural two-lane road with a broken yellow centre line and have signalled left: about 100 feet ahead a dirt road joins on the left. In the mirror you see the car behind has already moved into the oncoming lane and is passing you. The oncoming lane is empty. What is correct?",
+   "o": [
+    "Turn: your signal came first, so the passing driver must yield",
+    "Let the passing car by, without speeding up or turning, and turn after it has gone",
+    "Speed up and turn before the car finishes passing",
+    "Brake hard and stop in the middle of the lane so the passer can go by"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Скорость 15 миль/ч и расстояния взяты из задания и сцены; для q использованы футы.",
+  "key": "F125",
+  "pic": 125,
+  "topic": 8,
+  "short": "Вы за трактором и хотите его обогнать. Что правильно?",
+  "q": "Вы едете со скоростью 15 миль/ч по загородной двухполосной дороге за трактором с оранжевым треугольником тихоходного транспорта, до него около 40 футов. Осевая со стороны вашей полосы прерывистая, встречная полоса пуста далеко вперёд. Вы собираетесь обогнать трактор, но в зеркале видите: позади в 30 футах мотоцикл с включённой фарой уже у самой осевой и смещается на встречную полосу. Что правильно?",
+  "o": [
+   "Выезжать: вы ближе к трактору, значит, обгонять первым вам, а мотоциклист подождёт",
+   "Прибавить скорость и обогнать трактор раньше мотоцикла",
+   "Не выезжать, пропустить мотоцикл и только потом решать, обгонять ли трактор",
+   "Посигналить мотоциклисту, чтобы он отстал, и выезжать"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Перед обгоном нужно убедиться, что вас самих никто не собирается обгонять (учебник, стр. 23). Мотоцикл уже выходит на встречную полосу, и если вы выедете туда же, вы столкнётесь; пропустите его, а потом оцените обгон (§14-232(b): слева должно быть свободно). Права «потому что включён поворотник» нет, а гудок не заставит мотоциклиста отстать (стр. 38).",
+  "src": "стр. 23: «Look in your rear-view and side mirrors … Make sure that nobody is about to pass you.»; §14-232(b): «unless the left side is clearly visible and is free of oncoming traffic for a sufficient distance ahead to permit such overtaking and passing to be completely made without interfering with … any vehicle approaching from the opposite direction or any vehicle overtaken»",
+  "en": {
+   "q": "You drive at 15 mph on a rural two-lane road behind a tractor with an orange slow-vehicle triangle, about 40 feet ahead. The centre line on your side is broken, the oncoming lane is empty far ahead. You plan to pass, but in the mirror a motorcycle with its headlight on, 30 feet behind, is already at the centre line and moving into the oncoming lane. What is correct?",
+   "o": [
+    "Pull out: your signal is on, the motorcyclist must yield",
+    "Speed up and pass the tractor before the motorcycle",
+    "Do not pull out, let the motorcycle pass and only then decide whether to pass the tractor",
+    "Honk so the motorcyclist drops back, and pull out"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "",
+  "key": "F126",
+  "pic": 126,
+  "topic": 8,
+  "short": "Колонна за медленным грузовиком, встречная пуста. Что правильно?",
+  "q": "Вы едете со скоростью 40 миль/ч по прямой загородной двухполосной дороге с прерывистой жёлтой осевой. Впереди колонна: три легковые машины одна за другой с небольшими промежутками, а перед ними медленный грузовик. Встречная полоса пуста до горизонта. Что правильно?",
+  "o": [
+   "Обгонять по одной машине и только если после каждой есть место, куда вернуться в свою полосу",
+   "Обогнать всю колонну сразу: дорога прямая, встречная полоса пуста до горизонта",
+   "Выехать на встречную и посигналить, чтобы машины колонны прижались вправо",
+   "Обгонять по одной, но не возвращаясь в свою полосу до конца колонны, чтобы не терять скорость"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Не рассчитывайте обогнать несколько машин сразу: как правило, обгоняйте по одной (учебник, стр. 23). Обгонять можно, только если есть место вернуться в свою полосу, и нельзя рассчитывать, что другие водители освободят его для вас. Оставаться на встречной полосе вдоль всей колонны или сигналить, чтобы машины прижались, неверно.",
+  "src": "стр. 23: «Do not count on having enough time to pass several vehicles at once. Be safe. As a general rule, only pass one vehicle at a time.»; «Do not pass unless you have enough space to return to the driving lane. Do not count on other drivers to make room for you.»",
+  "en": {
+   "q": "You drive at 40 mph on a straight rural two-lane road with a broken yellow centre line. Ahead is a line of three cars close together, led by a slow truck. The oncoming lane is empty to the horizon. What is correct?",
+   "o": [
+    "Pass one vehicle at a time and only if there is room to return to your lane after each",
+    "Pass the whole line at once: the road is straight and the oncoming lane is empty",
+    "Pull out and honk so the cars in the line move to the right",
+    "Pass one at a time but stay in the oncoming lane until the end of the line to keep speed"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Сцена v3 ещё ждёт; расстояния в q не указаны намеренно.",
+  "key": "F127",
+  "pic": 127,
+  "topic": 8,
+  "short": "Впереди медленная машина, а перед ней велосипедист и яма. Что правильно?",
+  "q": "Вы едете со скоростью 35 миль/ч по загородной двухполосной дороге с прерывистой жёлтой осевой. Впереди медленно едет легковая машина, а прямо перед ней, у правого края полосы, велосипедист и рядом с ним в асфальте большая яма с водой. Встречная полоса пуста. Что правильно?",
+  "o": [
+   "Обгонять сейчас: встречная полоса пуста, а прерывистая линия разрешает обгон",
+   "Не начинать обгон: водитель впереди сейчас сместится влево, объезжая велосипедиста и яму, и окажется на вашем пути",
+   "Обогнать быстро, прибавив скорость, пока машина не доехала до велосипедиста",
+   "Начать обгон, посигналив водителю впереди, чтобы он прижался вправо"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Перед обгоном смотрите вперёд: велосипедисты у края дороги, яма или другой предмет заставляют машину впереди сместиться в вашу полосу обгона (учебник, стр. 23). Здесь водитель, объезжая велосипедиста и яму, выедет влево как раз туда, где вы собираетесь ехать. Прерывистая линия и пустая встречная полоса этого не отменяют. Гудок не заставит его прижаться вправо — там как раз препятствие.",
+  "src": "стр. 23: «Look ahead for road conditions and traffic that may cause other vehicles to move into your lane. You might lose your space for passing because of: People or bicyclists near the road … A patch of ice, a pothole, or something on the road.»",
+  "en": {
+   "q": "You drive at 35 mph on a rural two-lane road with a broken yellow centre line. A car ahead moves slowly, and just in front of it, at the right edge of the lane, a cyclist rides next to a large water-filled pothole. The oncoming lane is empty. What is correct?",
+   "o": [
+    "Pass now: the oncoming lane is empty and the broken line allows passing",
+    "Do not start to pass: the driver ahead is about to swerve left around the cyclist and the pothole and will end up in your path",
+    "Pass quickly by speeding up before the car reaches the cyclist",
+    "Start to pass and honk so the driver ahead moves right"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Скорость 50 и правый поворотник совпадают с кодом панели. Вид назад: полосы слева от камеры.",
+  "key": "F128",
+  "pic": 128,
+  "topic": 8,
+  "short": "Вы в левой полосе и хотите в среднюю. Что правильно?",
+  "q": "Вы едете со скоростью 50 миль/ч по трассе, в вашу сторону три полосы. Вы в левой и включили правый поворотник, чтобы перейти в среднюю: она перед вами свободна. В правой полосе примерно в 50 футов впереди едет легковая машина с мигающим левым поворотником, она уже наезжает на линию в среднюю полосу. Что правильно?",
+  "o": [
+   "Перестроиться: средняя полоса свободна, а ваш поворотник включён раньше",
+   "Подождать и проверить дальнюю полосу: машина из правой идёт в ту же среднюю, перестраиваться нужно после неё",
+   "Проверить только ближайшую полосу и слепую зону справа от вас: дальняя правая вас не касается",
+   "Перестроиться, прибавив скорость, чтобы проскочить перед той машиной"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Проверяйте и дальнюю полосу: водитель из неё может перестраиваться в ту же полосу, что и вы (учебник, стр. 23). Здесь машина из правой полосы уже заходит в среднюю, поэтому подождите, пока она перестроится. «Свободно сейчас» ничего не гарантирует, а прибавить скорость и проскочить — значит подрезать её.",
+  "src": "стр. 23: «Check the far lane. Be sure to check the far lane (if there is one), as someone in that lane may be planning to move into the same lane that you want to enter.»",
+  "en": {
+   "q": "You drive at 50 mph on a highway with three lanes in your direction. You are in the left lane and have signalled right to move to the middle lane, which is clear ahead. In the right lane about 50 feet ahead a car with a flashing left signal is already crossing the line into the middle lane. What is correct?",
+   "o": [
+    "Change lanes: the middle lane is clear and your signal came first",
+    "Wait and check the far lane: the car from the right lane is heading for the same middle lane, so change after it",
+    "Check only the nearest lane and the blind spot beside you: the far right lane does not concern you",
+    "Change lanes while speeding up to beat that car"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Ключ «остаюсь в полосе»; вариант «резко тормозить» играет роль «слишком осторожного».",
+  "key": "F129",
+  "pic": 129,
+  "topic": 8,
+  "short": "Вы хотите перестроиться в левую полосу. Что правильно?",
+  "q": "Вы едете со скоростью 55 миль/ч по трассе, в вашу сторону две полосы. Вы в правой и включили левый поворотник, чтобы перейти в левую; впереди обе полосы свободны. В левом боковом зеркале виден передок легковой машины, идущей в левой полосе почти рядом с вами, примерно в 10 футах позади-сбоку. Что правильно?",
+  "o": [
+   "Перестроиться: впереди свободно, а машина сзади притормозит",
+   "Резко затормозить, чтобы пропустить её, и сразу перестроиться за ней",
+   "Оставаться в своей полосе, проверить слепую зону поворотом головы и перестроиться, только когда машина проедет вперёд",
+   "Перестроиться, если зеркало показывает, что машина не приближается"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Перед перестроением нужно проверить зеркала и повернуть голову, чтобы увидеть слепую зону (учебник, стр. 23). Машина рядом в слепой зоне делает перестроение опасным, несмотря на свободную дорогу впереди. Не тормозите резко: на трассе это опасно для едущих сзади (стр. 36). Оставайтесь в полосе и перестраивайтесь, когда полоса освободится.",
+  "src": "стр. 23: «Look over your shoulder in the direction you plan to move. Be sure no one is near the rear corners of your vehicle. These areas are called “blind spots” because you cannot see them through your mirrors. You must turn your head and look»; стр. 36: «Stopping suddenly is dangerous»",
+  "en": {
+   "q": "You drive at 55 mph on a highway with two lanes in your direction. You are in the right lane and have signalled left to move to the left lane; both lanes are clear ahead. In the left mirror you see the front of a car in the left lane almost beside you, about 10 feet back. What is correct?",
+   "o": [
+    "Change lanes: it is clear ahead and the car behind will slow",
+    "Brake hard to let it pass and change lanes right behind it",
+    "Stay in your lane, check the blind spot by turning your head, and change only after the car has gone ahead",
+    "Change lanes if the mirror shows the car is not getting closer"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Ссылка из задания §14-241(e) говорит о знаках у перекрёстков (другой курс поворота), напрямую к вопросу не подходит; взяты §14-236(2) и стр. 43, 48.",
+  "key": "F130",
+  "pic": 130,
+  "topic": 8,
+  "short": "Вам нужно ехать прямо, а ваша полоса только налево. Что правильно?",
+  "q": "Вы со скоростью 10 миль/ч подъезжаете к перекрёстку на красный сигнал, вы в левой из двух полос. На асфальте в вашей полосе стрелка налево, над полосой знак с белой стрелкой налево; в правой полосе стрелка прямо, между полосами сплошная белая линия, в правой полосе плотно стоят машины. Вам нужно ехать прямо. Что правильно?",
+  "o": [
+   "Повернуть налево, как требует разметка, а затем вернуться на нужный маршрут",
+   "Дождаться зелёного и в последний момент перестроиться в правую полосу через сплошную линию",
+   "Один раз проехать прямо из левой полосы: нарушение разовое и безвредное",
+   "Остановиться и ждать, пока водители справа пропустят вас в свою полосу"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Знак и стрелка на полосе обязательны: полоса только для поворота налево (§14-236(2)); указатель «Lane Use Control» показывает разрешённое движение из полосы (учебник, стр. 48). Сплошная белая линия значит, что вы не должны менять полосу (стр. 43). Поэтому поверните налево и вернитесь на маршрут по другим улицам; последний момент перестроения и «разовое нарушение» опасны и незаконны.",
+  "src": "§14-236(2): «designate those lanes to be used by traffic moving in a particular direction … drivers of vehicles shall obey the directions of each such sign, signal or marking»; стр. 48: «Lane Use Control. This sign indicates permitted movement from a lane.»; стр. 43: «Solid White Lines … indicate you should stay in your lane»",
+  "en": {
+   "q": "You are stopped at a red light in the left of two lanes before an intersection. The pavement in your lane has a left arrow, a sign over the lane shows a white left arrow; the right lane has a straight arrow, a solid white line separates the lanes, and cars stand tightly in the right lane. You need to go straight. What is correct?",
+   "o": [
+    "Turn left as the markings require, then get back on your route",
+    "Wait for green and change into the right lane at the last moment across the solid line",
+    "Go straight once from the left lane: a one-time violation is harmless",
+    "Stay put and wait until drivers on the right leave room to change lanes"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Пересекается с существующим Q483 (фура замедлилась и включила поворотник); здесь другая сцена — фура догоняет медленную машину.",
+  "key": "F131",
+  "pic": 131,
+  "topic": 12,
+  "short": "Справа впереди фура догоняет медленную машину. Что правильно?",
+  "q": "Вы едете со скоростью 55 миль/ч в средней из трёх полос трассы, левая полоса свободна. В правой полосе примерно в 100 футах впереди фура почти догнала медленно едущую легковую машину. Что правильно?",
+  "o": [
+   "Прибавить скорость, чтобы проскочить мимо фуры, пока она не начала перестраиваться",
+   "Ехать как ехали: фура обязана уступить, ведь вы уже в своей полосе",
+   "Посигналить фуре, чтобы она осталась за легковой машиной",
+   "Быть готовым, что фура перейдёт в вашу полосу: слегка сбавить скорость и дать ей место, не держась рядом с ней"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Если водитель грузовика замедляется, сигналит или меняет полосу, на это есть причина: будьте внимательны, сбавьте скорость и держите дистанцию (учебник, стр. 20). Не ездите рядом с грузовиком и не пытайтесь проскочить: его слепые зоны большие (стр. 19). Требовать «уступи» гудком или упрямством опасно.",
+  "src": "стр. 20: «If a truck driver slows, stops, signals or changes lanes, you may be sure that there is a good reason for it. Be alert. Slow down and hold your position.»; стр. 19: «Avoid the No-Zone (blind spots) around trucks»; «If you linger alongside the cab, you may be in a position where the truck driver cannot see you»",
+  "en": {
+   "q": "You drive at 55 mph in the middle of three lanes on a highway, the left lane is clear. In the right lane about 100 feet ahead a tractor-trailer has almost caught up with a slow car. What is correct?",
+   "o": [
+    "Speed up to get past the truck before it starts to change lanes",
+    "Carry on: the truck must yield since you are already in your lane",
+    "Honk so the truck stays behind the car",
+    "Be ready for the truck to move into your lane: slow down slightly and give it room, not staying beside it"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Близнец Q564 (там левая полоса свободна, ключ «уйти влево»).",
+  "key": "F132",
+  "pic": 132,
+  "topic": 18,
+  "short": "Справа с рампы вливается грузовик. Что правильно?",
+  "q": "Вы едете со скоростью 55 миль/ч в правой из двух полос трассы. Справа впереди, примерно в 65 футах, по разгонной полосе едет грузовик и вот-вот вольётся в вашу полосу; разгонная полоса скоро кончается. В левой полосе позади-сбоку, около 15 футов, едет легковая машина: перестроиться влево нельзя. Что правильно?",
+  "o": [
+   "Прибавить скорость и проскочить перед грузовиком, пока он не влился",
+   "Сбавить скорость и пропустить грузовик, чтобы он безопасно вошёл в поток",
+   "Перестроиться влево, подав сигнал: водитель легковой машины уступит",
+   "Посигналить грузовику, чтобы он остановился в конце разгонной полосы"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Дайте въезжающим безопасно влиться в поток (учебник, стр. 20): когда уйти влево нельзя, сбавьте скорость и пропустите грузовик. Останавливаться в конце разгонной полосы нельзя: у водителя не хватит места разогнаться, а сзади в него могут въехать. Перестраиваться влево под сигнал нельзя: полоса занята, там слепая зона.",
+  "src": "стр. 20: «If you are approaching the entrance ramp to a highway, allow entering traffic to merge safely.»; «Do not drive to the end of the ramp and stop or you will not have enough room to get up to the speed of traffic.»; стр. 23 (слепые зоны)",
+  "en": {
+   "q": "You drive at 55 mph in the right of two highway lanes. Ahead on the right, about 65 feet away, a truck on the acceleration lane is about to merge into your lane; the acceleration lane ends soon. In the left lane a car is about 15 feet back beside you: you cannot move left. What is correct?",
+   "o": [
+    "Speed up and get ahead of the truck before it merges",
+    "Slow down and let the truck merge safely",
+    "Move left with a signal: the other driver will yield",
+    "Honk so the truck stops at the end of the acceleration lane"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Тема 21 вместо 0 по уточнению координатора.",
+  "key": "F133",
+  "pic": 133,
+  "topic": 0,
+  "short": "Вы едете 45 миль/ч, дорога уходит за вершину холма. Что правильно?",
+  "q": "Вы едете со скоростью 45 миль/ч по знакомой загородной двухполосной дороге с двойной сплошной жёлтой осевой. Примерно в 150 футах впереди дорога поднимается на вершину холма и пропадает за ней: что дальше, не видно. Что правильно?",
+  "o": [
+   "Держать скорость: вы много раз ездили здесь и знаете, что за холмом",
+   "Сместиться ближе к осевой, чтобы раньше увидеть, что за вершиной",
+   "Сбавить скорость так, чтобы успеть остановиться, если сразу за вершиной окажется препятствие",
+   "Коротко посигналить на вершине и ехать с прежней скоростью"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Что за вершиной холма, не видно, даже если вы много раз ездили по этой дороге: там может стоять сломанная машина. Сбавьте скорость, чтобы успеть остановиться (учебник, стр. 38). Смещение к осевой не помогает увидеть дорогу и опасно, гудок не заменяет скорости.",
+  "src": "стр. 38: «You may not know what is on the other side of a hill or just around a curve, even if you have driven the road many times. … adjust your speed so you can stop if necessary.»",
+  "en": {
+   "q": "You drive at 45 mph on a familiar rural two-lane road with a double solid yellow centre line. About 150 feet ahead the road climbs over the crest of a hill and disappears: you cannot see beyond. What is correct?",
+   "o": [
+    "Keep your speed: you have driven here many times and know what is over the hill",
+    "Move closer to the centre line to see over the crest sooner",
+    "Slow down enough to be able to stop if an obstacle is just beyond the crest",
+    "Tap the horn at the crest and keep your speed"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Юридический статус рекомендованной скорости в законе CT не проверен (UNVERIFIED); ответ по учебнику (стр. 49–50, 25) и стр. 36 про «слишком быстро для условий».",
+  "key": "F134",
+  "pic": 134,
+  "topic": 0,
+  "short": "Впереди крутой поворот направо. Что правильно?",
+  "q": "Вы едете со скоростью 45 миль/ч по загородной двухполосной дороге с ограничением 45. Примерно в 200 футах впереди дорога круто поворачивает направо; справа у обочины жёлтый ромбовидный знак со стрелкой поворота и под ним жёлтая квадратная табличка «25 MPH». Что правильно?",
+  "o": [
+   "Ехать 45: ограничение на дороге 45, а жёлтая табличка ничего не требует",
+   "Считать 25 минимальной скоростью поворота: медленнее ехать нельзя",
+   "Сбавить до 25, но уже в самом повороте, когда увидите, насколько он крут",
+   "Сбавить примерно до 25 миль/ч ещё до входа в поворот"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Жёлтая табличка под знаком поворота показывает безопасную скорость для этого поворота (учебник, стр. 49–50). Сбавлять нужно до входа в поворот, потому что торможение в повороте может привести к заносу (стр. 25). Это не минимальная скорость и не ограничение 45, а скорость поворота, и ехать быстрее значит рисковать: за скорость, слишком большую для условий, можно получить штраф (стр. 36).",
+  "src": "стр. 50: «A small sign showing the maximum safe speed may also be posted below the arrow.»; стр. 49: «Advisory Speed Plaque … used to indicate the advisory speed for a condition»; стр. 25: «Always slow down before you enter the curve so you do not have to brake in the curve.»",
+  "en": {
+   "q": "You drive at 45 mph on a rural two-lane road with a 45 limit. About 200 feet ahead the road turns sharply right; at the roadside a yellow diamond sign with a turn arrow, and below it a small yellow square plaque “25 MPH”. What is correct?",
+   "o": [
+    "Stay at 45: the road limit is 45 and the yellow plaque requires nothing",
+    "Treat 25 as the minimum speed in the curve: going slower is not allowed",
+    "Slow to 25 only in the curve itself, once you see how sharp it is",
+    "Slow to about 25 mph before entering the curve"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Пересекается с существующим Q586 (идея «после трассы»); здесь конкретная картинка со спидометром 50.",
+  "key": "F135",
+  "pic": 135,
+  "topic": 0,
+  "short": "Вы только что съехали с трассы, знак 35. Что правильно?",
+  "q": "Вы только что съехали с трассы на обычную пригородную двухполосную дорогу с двойной жёлтой осевой, домами и деревьями. Справа знак «SPEED LIMIT 35». Спидометр показывает 50 миль/ч, а вам кажется, что вы едете медленно. Что правильно?",
+  "o": [
+   "Ехать как есть: ощущения надёжнее спидометра, а на дороге с домами 50 безопасно",
+   "Сбавить до 45: превышение до 10 миль/ч не наказывают",
+   "Не менять скорость, пока на дороге не появятся пешеходы или другие машины",
+   "Посмотреть на спидометр и сбавить до 35: после трассы скорость кажется меньше, чем она есть"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Люди плохо оценивают свою скорость, особенно когда съезжают с быстрых дорог на местные: сверяйтесь со спидометром и следуйте знакам ограничения (учебник, стр. 36). Ограничение здесь 35, а у вас 50: сбавьте до 35. «Допуск 10 миль/ч» не существует, а ждать пешеходов нельзя: скорость учитывает боковые улицы и въезды, которых вы не видите.",
+  "src": "стр. 36: «People are not very good at judging how fast they are driving … This is especially true when you leave high-speed roads and are driving on local roads. Follow the speed limit signs»; «Check the speedometer often.»",
+  "en": {
+   "q": "You have just left the highway for an ordinary suburban two-lane road with a double yellow centre line, houses and trees. A sign on the right reads “SPEED LIMIT 35”. Your speedometer shows 50 mph, but you feel you are going slowly. What is correct?",
+   "o": [
+    "Keep going: feel is more reliable than the speedometer and 50 is safe near houses",
+    "Slow to 45: up to 10 mph over is not punished",
+    "Keep your speed until pedestrians or other cars appear",
+    "Check the speedometer and slow to 35: after the highway your speed feels lower than it is"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "«Ранний вечер» не обязательно попадает в §14-96a(a)(1) (получас после заката); ответ строится на учебнике (стр. 38).",
+  "key": "F136",
+  "pic": 136,
+  "topic": 3,
+  "short": "Вечер, солнце низко за спиной. Что правильно?",
+  "q": "Вы едете со скоростью 40 миль/ч по загородной двухполосной дороге ранним вечером; солнце низко у вас за спиной, длинные тени тянутся вперёд. Фары выключены. Навстречу примерно в 200 футах едет легковая машина. Что правильно?",
+  "o": [
+   "Оставить как есть: светло, и ваша машина хорошо видна встречным",
+   "Включить фары: встречным водителям трудно разглядеть вашу машину на фоне солнца",
+   "Включить дальний свет, чтобы встречная машина увидела вас лучше",
+   "Включить только габаритные огни: их достаточно, пока светло"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Когда вы едете от заходящего или восходящего солнца, встречным водителям трудно вас увидеть, поэтому включайте фары (учебник, стр. 38). Дальний свет слепит встречного, его нужно переключить на ближний за примерно квартал (стр. 38). Габаритные огни — только для припаркованной машины.",
+  "src": "стр. 38: «When driving away from a rising or setting sun, turn on your headlights. Drivers coming towards you may have trouble seeing your vehicle.»; «Parking lights are for parked vehicles only.»",
+  "en": {
+   "q": "You drive at 40 mph on a rural two-lane road in the early evening; the sun is low behind you and long shadows stretch ahead. Your headlights are off. An oncoming car is about 200 feet away. What is correct?",
+   "o": [
+    "Leave them off: it is light and your car is easily seen",
+    "Turn on your headlights: oncoming drivers have trouble seeing your car against the sun",
+    "Use high beams so the oncoming car sees you better",
+    "Use only parking lights: they are enough while it is light"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "type": "single",
+  "exam": true,
+  "doubt": "Близнец существующих Q73, Q216; здесь ситуация «морось, видимость хорошая». Проверить, нужна ли такая ситуация в пуле.",
+  "key": "F137",
+  "pic": 137,
+  "topic": 3,
+  "short": "Днём моросит. Что правильно?",
+  "q": "Днём, пасмурно, моросит мелкий дождь: асфальт мокрый, на стекле капли, но видно далеко. Вы едете со скоростью 40 миль/ч с выключенными фарами. Навстречу примерно в 230 футах едет машина с включёнными фарами. Что правильно?",
+  "o": [
+   "Ничего не менять: днём при хорошей видимости фары не нужны",
+   "Включить только габаритные огни: для мороси этого достаточно",
+   "Включить фары: закон требует их во время осадков, в том числе днём",
+   "Включить фары только если дождь усилится или видимость упадёт ниже 500 футов"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Фары обязательны во время осадков, включая дождь, снег и туман, даже днём и даже при хорошей видимости (§14-96a(a)(3)). Учебник (стр. 38) говорит то же: если включили дворники, включайте фары. Дальность видимости 500 футов — отдельное основание, а не условие для дождя. Габаритные огни — только для стоянки.",
+  "src": "§14-96a(a): «(3) at any time during periods of precipitation, including, but not limited to, periods of snow, rain or fog»; стр. 38: «if you turn on your wipers, turn on your headlights. It's the law.»",
+  "en": {
+   "q": "In the daytime, overcast, a fine drizzle: the road is wet, drops are on the windshield, but you can see far. You drive at 40 mph with headlights off. An oncoming car about 230 feet away has its headlights on. What is correct?",
+   "o": [
+    "Change nothing: headlights are not needed in daytime with good visibility",
+    "Use only parking lights: that is enough for a drizzle",
+    "Turn on your headlights: the law requires them during precipitation, including in daytime",
+    "Turn on headlights only if the rain gets heavier or visibility drops below 500 feet"
+   ]
+  }
+ },
+ {
+  "action": "new",
+  "key": "F138",
+  "pic": 138,
+  "topic": 9,
+  "type": "single",
+  "short": "С крыши машины впереди срывается снег. Что верно?",
+  "q": "Зимой вы едете 40 миль/ч по расчищенной дороге. В 60 футах впереди идёт легковая машина с толстой шапкой снега на крыше, куски снега срываются и летят назад. Что верно?",
+  "o": [
+   "Подъехать ближе, чтобы снег падал на капот, а не на лобовое стекло",
+   "Закон CT требует очищать только стёкла, поэтому водитель впереди ничего не нарушает и дистанцию менять не нужно",
+   "Увеличить дистанцию: по закону CT водитель обязан очистить от снега и льда крышу, капот и багажник, а он этого не сделал",
+   "Посигналить и мигнуть дальним светом, затем ехать вплотную, пока он не остановится и не уберёт снег"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Закон CT (§14-252a) обязывает убирать снег и лёд со всей машины, включая крышу, капот и багажник, чтобы они не угрожали другим. Снег с чужой крыши летит назад и может закрыть вам обзор или ударить в стекло, поэтому лучше отстать и держать большую дистанцию; сближение и сигналы только ухудшают дело. Учебник, стр. 11, называет только очистку всех окон, про крышу говорит закон.",
+  "src": "§14-252a(a): «shall remove any accumulated ice or snow from such motor vehicle, including the hood, trunk and roof»; стр. 11: «Clear snow, ice, or frost from all windows before driving»",
+  "exam": false,
+  "en": {
+   "q": "In winter you are driving 40 mph on a cleared road. 60 feet ahead a car with a thick cap of snow on its roof is shedding chunks that fly backwards. What is true?",
+   "o": [
+    "Move closer so the snow lands on your hood instead of your windshield",
+    "CT law only requires clearing the windows, so the driver ahead breaks no rule and you need not change your distance",
+    "Increase your following distance: CT law requires clearing snow and ice from the roof, hood and trunk, and this driver has not",
+    "Honk and flash your high beams, then follow closely until he stops and cleans it off"
+   ]
+  },
+  "doubt": "Учебник про крышу молчит (стр. 11 — только окна), поэтому exam:false; опора — §14-252a (инфракция, $75). Решение за основной сессией: оставить в «законах CT» как законный вопрос вне экзамена."
+ },
+ {
+  "action": "new",
+  "key": "F139",
+  "pic": 139,
+  "topic": 16,
+  "type": "single",
+  "short": "Два пешехода идут у края дороги без тротуара, впереди слепой поворот. Что делать?",
+  "q": "Вы едете 25 миль/ч по узкой загородной дороге без тротуаров. В 60 футах впереди у края вашей полосы идут двое пешеходов, а ещё дальше дорога уходит за лес, и что едет навстречу из-за поворота, не видно. Как поступить?",
+  "o": [
+   "Сбавить скорость и ехать за ними; объезжать с запасом, только когда увидите, что встречная полоса свободна",
+   "Посигналить и объехать их, не снижая скорости: встречных вы пока не видите",
+   "Объехать их сразу по своей полосе, прижавшись к осевой, и не выезжая на встречную",
+   "Сбавить скорость и объехать по встречной полосе: пешеходы важнее, а встречная машина успеет притормозить"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Пешеходам нужно дать больше места, а делить с ними полосу нельзя: объезжать можно, только когда соседняя полоса свободна. За поворотом или холмом всегда допускайте встречную машину, которую вы пока не видите. Значит, пока дорога не просматривается, надо сбавить скорость и ехать за пешеходами. Учебник, стр. 22 и 38.",
+  "src": "стр. 22: «Give extra space to pedestrians, bicycles and especially children … Do not share a lane with a pedestrian or bicyclist. Wait until it is safe to pass in the adjoining lane»; стр. 24: «Any time your view is blocked by a curve or a hill, you should assume that there is an oncoming vehicle just out of sight»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 25 mph on a narrow country road without sidewalks. 60 feet ahead two pedestrians walk at the edge of your lane, and further on the road bends into the woods, so you cannot see what is coming from around the bend. What should you do?",
+   "o": [
+    "Slow down and follow them; pass with extra room only when you can see that the oncoming lane is clear",
+    "Honk and pass them without slowing: you cannot see any oncoming traffic yet",
+    "Pass them right away in your own lane, hugging the centerline and not entering the oncoming lane",
+    "Slow down and pass in the oncoming lane: the pedestrians matter more and an oncoming car can brake"
+   ]
+  },
+  "doubt": "В законе нормы расстояния до пешехода на дороге нет (UNRESOLVED) — ответ опирается на учебник. Стр. 24 в учебнике — «Hills and Curves» (в «Visibility»), в тексте пояснения указана вместе со стр. 22."
+ },
+ {
+  "action": "new",
+  "key": "F140",
+  "pic": 140,
+  "topic": 16,
+  "type": "single",
+  "short": "Автобус на остановке, двери открыты, из него выходят люди. Что делать?",
+  "q": "Вы едете 25 миль/ч по городской улице. В 60 футах впереди справа у остановки стоит городской автобус с открытыми дверями, из него выходят люди. Что правильно?",
+  "o": [
+   "Посигналить и проехать, пока автобус стоит, чтобы не задерживаться за ним",
+   "Ехать с прежней скоростью: красных огней школьного автобуса нет, значит особая осторожность не нужна",
+   "Держаться вплотную к автобусу: так вы не выедете к осевой, а люди вас заметят",
+   "Сбавить скорость, взять запас в сторону от автобуса и быть готовым остановиться: человек может выйти из-за автобуса на дорогу"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Рядом с остановившимся автобусом люди могут выйти или выбежать из-за него, а вам их не видно. Поэтому снижайте скорость, держите запас сбоку и будьте готовы остановиться. Красные огни школьного автобуса — отдельное правило, а здесь осторожность нужна всегда. Сигнал не заменяет снижения скорости, а езда вплотную к автобусу не оставляет места на случай, если кто-то шагнёт вам навстречу. Учебник, стр. 16 и 22.",
+  "src": "стр. 22: «Keep extra space between your vehicle and parked cars. Someone could step out from a parked vehicle or from between vehicles»; стр. 16: «Take extra care to look out for children, especially near schools, bus stops…»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 25 mph on a city street. 60 feet ahead on the right a city bus is stopped at a bus stop with its doors open and people are getting off. What is right?",
+   "o": [
+    "Honk and drive past while the bus is standing, so you are not stuck behind it",
+    "Keep your speed: there are no red lights like on a school bus, so no special care is needed",
+    "Stay right next to the bus: that way you will not drift toward the centerline and people will notice you",
+    "Slow down, keep extra room away from the bus and be ready to stop: someone may step out from behind it onto the road"
+   ]
+  },
+  "doubt": "В учебнике нет прямого правила про городской автобус на остановке — ключ строится на «parked vehicles» (стр. 22) и «bus stops» (стр. 16). Если reviewer сочтёт слабым — перевести в exam:false."
+ },
+ {
+  "action": "new",
+  "key": "F141",
+  "pic": 141,
+  "topic": 16,
+  "type": "single",
+  "short": "У фургона мороженого стоят дети, ещё один бежит к нему. Что делать?",
+  "q": "Вы едете 20 миль/ч по жилой улице. В 80 футах впереди у тротуара стоит фургон с мороженым, у окошка двое детей, а ещё один ребёнок бежит к фургону по тротуару. Что правильно?",
+  "o": [
+   "Посигналить, чтобы дети отошли от дороги, и ехать с прежней скоростью",
+   "Сбавить скорость и быть готовым остановиться: дети непредсказуемы и могут выбежать на дорогу",
+   "Ехать как обычно: знак STOP у фургона не выдвинут, значит дети вас не касаются",
+   "Прижаться к осевой и проехать быстрее, пока дети ещё у окошка"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Дети — самые непредсказуемые пешеходы, и около фургонов с мороженым их особенно много; они могут выбежать на дорогу, не глядя. Поэтому сбавьте скорость и будьте готовы остановиться. Отдельное требование остановиться за 10 футов действует, когда у фургона мигают огни и выдвинут знак STOP, но осторожность нужна и без него. Сигнал не заменяет снижения скорости. Учебник, стр. 16 и 18.",
+  "src": "стр. 16: «Children are often the least predictable pedestrians and the most difficult to see. Take extra care … especially near … ice cream trucks»; стр. 18: «Ice Cream Trucks … stop their vehicles at least 10 feet from the front or back of the truck»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 20 mph on a residential street. 80 feet ahead an ice cream truck is parked at the curb, two children stand at its window and another child is running to it along the sidewalk. What is right?",
+   "o": [
+    "Honk so the children move away from the road and keep your speed",
+    "Slow down and be ready to stop: children are unpredictable and may run into the road",
+    "Drive as usual: the truck has no stop arm out, so the children do not concern you",
+    "Move toward the centerline and pass quickly while the children are still at the window"
+   ]
+  },
+  "doubt": "Близнец Q520 (закон про выдвинутый STOP-рычаг, 10 футов) — здесь случай без мигающих огней, ответ про общую осторожность; не дубль."
+ },
+ {
+  "action": "new",
+  "key": "F142",
+  "pic": 142,
+  "topic": 7,
+  "type": "single",
+  "short": "Парковка у торгового центра: сзади выезжает машина, слева идёт человек с тележкой. Как ехать?",
+  "q": "Вы едете 10 миль/ч по проезду между рядами на большой парковке у торгового центра. Справа впереди, в 30 футах, машина выезжает с места задним ходом, и горят белые фонари. Слева между машинами человек катит тележку с покупками. Что правильно?",
+  "o": [
+   "Проехать побыстрее, пока машина не выехала ещё дальше на проезд",
+   "Ехать как обычно: вы едете по проезду, значит выезжающая задом машина обязана уступить вам",
+   "Ехать очень медленно и быть готовым остановиться: на парковке машины и люди движутся в разные стороны, и вас могут не заметить",
+   "Мигнуть фарами и не снижать скорость: свет предупредит их, что вы едете"
+  ],
+  "m": [
+   2
+  ],
+  "e": "На торговых парковках машины и люди постоянно трогаются, останавливаются и идут в разные стороны, а водитель, едущий задним ходом, плохо видит, что делается сзади. Поэтому снижайте скорость и будьте готовы остановиться. Даже если уступать должен другой водитель, вам важнее не столкнуться. Учебник, стр. 22 «Trouble Spots» и стр. 24.",
+  "src": "стр. 22: «Shopping centers, parking lots and downtown areas. These are busy areas with vehicles and people stopping, starting, and moving in different directions»; стр. 24: «A driver backing into the roadway or backing into or pulling out of parking spaces» (Others Who Cannot See You)",
+  "exam": true,
+  "en": {
+   "q": "You are driving 10 mph along a lane between rows on a large shopping-center parking lot. 30 feet ahead on the right a car is backing out of a space with its white reverse lights on. On the left a person pushes a shopping cart between cars. What is right?",
+   "o": [
+    "Speed up past the car before it backs further into the lane",
+    "Drive as usual: you are on the through lane, so the backing car must yield to you",
+    "Drive very slowly and be ready to stop: in a parking lot cars and people move in all directions and may not see you",
+    "Flash your headlights and keep your speed: the light will warn them you are coming"
+   ]
+  },
+  "doubt": ""
+ },
+ {
+  "action": "new",
+  "key": "F143",
+  "pic": 143,
+  "topic": 13,
+  "type": "single",
+  "short": "Два велосипедиста едут рядом в нашей полосе, навстречу машина. Что делать?",
+  "q": "Вы едете 15 миль/ч по загородной двухполосной дороге с прерывистой жёлтой осевой. В 50 футах впереди в вашей полосе рядом едут два велосипедиста, а навстречу, в 200 футах, идёт легковая машина. Что правильно?",
+  "o": [
+   "Посигналить, чтобы они выстроились в цепочку, и сразу обогнать",
+   "Ехать за ними и обгонять, когда встречная полоса свободна, оставив между машиной и велосипедом не меньше 3 футов",
+   "Обогнать, не выезжая из своей полосы: пока ехать по двое им можно, места рядом хватает",
+   "Остановиться и потребовать, чтобы они ехали по одному: ездить по двое запрещено"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Закон разрешает велосипедистам ехать по двое в одной полосе, если они не мешают движению. Нельзя делить полосу с велосипедистом, поэтому обгонять надо только когда встречная полоса свободна, оставляя не меньше 3 футов. Гудок может испугать велосипедиста, и он вильнёт в вашу сторону. Учебник, стр. 17 и 22, закон §14-286b(b), §14-232(a).",
+  "src": "§14-286b(b): «shall not ride more than two abreast … on a laned roadway, shall ride within a single lane»; §14-232(a): «safe distance … not less than three feet» (bicycle); стр. 22: «if you are overtaking a bicycle and an oncoming vehicle is approaching, slow down and let the vehicle pass first»; стр. 17: «do not sound your horn close to bicyclists»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 15 mph on a two-lane country road with a broken yellow centerline. 50 feet ahead in your lane two bicyclists ride side by side, and an oncoming car is 200 feet away. What is right?",
+   "o": [
+    "Honk so they line up single file and pass immediately",
+    "Stay behind them and pass when the oncoming lane is clear, leaving at least 3 feet between your car and the bicycles",
+    "Pass without leaving your lane: two abreast is allowed, so there is room alongside",
+    "Stop and demand that they ride single file: riding two abreast is prohibited"
+   ]
+  },
+  "doubt": ""
+ },
+ {
+  "action": "new",
+  "key": "F144",
+  "pic": 144,
+  "topic": 13,
+  "type": "single",
+  "short": "Подросток на велосипеде виляет и оглядывается. Как ехать?",
+  "q": "Вы едете 20 миль/ч по тихой жилой улице. В 50 футах впереди в вашей полосе едет подросток на велосипеде: он виляет, оглядывается через плечо и едет ближе к середине полосы. Что правильно?",
+  "o": [
+   "Посигналить и обогнать вплотную, чтобы он понял, что ему надо держаться правее",
+   "Ехать как прежде: велосипедист обязан соблюдать правила, значит резких манёвров не будет",
+   "Обогнать как можно быстрее, не оставляя лишнего места, пока он не вильнул ещё раз",
+   "Сбавить, держать большую дистанцию и быть готовым к его внезапному манёвру"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Неопытный велосипедист едет непредсказуемо: может вильнуть, выехать на середину или свернуть. Поэтому сбавьте скорость, держите дистанцию и будьте готовы к любому манёвру. Гудок рядом с велосипедистом может испугать его, а обгон вплотную противоречит правилу «не меньше 3 футов». Учебник, стр. 17.",
+  "src": "стр. 17: «An unskilled bicyclist may swerve unpredictably … If you see an unskilled bicyclist, be ready for any sudden movements»; «do not sound your horn close to bicyclists»; «a minimum of three feet distance»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 20 mph on a quiet residential street. 50 feet ahead in your lane a teenager rides a bicycle without a helmet: he wobbles, looks back over his shoulder and rides closer to the middle of the lane. What is right?",
+   "o": [
+    "Honk and pass close so he learns to keep further right",
+    "Drive as before: a cyclist must obey the rules, so there will be no sudden moves",
+    "Pass as fast as possible without leaving extra room before he wobbles again",
+    "Slow down, keep a larger distance and be ready for a sudden move"
+   ]
+  },
+  "doubt": ""
+ },
+ {
+  "action": "new",
+  "key": "F145",
+  "pic": 145,
+  "topic": 13,
+  "type": "single",
+  "short": "Вы стоите в пробке в левой полосе, в зеркале между рядами едет мотоцикл. Что верно?",
+  "q": "Вы стоите в плотной пробке на трассе с двумя полосами в вашу сторону, в левой полосе. В зеркале видно, что между рядами машин по разделительной линии едет мотоцикл. Что верно?",
+  "o": [
+   "В пробке мотоциклу можно медленно ехать между рядами, и вы должны специально освободить для него место",
+   "Ему так ехать запрещено по закону CT, но вы не должны перекрывать ему путь и открывать дверь, а должны следить за зеркалами",
+   "Чтобы он не ездил так, сместитесь к разделительной линии и перекройте ему проезд",
+   "Нарушает он, значит вам ничего делать не нужно: смотреть в зеркала и держать полосу ни к чему"
+  ],
+  "m": [
+   1
+  ],
+  "e": "§14-289b(b) запрещает мотоциклисту ехать между полосами, но его нарушение не даёт вам права «воспитывать» его: не перекрывайте ему путь, не открывайте дверь и не двигайтесь так, чтобы помешать. В пробке смотрите в зеркала и в слепые зоны: мотоцикл мал и легко прячется. Учебник, стр. 18: не мешайте мотоциклу завершить манёвр.",
+  "src": "§14-289b(b): «The operator of a motorcycle shall not … (2) operate a motorcycle between lanes of traffic»; стр. 18: «Never speed up or interfere with their ability to pass safely»; «Always make a visual check for motorcycles by checking mirrors and blind spots»",
+  "exam": true,
+  "en": {
+   "q": "You are stopped in dense highway traffic with two lanes in your direction, in the left lane. In your mirror you see a motorcycle riding between the rows of cars along the lane line. What is true?",
+   "o": [
+    "In a jam a motorcycle may ride slowly between rows, and you must make room for him on purpose",
+    "He is not allowed to ride like that under CT law, but you must not block his way or open your door, and you should keep checking your mirrors",
+    "To stop him doing it, move toward the lane line and block his path",
+    "He is the one breaking the law, so you need to do nothing: checking mirrors and holding your lane is pointless"
+   ]
+  },
+  "doubt": "Немецкий ключ «дам проехать» не брали (в CT §14-289b(b) запрет). Дистрактор «освободить место» намеренно имитирует это. Стр. 18 — про обгон мотоциклом, поэтому ссылка на неё косвенная."
+ },
+ {
+  "action": "new",
+  "key": "F147",
+  "pic": 147,
+  "topic": 21,
+  "type": "single",
+  "short": "Встречная машина обгоняет грузовик и едет прямо на нас по нашей полосе. Что делать?",
+  "q": "Вы едете 45 миль/ч по загородной двухполосной дороге в плавном повороте налево. В 150 футах навстречу идёт легковая машина, которая обгоняет грузовик и едет прямо по вашей полосе на вас. Справа ровная травяная обочина без деревьев и канавы. Что делать?",
+  "o": [
+   "Уйти влево на встречную полосу, чтобы объехать её: она всё равно вернётся в свою",
+   "Держать свою полосу и скорость: нарушает правила она, значит уступить должна она",
+   "Тормозить, посигналить и уходить вправо к краю дороги, но не влево",
+   "Один раз мигнуть фарами и продолжать ехать по центру своей полосы, пока она не вернётся"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Лучше съехать с дороги, чем столкнуться лоб в лоб: тормозите, дайте резкий гудок и уходите вправо. Влево нельзя: встречная машина может вернуться в свою полосу или вы окажетесь рядом с грузовиком. Право на свою полосу вас не спасёт, если вы окажетесь на пути у машины. Учебник, стр. 38 и 40.",
+  "src": "стр. 40: «Remember that it is generally better to run off the road than to crash head-on into another vehicle»; стр. 38: «If there is danger, do not be afraid to sound a SHARP BLAST on your horn … Another vehicle is in danger of hitting you»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 45 mph on a country two-lane road in a gentle left curve. 150 feet ahead an oncoming car is overtaking a truck and is coming straight at you in your lane. On your right is a flat grassy shoulder with no trees or ditch. What should you do?",
+   "o": [
+    "Swerve left into the oncoming lane to go around it: it will move back into its own lane anyway",
+    "Hold your lane and speed: it is the one breaking the rules, so it must give way",
+    "Brake, sound the horn and steer right toward the edge of the road, not left",
+    "Flash your lights once and keep driving in the middle of your lane until it returns"
+   ]
+  },
+  "doubt": "Условие про ровную обочину входит в q, иначе «уходить вправо» может быть небезопасным; на картинке она видна, но в short это не повторено."
+ },
+ {
+  "action": "new",
+  "key": "F148",
+  "pic": 148,
+  "topic": 21,
+  "type": "single",
+  "short": "Мы стоим на красном, сзади не успевает остановиться машина. Что делать?",
+  "q": "Вы стоите в колонне на красный сигнал, впереди в 15 футах стоит машина с горящими стоп-сигналами. В зеркале вы видите, что сзади близко подъезжает машина, которая явно не успевает остановиться. Что делать?",
+  "o": [
+   "Прижать голову к подголовнику, откинуться на спинку и держать ногу на тормозе",
+   "Отпустить тормоз, чтобы удар был мягче и вас не зажало",
+   "Наклониться к рулю и упереться в него руками, чтобы не удариться затылком",
+   "Отстегнуть ремень, чтобы после удара сразу выскочить из машины"
+  ],
+  "m": [
+   0
+  ],
+  "e": "При ударе сзади тело отбрасывает назад: прижмитесь к спинке и держите голову у подголовника. Держите ногу на тормозе, иначе вас вытолкнет на машину впереди. Ремень оставьте пристёгнутым: он удерживает на месте при втором ударе. Учебник, стр. 41.",
+  "src": "стр. 41: «Hit From the Rear … Press yourself against the back of your seat and put your head against the head restraint. Be ready to apply your brakes so that you will not be pushed into another vehicle»",
+  "exam": true,
+  "en": {
+   "q": "You are stopped in a line of cars at a red light, 15 feet behind a car with brake lights on. In your mirror you see a car coming up close behind you that clearly cannot stop in time. What should you do?",
+   "o": [
+    "Press your head against the head restraint, sit back and keep your foot on the brake",
+    "Release the brake so the impact is softer and you are not crushed",
+    "Lean forward and brace your hands on the wheel so your head does not hit the seat",
+    "Unbuckle your belt so you can get out of the car right after the impact"
+   ]
+  },
+  "doubt": "Условие «в зеркале видно» — на картинке вид назад (зеркало), в основной сцене впереди стоп-сигналы 5 м (примерно 15 футов)."
+ },
+ {
+  "action": "new",
+  "key": "F149",
+  "pic": 149,
+  "topic": 21,
+  "type": "single",
+  "short": "Мы слегка задели стоящую впереди машину на трассе. Никто не пострадал. Что делать?",
+  "q": "На скоростной трассе (limited access highway) вы слегка задели стоящую впереди машину: вмятина на бампере, никто не пострадал, обе машины могут ехать. Справа свободная обочина. Что делать?",
+  "o": [
+   "Остаться в полосе с аварийкой до приезда полиции, чтобы всё осталось как есть",
+   "Выйти из машины и обсуждать повреждения прямо у бампера, пока не приедет полиция",
+   "Ехать вместе до ближайшего съезда и обменяться данными там",
+   "Сразу отогнать обе машины на обочину и там обменяться данными"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Если никто не пострадал и машины можно ехать, закон CT требует сразу убрать их с проезжей части на свободное место рядом с местом аварии, и это не считается уходом с места ДТП (Conn. Gen. Stat. §14-224(d)–(e)). Стоять в полосе и ходить по проезжей части опасно: вас могут сбить. Обмен данными проводите на обочине. Учебник, стр. 41.",
+  "src": "§14-224(d): «shall immediately move … from the traveled portion of the highway to an untraveled area which is adjacent to the accident site»; (e): «No person who acts in accordance with … subsection (d) may be considered to have violated…»; стр. 41: «get it off the road … Do not stand or walk in traffic lanes»",
+  "exam": true,
+  "en": {
+   "q": "On a limited access highway you lightly bumped a stopped car ahead: a dent in the bumper, nobody is hurt and both cars can be driven. There is a free shoulder on the right. What should you do?",
+   "o": [
+    "Stay in the lane with hazards on until the police arrive so everything stays as it was",
+    "Get out and discuss the damage at the bumper until the police arrive",
+    "Drive together to the next exit and exchange information there",
+    "Move both cars to the shoulder right away and exchange information there"
+   ]
+  },
+  "doubt": "§14-224(d) прямо про limited access highway; в учебнике (стр. 41) общее «get it off the road». Если exam:true нужен — решает основная сессия. Нужны ли аварийка и вмятина в q: картинка их показывает."
+ },
+ {
+  "action": "new",
+  "key": "F150",
+  "pic": 150,
+  "topic": 21,
+  "type": "single",
+  "short": "Впереди на обочине полиция и скорая с мигалками. Что делать?",
+  "q": "Вы едете 50 миль/ч в правой из двух полос в вашу сторону. В 250 футах впереди на правой обочине стоят полицейская машина и скорая с мигающими огнями, рядом разбитая легковая машина. Левая полоса свободна. Что делать?",
+  "o": [
+   "Остаться в правой полосе на той же скорости: служебные машины стоят на обочине, не мешая",
+   "Сбавить скорость ниже разрешённой и перестроиться в левую полосу, если это безопасно, глядя на дорогу, а не на место аварии",
+   "Сбавить и остановиться напротив, чтобы рассмотреть, не нужна ли помощь",
+   "Перестроиться в левую полосу, но скорость не снижать: так вы быстрее проедете опасное место"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Закон Move Over требует снизить скорость ниже разрешённой и, если безопасно, перестроиться на одну полосу от стоящих служебных машин. Не останавливайтесь и не тормозите, чтобы поглазеть: так вы мешаете спасателям и рискуете сами. Учебник, стр. 16 и 41, закон §14-283b.",
+  "src": "§14-283b(b)(1): «shall (A) immediately reduce speed to a reasonable level below the posted speed limit, and (B) … move such motor vehicle over one lane, unless such movement would be unreasonable or unsafe»; стр. 16: «SLOW DOWN … Move their vehicle over one lane»; стр. 41: «Never drive to the scene of an accident … just to look»",
+  "exam": true,
+  "en": {
+   "q": "You are driving 50 mph in the right of two lanes in your direction. 250 feet ahead on the right shoulder a police car and an ambulance with flashing lights are parked next to a wrecked car. The left lane is clear. What should you do?",
+   "o": [
+    "Stay in the right lane at the same speed: the vehicles are on the shoulder and are not in your way",
+    "Slow below the speed limit and move into the left lane if it is safe, watching the road rather than the crash scene",
+    "Slow and stop alongside to take a look in case help is needed",
+    "Move into the left lane but do not reduce speed, so you get past the danger sooner"
+   ]
+  },
+  "doubt": "Стр. 16 учебника формулирует Move Over для «any vehicle pulled over»; закон — для аварийных служб и неаварийных на обочине. Здесь вариант с аварийными, ключ подходит обоим."
+ },
+ {
+  "action": "new",
+  "key": "F151",
+  "pic": 151,
+  "topic": 21,
+  "type": "single",
+  "short": "Из двора задним ходом выезжает машина с заснеженными стёклами. Что делать?",
+  "q": "Зимним утром вы едете 20 миль/ч по жилой улице. В 45 футах справа из подъездной дорожки медленно выезжает задом легковая машина: все стёкла покрыты снегом и инеем, расчищен только маленький кружок на заднем стекле, горят белые фонари заднего хода. Что делать?",
+  "o": [
+   "Ехать как прежде: выезжающий задом обязан уступить проезжающим",
+   "Коротко посигналить и проехать, не снижая скорости: гудок его предупредит",
+   "Считать, что водитель вас не видит: сбавить скорость и быть готовым остановиться",
+   "Быстро проскочить перед ним, пока он ещё не выехал на проезжую часть"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Водитель, чьи окна покрыты снегом или льдом, плохо видит и может выехать на вас, не зная, что вы рядом. Поэтому не рассчитывайте, что он вас заметит: сбавьте скорость и будьте готовы остановиться. Гудок не заменяет снижения скорости, а «проскочить» оставляет ему шанс врезаться в вас. Учебник, стр. 24.",
+  "src": "стр. 24: «Others Who Cannot See You … A driver backing into the roadway … A driver whose windows are covered with snow or ice or are steamed-up»; стр. 38: «a light tap on the horn»",
+  "exam": true,
+  "en": {
+   "q": "On a winter morning you are driving 20 mph on a residential street. 45 feet ahead on the right a car is slowly backing out of a driveway: all its windows are covered with snow and frost, only a small circle is cleared on the rear window, and its white reverse lights are on. What should you do?",
+   "o": [
+    "Drive as before: the backing driver must yield to passing traffic",
+    "Give a short honk and pass without slowing: the horn will warn him",
+    "Assume the driver cannot see you: slow down and be ready to stop",
+    "Dash across in front of him before he gets out onto the road"
+   ]
+  },
+  "doubt": ""
+ },
+ {
+  "action": "new",
+  "key": "F152",
+  "pic": 152,
+  "topic": 9,
+  "type": "single",
+  "short": "Велобагажник закрывает номер и левый задний фонарь. Что верно?",
+  "q": "Вы стоите на красный. Впереди в 12 футах стоит хэтчбек с велобагажником на задней двери; два велосипеда полностью закрывают номерной знак и левый задний фонарь, правый фонарь виден. Что верно?",
+  "o": [
+   "Так ехать нельзя: номерной знак должен быть виден и читаться, а оба задних фонаря не должны быть закрыты",
+   "Так ехать можно, если велосипеды надёжно закреплены на багажнике",
+   "Так ехать можно: достаточно, чтобы был виден хотя бы один задний фонарь",
+   "Закрытие номера и фонаря допустимо днём, ночью нужно открыть только фонарь"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Номерной знак должен быть открыт и читаться, и ничто на машине не должно скрывать цифры и буквы. Машина должна иметь не менее двух задних фонарей, видимых сзади. Груз и велобагажник не должны закрывать ни номер, ни фонари; надёжное крепление этого не меняет. Conn. Gen. Stat. §14-18(c), §14-96c(a).",
+  "src": "§14-18(c): «Nothing may be affixed to a motor vehicle … that obscures or impairs the visibility of the numerals and letters on such number plates»; §14-96c(a): «equipped with at least two tail lamps mounted on the rear»",
+  "exam": false,
+  "en": {
+   "q": "You are stopped at a red light. 12 feet ahead a hatchback has a bike rack on its rear door; two bicycles completely cover its license plate and left tail light, while the right tail light is visible. What is true?",
+   "o": [
+    "It is not allowed to drive like that: the plate must be visible and legible, and neither tail light may be blocked",
+    "It is fine if the bicycles are securely fastened on the rack",
+    "It is fine: it is enough that at least one tail light is visible",
+    "Blocking the plate and light is allowed in daytime; at night only the light must be uncovered"
+   ]
+  },
+  "doubt": "В учебнике CT велобагажника нет (exam:false). Суть: §14-18(c) и §14-96c(a). Пояснение содержит совет по багажнику — возможно, сократить."
+ },
+ {
+  "action": "new",
+  "key": "F153",
+  "pic": 153,
+  "topic": 9,
+  "type": "single",
+  "short": "Из пикапа далеко торчат доски. Что нужно по закону?",
+  "q": "Вы едете днём 30 миль/ч на пикапе с длинными досками в кузове: они выступают назад больше чем на 4 фута. Что требует закон CT?",
+  "o": [
+   "Ничего: днём груз можно везти без отметки, если доски надёжно привязаны",
+   "Прикрепить к концу груза красный флажок любого размера, лишь бы он был заметен",
+   "Прикрепить красный фонарь: он обязателен и днём, и ночью",
+   "Прикрепить к концу груза красный флажок или ткань не меньше 12 на 12 дюймов, видимые сзади"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Если груз выступает назад больше чем на 4 фута, днём к его концу нужен красный флажок или ткань не меньше 12×12 дюймов, хорошо видимый сзади. Ночью вместо флажка нужен красный фонарь, виден не менее чем на 500 футов. Крепление груза этого правила не заменяет. Conn. Gen. Stat. §14-96k.",
+  "src": "§14-96k: «the load of which extends more than four feet beyond the rear of the body … a red flag or cloth not less than twelve inches square»; ночью — «a red light … plainly visible … five hundred feet»",
+  "exam": false,
+  "en": {
+   "q": "You are driving by day at 30 mph in a pickup with long boards in the bed that project more than 4 feet behind the body. What does CT law require?",
+   "o": [
+    "Nothing: by day a load may be carried without a marker if it is tied down securely",
+    "Attach a red flag of any size, as long as it is noticeable",
+    "Attach a red light: it is required both day and night",
+    "Attach a red flag or cloth at least 12 by 12 inches to the end of the load, visible from behind"
+   ]
+  },
+  "doubt": "Правила нет в учебнике (exam:false). Картинка (v3): доски выступают примерно на половину длины легковой машины, то есть больше 4 футов."
+ },
+ {
+  "action": "new",
+  "key": "F154",
+  "pic": 154,
+  "topic": "extra",
+  "type": "single",
+  "short": "Высокий арендованный фургон перед низким мостом. Что делать?",
+  "q": "Вы за рулём арендованного высокого фургона высотой 11 футов. Впереди в 130 футах городская дорога проходит под низким железнодорожным мостом, на мосту знак «LOW CLEARANCE 10 FT 6 IN». Что правильно?",
+  "o": [
+   "Проехать очень медленно: разница всего в 6 дюймов, и фургон не заденет мост",
+   "Не заезжать под мост и найти объезд: фургон выше, чем допустимая высота проезда",
+   "Проехать: знак касается только машин с грузовой регистрацией, а арендованный фургон — нет",
+   "Проехать по самому краю полосы, где свод моста выше, и не задеть его"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Знак «Low Clearance» показывает наименьшую высоту под мостом: фургон выше этой высоты не пройдёт, даже если разница мала, скорость не поможет. Знак касается любых машин такой высоты, в том числе арендованных. Возьмите объезд. Знак не из учебника CT.",
+  "src": "знака Low Clearance в учебнике CT нет (поиск «clearance» по ct-drivers-manual-pages.txt — пусто); общая логика — высота машины ≥ допустимой высоты знака",
+  "exam": false,
+  "en": {
+   "q": "You are driving a rented tall van 11 feet high. 130 feet ahead a city road passes under a low railroad bridge with a sign «LOW CLEARANCE 10 FT 6 IN». What is right?",
+   "o": [
+    "Pass very slowly: the difference is only 6 inches and the van will not touch the bridge",
+    "Do not drive under the bridge and find a detour: your van is taller than the allowed clearance",
+    "Pass: the sign applies only to vehicles with commercial plates, and a rented van is not one",
+    "Pass at the very edge of the lane where the arch is higher and you will not hit it"
+   ]
+  },
+  "doubt": "Тема extra, вне экзамена. Решение основной сессии, делать ли вопрос (ChatGPT оставил решение за пользователем). В тексте цифра 11 футов выдумана для условия — сверить с картинкой знака 10 FT 6 IN."
+ },
+ {
+  "action": "new",
+  "key": "F155",
+  "pic": 155,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Монета вставлена в протектор. Что показывает тест с пенни?",
+  "q": "Вы проверяете шину «тестом с пенни»: вставили монету головой Линкольна вниз туда, где протектор ниже всего, и протектор закрывает голову монеты. Что это значит?",
+  "o": [
+   "Шина изношена и её нужно менять: чем больше закрыта голова, тем лысее шина",
+   "Тест неверный: проверять нужно по самой глубокой канавке, а не по самой неглубокой",
+   "Протектор достаточно глубокий: это безопасная глубина, и шина держит дорогу",
+   "Шина годна только летом, а на мокрой дороге и зимой её нужно менять в любом случае"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Если протектор закрывает хоть часть головы Линкольна, глубина протектора безопасная. Если голова видна целиком, шины нужно менять. Монету вставляют туда, где протектор ниже всего (сильнее стёрт), а не в самую глубокую канавку. Чем меньше протектор, тем хуже сцепление на мокрой дороге. Учебник, стр. 11.",
+  "src": "стр. 11: «Select a point on your tire where the tread appears to be lowest and place Lincoln's head into one of the grooves. If any part of Lincoln's head is covered by the tread, you're driving with the safe amount of tread»",
+  "exam": true,
+  "en": {
+   "q": "You check a tire with the «penny test»: you put a penny head-down into the lowest spot of the tread, and the tread covers Lincoln's head. What does that mean?",
+   "o": [
+    "The tire is worn and must be replaced: the more of the head is covered, the balder the tire",
+    "The test is wrong: you must measure in the deepest groove, not the shallowest",
+    "The tread is deep enough: this is a safe amount of tread and the tire grips the road",
+    "The tire is only good for summer and must be replaced anyway for wet roads and winter"
+   ]
+  },
+  "doubt": "Условие «закрыта голова» (без слова «полностью»): учебник — «any part». На картинке «закрыт до макушки» (глубокий протектор) — совместимо. Близнец F156 с обратным ответом."
+ },
+ {
+  "action": "new",
+  "key": "F156",
+  "pic": 156,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Монета в протекторе: голова видна целиком. Что это значит?",
+  "q": "Вы проверяете шину «тестом с пенни»: вставили монету головой Линкольна вниз туда, где протектор ниже всего, и голова видна целиком. Что это значит?",
+  "o": [
+   "Протектор изношен: сцепление, особенно на мокрой дороге, сильно снижено, шины нужно менять",
+   "Шина в порядке: голова видна, значит она хорошо держит дорогу",
+   "Достаточно подкачать шины, и сцепление вернётся",
+   "Перевернуть монету головой вверх и проверить ещё раз: так тест точнее"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Если голова Линкольна не закрыта протектором ни в одном месте, протектор ниже безопасного, и сцепление с дорогой в плохих условиях сильно снижено. Изношенные шины увеличивают тормозной путь на мокрой дороге и риск прокола. Подкачка износ не исправляет, а монету вставляют именно головой вниз. Учебник, стр. 11.",
+  "src": "стр. 11: «If your tread gets below that, your car's ability to grip the road in adverse conditions is greatly reduced»; «Worn or bald tires can increase your stopping distance and make turning more difficult when the road is wet»",
+  "exam": true,
+  "en": {
+   "q": "You check a tire with the «penny test»: you put a penny head-down into the lowest spot of the tread and the whole head is visible. What does that mean?",
+   "o": [
+    "The tread is worn: grip, especially on wet roads, is greatly reduced and the tires must be replaced",
+    "The tire is fine: the head is visible, so it grips well",
+    "Just inflate the tires and the grip will return",
+    "You need not replace the tires right away: the test matters only on wet and snowy roads, dry roads are fine"
+   ]
+  },
+  "doubt": "Дистрактор 3 отчасти верен (хуже именно на мокрой дороге), но «менять не сразу» неверно: тест показывает износ ниже безопасного. Если reviewer сочтёт двусмысленным — убрать «не сразу»."
+ },
+ {
+  "action": "new",
+  "key": "F157",
+  "pic": 157,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Где указано нужное давление в шинах и как его проверить?",
+  "q": "Вы хотите проверить давление в шинах своей машины. Что верно?",
+  "o": [
+   "Нужное давление равно цифре на боковине шины: её и нужно держать",
+   "Манометр нужен только в мастерской, а давление можно оценить на глаз по виду шины",
+   "Перед дальней поездкой давление лучше немного спустить: мягкая шина лучше держит дорогу",
+   "Рекомендуемое давление (psi) указано в инструкции или на наклейке в проёме водительской двери, проверять нужно манометром"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Рекомендуемое давление указано в инструкции по эксплуатации и на наклейке в проёме водительской двери, а проверяют его манометром. Низкое давление ускоряет износ шин, повышает расход топлива и ухудшает управляемость и торможение. Проверяйте шины раз в месяц и перед дальней поездкой. Учебник, стр. 11.",
+  "src": "стр. 11: «check tire pressure using the recommended psi … located in the vehicle owner's manual or the driver's side door jamb … Use a tire pressure gauge»; «Once every month, or before you embark upon a long road trip, check your tires»",
+  "exam": true,
+  "en": {
+   "q": "You want to check the tire pressure on your car. What is true?",
+   "o": [
+    "The right pressure equals the number on the tire sidewall: keep that figure",
+    "A gauge is only needed at a shop; you can judge pressure by eye from the tire's look",
+    "Before a long trip it is better to let a little air out: a softer tire grips the road better",
+    "The recommended pressure (psi) is in the owner's manual or on the sticker in the driver's door jamb, and you check it with a tire pressure gauge"
+   ]
+  },
+  "doubt": "Дистрактор про боковину: на боковине обычно максимальное давление, а не рекомендуемое — в учебнике этого нет (UNVERIFIED), но как неверный подходит. Вопрос про «раз в месяц» отдельно не вынесен."
+ },
+ {
+  "action": "new",
+  "key": "F158",
+  "pic": 158,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Помощник стоит сзади машины и показывает большой палец. Как проверить стоп-сигналы?",
+  "q": "Вы хотите убедиться, что стоп-сигналы вашей машины работают. Как это сделать?",
+  "o": [
+   "Нажать педаль и посмотреть в салонное зеркало: по отражению видно, горят ли огни",
+   "Нажать педаль тормоза, пока помощник смотрит на задние огни снаружи",
+   "Если на панели нет сигнальной лампы, значит стоп-сигналы работают",
+   "Достаточно проверить на техосмотре: между осмотрами лампы проверять не нужно"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Огни проверяют снаружи машины: стоп-сигналы сообщают другим, что вы тормозите, и их нельзя оценить из салона по отражению. Для проверки попросите помощника посмотреть сзади, пока вы нажимаете тормоз. Отсутствие лампы на панели ничего не гарантирует. Учебник, стр. 11.",
+  "src": "стр. 11: «Make sure that turn signals, brake lights, taillights, and headlights are operating properly. These should be checked from the outside of the vehicle»",
+  "exam": true,
+  "en": {
+   "q": "You want to make sure your brake lights work. How do you do it?",
+   "o": [
+    "Press the pedal and look in the rear-view mirror: the reflection shows whether the lights are on",
+    "Press the brake pedal while a helper looks at the rear lights from outside",
+    "If there is no warning lamp on the dashboard, the brake lights work",
+    "Checking at an inspection is enough: between inspections the bulbs need no checking"
+   ]
+  },
+  "doubt": "Дистрактор про зеркало — минимальная пара к «снаружи», правдоподобно, но по учебнику огни проверяют снаружи."
+ },
+ {
+  "action": "new",
+  "key": "F159",
+  "pic": 159,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Вечером на закате стекло изнутри мутное. Что делать?",
+  "q": "Вечером вы едете 30 миль/ч, солнце низко прямо впереди над дорогой. Лобовое стекло изнутри покрыто мутной плёнкой и разводами, и они светятся белёсыми бликами, из-за чего плохо видно пешехода у края дороги в 80 футах. В чём причина и что делать?",
+  "o": [
+   "Дело в тонировке: включить дальний свет, и пешехода будет видно",
+   "Стекло мыть нужно только снаружи, а грязь изнутри на обзор не влияет",
+   "Грязь на стекле изнутри рассеивает свет: стекло нужно мыть и изнутри, а пока сбавить скорость",
+   "Надеть тёмные очки и ехать как обычно: стекло мыть не обязательно"
+  ],
+  "m": [
+   2
+  ],
+  "e": "Яркое солнце или фары, попавшие на грязное стекло, создают блики, и обзор резко ухудшается. Поэтому стекла нужно содержать чистыми и снаружи, и внутри. Дальний свет и очки этого не исправят. Закон требует, чтобы лобовое стекло было достаточно чистым с обеих сторон. Учебник, стр. 11, §14-99f(a).",
+  "src": "стр. 11: «Make sure the inside of the windshield and windows are clean as well. Bright sun or headlights on a dirty windshield make it hard to see»; §14-99f(a): «reasonably free of defects and accumulations, inside and out, of snow, ice, condensation and dirt»",
+  "exam": true,
+  "en": {
+   "q": "In the evening you are driving 30 mph with the low sun straight ahead over the road. The inside of the windshield is covered with a hazy film and smears that glow with whitish glare, making it hard to see a pedestrian at the roadside 80 feet ahead. What is the cause and what should you do?",
+   "o": [
+    "It is the tint: turn on high beams and you will see the pedestrian",
+    "Only the outside needs washing; dirt on the inside does not affect visibility",
+    "Dirt on the inside of the glass scatters the light: the windshield must be cleaned inside too, and meanwhile slow down",
+    "Put on sunglasses and drive as usual: washing the glass is not necessary"
+   ]
+  },
+  "doubt": "Дальний свет на закате — неверный дистрактор «Dim high beams» (стр. 38, учебник). Ответ включает «сбавить скорость» как первичное действие; если reviewer возражает, убрать."
+ },
+ {
+  "action": "new",
+  "key": "F160",
+  "pic": 160,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Так настроено левое зеркало. Как правильно настроить боковые зеркала?",
+  "q": "Как правильно настроить боковые зеркала перед поездкой?",
+  "o": [
+   "Чтобы, слегка наклонившись вперёд, был виден бок вашей машины",
+   "Чтобы бок вашей машины занимал в зеркале половину стекла",
+   "Чтобы в боковом зеркале было видно то же самое, что и в салонном, а не бок машины",
+   "Настраивать зеркала лучше на ходу, когда видно реальную дорогу"
+  ],
+  "m": [
+   0
+  ],
+  "e": "Боковые зеркала настраивают так, чтобы, слегка наклонившись вперёд, вы видели бок своей машины: тогда они показывают полосы рядом, а не повторяют салонное зеркало. Салонным зеркалом вы видите заднее стекло, боковыми — стороны. Настройку выполняют до начала движения. Учебник, стр. 12.",
+  "src": "стр. 12: «A good adjustment for the side mirrors is to set them so that when you lean forward slightly, you can see the side of your vehicle»; «Make any adjustments to the seat and mirrors before you drive off»",
+  "exam": true,
+  "en": {
+   "q": "How should you adjust the side mirrors before driving?",
+   "o": [
+    "So that, leaning forward slightly, you can see the side of your own car",
+    "So that the side of your car fills half of the mirror glass",
+    "So that the side mirror shows the same thing as the rear-view mirror instead of the side of the car",
+    "Adjust the mirrors while driving, when you can see the real road"
+   ]
+  },
+  "doubt": "Q без картинки читается как общий; на картинке «узкая полоска бока справа» — дополнительная иллюстрация. Дистрактор «половина стекла» — типичное заблуждение (в учебнике нет)."
+ },
+ {
+  "action": "new",
+  "key": "F161",
+  "pic": 161,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Дождь, треснутое лобовое стекло и плохие дворники. Что делать?",
+  "q": "Идёт дождь, вы едете 30 миль/ч. По лобовому стеклу идёт длинная трещина, а стёртые щётки оставляют на нём полосы воды. Что правильно?",
+  "o": [
+   "Заменить только щётки: трещина обзору не мешает, а стекло в обычной езде не разобьётся",
+   "Включить омыватель и обогрев и ехать дальше: замену можно отложить до сухой погоды",
+   "Подождать и ехать медленнее: полосы на стекле исчезнут, когда оно намокнет полностью",
+   "Заменить стёршиеся щётки и повреждённое стекло: плохо видно, а треснувшее стекло легко разбивается"
+  ],
+  "m": [
+   3
+  ],
+  "e": "Щётки, которые плохо убирают воду, нужно заменить, а повреждённое стекло легко разбивается даже при небольшом ударе или столкновении, поэтому его тоже меняют. Закон требует, чтобы лобовое стекло было достаточно свободно от дефектов и со стеклоочистителем в рабочем состоянии. Учебник, стр. 11, §14-99f(a).",
+  "src": "стр. 11: «If the blades are not clearing water well, replace them … Damaged glass can break very easily in a minor collision … Have a damaged windshield replaced»; §14-99f(a): «windshield cleaner or wiper in effective working order … reasonably free of defects»",
+  "exam": true,
+  "en": {
+   "q": "It is raining and you are driving 30 mph. A long crack runs across the windshield and the worn wiper blades leave streaks of water. What is right?",
+   "o": [
+    "Replace only the blades: the crack does not affect visibility and the glass will not break in normal driving",
+    "Use the washer and defroster and keep driving: replacement can wait for dry weather",
+    "Wait and drive slower: the streaks will disappear once the glass is fully wet",
+    "Replace the worn wiper blades and the damaged windshield: visibility is poor and a cracked windshield breaks easily"
+   ]
+  },
+  "doubt": ""
+ },
+ {
+  "action": "new",
+  "key": "F162",
+  "pic": 162,
+  "topic": "vehicle",
+  "type": "single",
+  "short": "Ночью встречная машина мигает нам дальним. Что это может значить?",
+  "q": "Ночью вы едете 40 миль/ч по неосвещённой загородной дороге с включённым ближним светом. Навстречу машина в 230 футах мигает вам дальним светом. Что это может значить и что делать?",
+  "o": [
+   "Водитель просто здоровается: на это можно не обращать внимания",
+   "Ваши фары, возможно, сбиты и светят неправильно, слепя встречных: покажите машину механику",
+   "Включить дальний свет: так вас лучше будет видно, и он перестанет мигать",
+   "Мигнуть дальним в ответ, чтобы он выключил его, и ехать дальше"
+  ],
+  "m": [
+   1
+  ],
+  "e": "Если встречные водители часто мигают вам, хотя у вас ближний свет, возможно, фары сбиты и слепят их. Неправильно направленная фара светит туда, где вам не помогает, и слепит других. Попросите механика проверить фары. Включить дальний, чтобы «ответить», нельзя: слепят оба. Учебник, стр. 11 и 38.",
+  "src": "стр. 11: «An out-of-line headlight can shine where it does not help you and may blind other drivers. If you … other drivers are often flashing their headlights at you, have a mechanic check the headlights»; стр. 38: «Do not try to 'get back' at other drivers»",
+  "exam": true,
+  "en": {
+   "q": "At night you are driving 40 mph on an unlit country road with low beams on. An oncoming car 230 feet away flashes its high beams at you. What might this mean and what should you do?",
+   "o": [
+    "The driver is just greeting you: you can ignore it",
+    "Your headlights may be out of alignment and blinding oncoming drivers: have a mechanic check them",
+    "Turn on your high beams: you will be seen better and he will stop flashing",
+    "Flash your high beams back so he turns his off, and keep driving"
+   ]
+  },
+  "doubt": "Стр. 38 разрешает коротко мигнуть встречному с дальним, но здесь у нас ближний свет и вопрос про причину мигания; дистрактор «мигнуть в ответ» неверен, так как не решает проблему."
+ },
+ {
+  "id": 485,
+  "action": "edit",
+  "e": "Прежде чем открыть дверь, посмотрите в зеркало и назад: если по полосе едет велосипедист, подождите, пока он проедет. Нельзя открывать дверь так, чтобы она задела велосипедиста или пешехода. Перед выездом задним ходом тоже проверьте велосипедистов. Стр. 16–17.",
+  "short": "Вы припарковались у бордюра. Что верно?",
+  "pic": 146,
+  "problem": "Картинка №146 (вид назад: по полосе едет велосипедист): пояснение — подождать, пока велосипедист проедет; условие и варианты без изменений",
+  "old": {
+   "q": "Вы припарковались у бордюра. Что верно?",
+   "e": "Прежде чем открыть дверь, проверьте стороны и зад: нельзя открывать её, если она заденет велосипедиста или пешехода. Перед движением назад тоже проверьте велосипедистов. Стр. 16–17."
+  },
+  "src": "учебник, стр. 16–17",
+  "review": "fixes-10, основная сессия 2026-11-25"
+ }
+]
