@@ -170,7 +170,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
    const app=path.join(__dirname,'../editorial/img/driver-view/app/q'+id+'.jpg');assert(fs.existsSync(app)&&imgs['q'+id]==='data:image/jpeg;base64,'+fs.readFileSync(app).toString('base64'),'Batch 7 scene copy in app/ '+id);
    assert.equal(!!o.plain,B7P.has(+id),'Batch 7 close-ups without the dashboard (155–158, 160) '+id);
    if(!o.plain)assert(d[4]==='q'+id+'r'&&o.ry===80,'Batch 7 mirror view '+id);
-   assert.equal(!!o.low,+id===749,'Batch 7 low-beam icon only on No.162 (Q749) '+id);}
+   assert.equal(!!o.low,+id===748||+id===749,'Batch 7 low-beam icon on No.161 (rain with wipers, §14-96a) and No.162 (Q748, Q749) '+id);}
  }
  // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) and No.153 (Q740) still being fixed → text only
  {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8'));
