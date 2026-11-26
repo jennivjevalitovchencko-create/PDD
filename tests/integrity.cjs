@@ -308,7 +308,7 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  N.forEach((d,n)=>{const id=701+n,q=a.Q[id];
   assert.equal(q.k,d.key,'fixes-10 order: '+d.key+' is Q'+id);
   if(d.type==='tf'){assert(q.t===1&&q[0]===d.q+' (верно или неверно?)'&&q[2]===(d.v?0:1),'fixes-10 true/false '+d.key);assert.equal(d.exam,false,'true/false stays out of the exam '+d.key)}
-  else{assert.equal(q[0],a.DV[id]?d.short:d.q,'fixes-10 text '+d.key); // with a driver-view picture (batch 7, 26.11) the app shows the "short" textassert.deepEqual([...q[1]],d.o,'fixes-10 options '+d.key);
+  else{assert.equal(q[0],a.DV[id]?d.short:d.q,'fixes-10 text '+d.key); /* with a driver-view picture (batch 7, 26.11) the app shows the "short" text */assert.deepEqual([...q[1]],d.o,'fixes-10 options '+d.key);
   assert.deepEqual([...q.m],d.m,'fixes-10 key '+d.key);assert.equal(q[2],d.m[0],'fixes-10 primary key '+d.key);}assert.equal(q[3],d.e,'fixes-10 explanation '+d.key);
   const t=d.topic==='extra'?XT:d.topic==='vehicle'?VT:d.topic;
   assert(a.RT[t].ids.includes(id)&&a.RT.filter(r=>(r.ids||[]).includes(id)).length===1,'fixes-10 one topic '+d.key);
