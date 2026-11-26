@@ -140,11 +140,11 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,485,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,737,738,739,741,742,743,744,745,746,747,748,749],'Driver-view questions'); // + batch 7 (26.11): Q485, Q701–Q749 without Q736/Q740
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,485,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,737,738,739,740,741,742,743,744,745,746,747,748,749],'Driver-view questions'); // + batch 7 (26.11): Q485, Q701–Q749 without Q736
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  // fixes-6 (released 2026-11-22) re-marked its questions <date>-fix, so the older picture-release marks below skip them (Q136, Q161, Q205, Q294, Q564, Q610); fixes-6 marks are checked at the end
- const B7=new Set([485,...Array.from({length:49},(_,i)=>701+i).filter(i=>i!==736&&i!==740)]),B7P=new Set([742,743,744,745,747]); // batch 7 (26.11)
+ const B7=new Set([485,...Array.from({length:49},(_,i)=>701+i).filter(i=>i!==736)]),B7P=new Set([742,743,744,745,747]); // batch 7 (26.11)
  const F6=new Set(['fixes-6.json','fixes-7.json','fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // questions re-edited after the picture releases carry the newer fixes mark
  for(const [id,d] of Object.entries(a.DV)){
   const q=a.Q[id],svg=F.svg[id];
@@ -172,11 +172,11 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
    if(!o.plain)assert(d[4]==='q'+id+'r'&&o.ry===80,'Batch 7 mirror view '+id);
    assert.equal(!!o.low,+id===748||+id===749,'Batch 7 low-beam icon on No.161 (rain with wipers, §14-96a) and No.162 (Q748, Q749) '+id);}
  }
- // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) and No.153 (Q740) still being fixed → text only
+ // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) still being fixed → text only; No.153 (Q740) added 26.11
  {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8'));
   for(const id of B7){assert(a.DV[id],'Batch 7 picture embedded '+id);const n=id===485?146:id<734?id-588:id-587,d=id===485?f10.find(x=>x.id===485):f10.find(x=>x.key==='F'+n);
    assert.equal(a.Q[id][0],d.short,'Batch 7 short text = fixes-10 short '+id);}
-  assert(!a.DV[736]&&!a.DV[740],'Q736 (No.149) and Q740 (No.153) wait for their pictures');
+  assert(!a.DV[736],'Q736 (No.149) waits for its scene'); // No.153 (Q740) embedded 26.11
   assert(a.DV[708][2]===1&&a.DV[708][1]===0,'Q708 (No.120): 0 mph, left signal');}
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
