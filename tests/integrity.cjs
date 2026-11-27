@@ -175,7 +175,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   if(B8.has(+id)){assert.equal(a.QV[id],'2026-11-27-img','Batch 8 progress reset '+id);
    assert.equal(d[0],'q'+id,'Batch 8 own scene '+id);
    const app=path.join(__dirname,'../editorial/img/driver-view/app/q'+id+'.jpg');assert(fs.existsSync(app)&&imgs['q'+id]==='data:image/jpeg;base64,'+fs.readFileSync(app).toString('base64'),'Batch 8 scene copy in app/ '+id);
-   assert(!o.plain&&d[4]==='q'+id+'r'&&o.ry===80,'Batch 8 dashboard and mirror view '+id);
+   assert(!o.plain&&d[4]==='q'+id+'r'&&o.ry===(+id===500?130:80),'Batch 8 dashboard and mirror view (Q500/No.171: window lower, the motorcycle on the road — second check 27.11) '+id);
    assert.equal(!!o.high,+id===141,'Batch 8 high-beam icon only on No.176 (Q141) '+id);
    assert.equal(!!o.low,+id===182||+id===60,'Batch 8 low-beam icon only on No.177 (Q182) and No.178 (Q60: heavy rain, CGS §14-96a — second check 27.11) '+id);}
  }
