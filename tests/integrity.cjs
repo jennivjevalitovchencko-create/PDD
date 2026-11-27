@@ -177,7 +177,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
    const app=path.join(__dirname,'../editorial/img/driver-view/app/q'+id+'.jpg');assert(fs.existsSync(app)&&imgs['q'+id]==='data:image/jpeg;base64,'+fs.readFileSync(app).toString('base64'),'Batch 8 scene copy in app/ '+id);
    assert(!o.plain&&d[4]==='q'+id+'r'&&o.ry===80,'Batch 8 dashboard and mirror view '+id);
    assert.equal(!!o.high,+id===141,'Batch 8 high-beam icon only on No.176 (Q141) '+id);
-   assert.equal(!!o.low,+id===182,'Batch 8 low-beam icon only on No.177 (Q182) '+id);}
+   assert.equal(!!o.low,+id===182||+id===60,'Batch 8 low-beam icon only on No.177 (Q182) and No.178 (Q60: heavy rain, CGS §14-96a — second check 27.11) '+id);}
  }
  // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) still being fixed → text only; No.153 (Q740) added 26.11
  {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8'));
@@ -190,7 +190,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
   for(const [n,id] of Object.entries(B8M)){assert(a.DV[id],'Batch 8 picture embedded No.'+n+' Q'+id);
    assert(J[id]&&J[id].short===a.Q[id][0]&&J[id].full===a.Q[id][0]&&J[id].picture.startsWith('Картинка №'+n+' '),'Batch 8 question-texts entry (text unchanged) '+id);
    assert(a.EXQ.includes(+id),'Batch 8 question is an exam question '+id);}
-  assert(a.DV[84][3]===1&&a.DV[84][1]===0,'Q84 (No.167): 0 mph, right signal');assert(a.DV[563][2]===1,'Q563 (No.185): left signal');assert(a.DV[177][3]===1&&a.DV[177][1]===55,'Q177 (No.187): 55 mph, right signal');}
+  assert(a.DV[84][3]===1&&a.DV[84][1]===0,'Q84 (No.167): 0 mph, right signal');assert(a.DV[563][2]===1,'Q563 (No.185): left signal');assert(a.DV[526][2]===1&&a.DV[526][3]===0,'Q526 (No.183): left signal — merging out of the closing lane (second check 27.11)');assert(a.DV[177][3]===1&&a.DV[177][1]===55,'Q177 (No.187): 55 mph, right signal');}
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
  assert.deepEqual(P,Object.keys(a.DV).map(id=>DVP[id]),'sw.js precaches every driver-view picture');
