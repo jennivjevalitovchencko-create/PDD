@@ -17,6 +17,7 @@ const {a}=load();
 const FIXED=new Set(fs.readdirSync(path.join(__dirname,'../editorial/rules')).filter(f=>/^fixes-\d+\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8'))).filter(x=>x.action==='edit'&&(x.q||x.o||x.m||x.e)).map(x=>x.id));
 assert.equal(a.Q.length,786); // 701 + 85 new questions fixes-10 (F113–F162 for the driver-view pictures 113–162, ids 701–749; S01–S40 without pictures, ids 750–785; appended last) // 655 + 42 new questions R1–R42 (new-questions-2026-11-09b.json) + 4 manual signs 2026-11-23 (ids 697-700, appended last)
 assert.equal(a.EXQ.length,290); // 2026-11-25: +41 of the 49 picture questions of fixes-10 and +28 of the 36 questions without pictures (the rest stay out: Полезно знать, law-only exam:false or true/false → xt); 2026-11-23: the 17 «Какой знак означает…» questions about signs not in the CT manual (Q402–Q418) left the exam (user: as in the real test); 2026-11-21: Q113 has one correct answer (Move Over by law, fixes-5) and joins the exam; 2026-11-21: Q634 key fixed to one answer, so it joins the exam; +21 single-choice R-questions; 2026-11-15: single-choice picture questions join the exam (Q636, Q646, Q675), sign-group questions stay out
+const B8M={163:83,164:606,165:607,166:302,167:84,168:66,169:285,170:278,171:500,172:131,173:496,174:495,175:499,176:141,177:182,178:60,179:121,180:122,181:615,182:617,183:526,184:153,185:563,186:497,187:177},B8=new Set(Object.values(B8M)); // batch 8 (27.11): picture No. → old exam question; these questions carry the newer picture mark 2026-11-27-img instead of their fixes-* mark
 assert.equal(a.SIGNQ.length,58); // +4 manual signs 2026-11-23
 assert.deepEqual([...a.SIGNQ.slice(-11,-7)],[697,698,699,700],'Manual signs 2026-11-23 are the last questions (earlier IDs unchanged)');
 for(const id of [697,698,699,700])assert(a.Q[id][0]==='Что означает этот знак?'&&/^data:image\/png;base64,/.test(a.Q[id][4])&&a.Q[id][1][a.Q[id][2]]&&a.CD.some(c=>c.img===a.Q[id][4]),'Manual sign question and card '+id);
@@ -140,7 +141,7 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
 {
  const B=require('../editorial/img/driver-view/build-app.cjs'),F=B.frames(html),DVP=JSON.parse(html.match(/const DVP=(\{[^}]*\});\/\*DVP\*\//)[1]);
  assert(!/data:image\/jpeg/.test(html)&&html.includes('const DVI={};/*DVI*/'),'No embedded JPEG pictures in index.html');
- assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,63,64,65,67,68,74,85,86,87,88,89,90,91,92,93,96,97,99,101,113,125,127,128,132,133,136,137,139,142,159,160,161,164,167,176,178,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,281,294,298,300,303,331,466,470,484,485,498,501,527,528,529,531,550,560,561,564,605,609,610,611,612,613,614,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,737,738,739,740,741,742,743,744,745,746,747,748,749],'Driver-view questions'); // + batch 7 (26.11): Q485, Q701–Q749 without Q736
+ assert.deepEqual(Object.keys(a.DV).map(Number).sort((x,y)=>x-y),[4,5,6,7,8,9,10,11,12,13,14,15,17,18,37,60,63,64,65,66,67,68,74,83,84,85,86,87,88,89,90,91,92,93,96,97,99,101,113,121,122,125,127,128,131,132,133,136,137,139,141,142,153,159,160,161,164,167,176,177,178,182,189,191,192,193,194,195,196,197,198,199,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,275,278,281,285,294,298,300,302,303,331,466,470,484,485,495,496,497,498,499,500,501,526,527,528,529,531,550,560,561,563,564,605,606,607,609,610,611,612,613,614,615,617,618,619,634,635,636,637,638,643,646,647,648,650,669,671,673,675,677,679,682,684,686,687,689,692,695,701,702,703,704,705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,737,738,739,740,741,742,743,744,745,746,747,748,749],'Driver-view questions'); // + batch 7 (26.11): Q485, Q701–Q749 without Q736; + batch 8 (27.11): 25 old exam questions (No.163–187)
  assert.deepEqual(Object.keys(DVP).sort(),Object.keys(a.DV).sort(),'DVP has a file for every DV question');
  const imgs=B.images();assert(imgs.dash,'Dashboard image');
  // fixes-6 (released 2026-11-22) re-marked its questions <date>-fix, so the older picture-release marks below skip them (Q136, Q161, Q205, Q294, Q564, Q610); fixes-6 marks are checked at the end
@@ -171,6 +172,12 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
    assert.equal(!!o.plain,B7P.has(+id),'Batch 7 close-ups without the dashboard (155–158, 160) '+id);
    if(!o.plain)assert(d[4]==='q'+id+'r'&&o.ry===80,'Batch 7 mirror view '+id);
    assert.equal(!!o.low,+id===748||+id===749,'Batch 7 low-beam icon on No.161 (rain with wipers, §14-96a) and No.162 (Q748, Q749) '+id);}
+  if(B8.has(+id)){assert.equal(a.QV[id],'2026-11-27-img','Batch 8 progress reset '+id);
+   assert.equal(d[0],'q'+id,'Batch 8 own scene '+id);
+   const app=path.join(__dirname,'../editorial/img/driver-view/app/q'+id+'.jpg');assert(fs.existsSync(app)&&imgs['q'+id]==='data:image/jpeg;base64,'+fs.readFileSync(app).toString('base64'),'Batch 8 scene copy in app/ '+id);
+   assert(!o.plain&&d[4]==='q'+id+'r'&&o.ry===80,'Batch 8 dashboard and mirror view '+id);
+   assert.equal(!!o.high,+id===141,'Batch 8 high-beam icon only on No.176 (Q141) '+id);
+   assert.equal(!!o.low,+id===182,'Batch 8 low-beam icon only on No.177 (Q182) '+id);}
  }
  // batch 7 (26.11): German-sample pictures No.113–162 → Q701–Q749 (fixes-10 F113–F162) and No.146 → Q485; No.149 (Q736) still being fixed → text only; No.153 (Q740) added 26.11
  {const f10=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8'));
@@ -178,6 +185,12 @@ assert(a.EXQ.includes(675)&&a.EXQ.includes(646)&&a.EXQ.every(i=>a.Q[i][0]!=='К 
    assert.equal(a.Q[id][0],d.short,'Batch 7 short text = fixes-10 short '+id);}
   assert(!a.DV[736],'Q736 (No.149) waits for its scene'); // No.153 (Q740) embedded 26.11
   assert(a.DV[708][2]===1&&a.DV[708][1]===0,'Q708 (No.120): 0 mph, left signal');}
+ // batch 8 (27.11): pictures No.163–187 → old exam questions (map: theory-work/pictures-2026-11-25/meta/map.txt); question texts unchanged, short text = full text
+ {const J=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/img/driver-view/question-texts.json'),'utf8')).texts;
+  for(const [n,id] of Object.entries(B8M)){assert(a.DV[id],'Batch 8 picture embedded No.'+n+' Q'+id);
+   assert(J[id]&&J[id].short===a.Q[id][0]&&J[id].full===a.Q[id][0]&&J[id].picture.startsWith('Картинка №'+n+' '),'Batch 8 question-texts entry (text unchanged) '+id);
+   assert(a.EXQ.includes(+id),'Batch 8 question is an exam question '+id);}
+  assert(a.DV[84][3]===1&&a.DV[84][1]===0,'Q84 (No.167): 0 mph, right signal');assert(a.DV[563][2]===1,'Q563 (No.185): left signal');assert(a.DV[177][3]===1&&a.DV[177][1]===55,'Q177 (No.187): 55 mph, right signal');}
  const sw=fs.readFileSync(path.join(__dirname,'../sw.js'),'utf8'),m=sw.match(/const C='([^']*)',P=(\[[^\]]*\]);\/\*PRE\*\//);
  assert(m,'sw.js precache marker');const P=JSON.parse(m[2]);
  assert.deepEqual(P,Object.keys(a.DV).map(id=>DVP[id]),'sw.js precaches every driver-view picture');
@@ -266,13 +279,13 @@ for(const m of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/theo
 }
 // fixes-5 (law review 2026-11-21): its questions keep the reset mark of that release
 const F7=new Set(['fixes-7.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id))); // fixes-7 re-edits Q257 and Q419, fixes-9 (LOW) re-edits more (newer marks below)
-for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))if(!F7.has(x.id))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
+for(const x of JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-5.json'),'utf8')))if(!F7.has(x.id)&&!B8.has(x.id))assert.equal(a.QV[x.id],'2026-11-21-fix','fixes-5 progress reset '+x.id);
 // fixes-6 (released 2026-11-22, 30 questions): its questions keep the reset mark of that release (build-fixes.cjs 2026-11-22)
 {const f6=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-6.json'),'utf8'));assert.equal(f6.length,30,'fixes-6 has 30 questions');
- const F8=new Set(['fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id)));for(const x of f6)if(!F8.has(x.id))assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);} // re-edited in fixes-8 → newer mark
+ const F8=new Set(['fixes-8.json','fixes-9.json'].flatMap(f=>JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules',f),'utf8')).map(x=>x.id)));for(const x of f6)if(!F8.has(x.id)&&!B8.has(x.id))assert.equal(a.QV[x.id],'2026-11-22-fix','fixes-6 progress reset '+x.id);} // re-edited in fixes-8 → newer mark
 // Newest fixes file (fixes-7, full review 2026-11, HIGH first): edits and "mark" entries (sign data / generator changed in index.html) carry the mark of build-fixes.cjs 2026-11-23
 {const f7=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-7.json'),'utf8'));
- const F9=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')).map(x=>x.id));for(const x of f7)if(!F9.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-7 progress reset '+x.id); // re-edited in fixes-9 → newer mark
+ const F9=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')).map(x=>x.id));for(const x of f7)if(!F9.has(x.id)&&!B8.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-7 progress reset '+x.id); // re-edited in fixes-9 → newer mark
  assert(!/\b00\b/.test(a.Q[257][1][0])&&a.Q[257][1][0].includes('$500')&&a.Q[257][1][0].includes('$1000'),'Q257 keeps the dollar amounts');
  for(const q of a.Q)for(const s of [q[0],q[3],...q[1]])assert(!/(до|штраф|fine)\s+0{2,}/i.test(s),'No amount lost its leading digit: '+s.slice(0,80));
  // «Какой знак означает…»: no distractor means the same as the key (SYNG), and the four renamed signs are told apart
@@ -290,10 +303,10 @@ assert.equal(a.VER(),'Версия '+a.APP_VER.n+' от '+a.APP_VER.d.slice(8)+'
 assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$\{VER\(\)\}/g)||[]).length===2,'Version on home and in «Ещё»');
 // fixes-8 (MEDIUM of the full review, released 2026-11-23 as «Версия 56»): every question of the file carries its reset mark
 {const f8=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-8.json'),'utf8')),f9=JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-9.json'),'utf8')),F9=new Set(f9.map(x=>x.id)),F10E=new Set(JSON.parse(fs.readFileSync(path.join(__dirname,'../editorial/rules/fixes-10.json'),'utf8')).filter(x=>x.action==='edit').map(x=>x.id));
- for(const x of f8)if(!F9.has(x.id)&&!F10E.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id); // re-edited in fixes-10 (Q485) → newer mark
+ for(const x of f8)if(!F9.has(x.id)&&!F10E.has(x.id)&&!B8.has(x.id))assert.equal(a.QV[x.id],'2026-11-23-fix','fixes-8 progress reset '+x.id); // re-edited in fixes-10 (Q485) → newer mark
  // fixes-9 (LOW of the full review, «Версия 57»): once released (APP_VER 57+, build-fixes.cjs <date>) every question of the file carries one new mark;
  // the date must not be 2026-11-23: 19 questions of fixes-9 were already marked 2026-11-23-fix by fixes-8 and would keep old progress
- if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)if(!F10E.has(x.id))assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}
+ if(a.APP_VER.n>=57){const m=a.QV[f9[0].id];assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix','fixes-9 release mark '+m);for(const x of f9)if(!F10E.has(x.id)&&!B8.has(x.id))assert.equal(a.QV[x.id],m,'fixes-9 progress reset '+x.id);}
  // fixes-10 («Версия 58», build-fixes.cjs 2026-11-25): its edits of old questions (Q485 explanation for picture 146) carry a mark newer than fixes-9's
  if(a.APP_VER.n>=58)for(const id of F10E){const m=a.QV[id];if(a.DV[id]&&m==='2026-11-26-img')continue; /* Q485: picture 146 in batch 7 — newer mark */assert(/^\d{4}-\d\d-\d\d-fix$/.test(m)&&m!=='2026-11-23-fix'&&m!==a.QV[f9[0].id],'fixes-10 progress reset '+id+' '+m);}}
 // fixes-10 (2026-11-25, «Версия 58»): 49 new questions F113–F162 for the driver-view pictures 113–162 (ids 701–749) and 36 questions S01–S40 without pictures (ids 750–785), appended after the manual signs

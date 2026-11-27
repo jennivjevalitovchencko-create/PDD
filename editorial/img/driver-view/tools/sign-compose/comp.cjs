@@ -6,7 +6,7 @@ const probe=f=>execFileSync('ffprobe',['-v','error','-show_entries','stream=widt
 const [rw,rh]=probe(ref);const s=Math.max(w/rw,h/rh);const nw=Math.round(rw*s),nh=Math.round(rh*s);
 const ox=Math.round(x+(w-nw)/2)+ +dx, oy=Math.round(y+(h-nh)/2)+ +dy;
 const raw=(f,vf)=>execFileSync('ffmpeg',['-v','error','-i',f,'-vf',vf,'-f','rawvideo','-'],{maxBuffer:1e8});
-const C={yellow:(r,g,b)=>r>150&&g>110&&b<110&&r-b>90,red:(r,g,b)=>r>110&&g<90&&b<90&&r-g>60,white:(r,g,b)=>r>170&&g>170&&b>170&&Math.abs(r-b)<40};
+const C={yellow:(r,g,b)=>r>150&&g>110&&b<110&&r-b>90,red:(r,g,b)=>r>110&&g<90&&b<90&&r-g>60,orange:(r,g,b)=>r>190&&g>70&&g<170&&b<70&&r-g>60,green:(r,g,b)=>g>70&&g-r>30&&g>=b&&r<90,white:(r,g,b)=>r>170&&g>170&&b>170&&Math.abs(r-b)<40};
 const mean=(buf,step,alpha)=>{let n=0,a=[0,0,0];for(let k=0;k<buf.length;k+=step){if(alpha&&buf[k+3]<250)continue;const r=buf[k],g=buf[k+1],b=buf[k+2];if(C[cls](r,g,b)){n++;a[0]+=r;a[1]+=g;a[2]+=b;}}return a.map(v=>v/n);};
 // photo: inner 70% of bbox to avoid background
 const ix=Math.round(x+w*0.15),iy=Math.round(y+h*0.15),iw=Math.round(w*0.7),ih=Math.round(h*0.7);

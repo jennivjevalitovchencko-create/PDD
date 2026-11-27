@@ -5,3 +5,7 @@ User decision 2026-11-22: for every sign, use the MUTCD reference instead of a d
 Added 2026-11-26 (batch 7, same source and check, all "Public domain" via the Commons API): MUTCD_W2-2R (13-px transparent margin cropped), MUTCD_R3-5L,
 MUTCD_R2-1-35 (= File:Speed_Limit_35_sign.svg), MUTCD_W13-1P-25 (File:MUTCD_W13-1P.svg with the «3» replaced by the «2» of File:Speed_Limit_25_sign.svg — same glyph size),
 MUTCD_W12-2-10-6 and MUTCD_W12-2P-10-6 (File:MUTCD_W12-2.svg / File:MUTCD_W12-2P.svg with digits «0», «6» from File:Speed_Limit_60_sign.svg; background #fcd116).
+Added 2026-11-27 (batch 8, same source and check, all "Public domain" via the Commons API): MUTCD_R1-2 (YIELD), MUTCD_R2-1-55 (= File:Speed_Limit_55_sign.svg),
+MUTCD_R2-1-40 (= File:Speed_Limit_40_sign.svg), MUTCD_CW4-2R (orange work-zone Lane Ends, right lane), MUTCD_E5-1 (EXIT gore sign);
+MUTCD_E5-1-oneline — the «EXIT» word and the arrow of File:MUTCD_E5-1.svg rearranged on one line (scaled 1.86 / 1.10) on the same green panel and border,
+to match the one-line overhead sign of the accepted scene No.187.
