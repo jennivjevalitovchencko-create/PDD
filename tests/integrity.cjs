@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,APP_VER,VER,openTopics:()=>go("sign"),PCQ,pcv,pcm,hm2,TP,app,quiz,ans,start,tids,DUP,getS:()=>S};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,APP_VER,VER,openTopics:()=>go("sign"),PCQ,pcv,pcm,hm2,TP,app,quiz,ans,start,tmode,tids,DUP,getS:()=>S};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -339,7 +339,7 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  assert(Object.keys(a.DV).every(id=>P.includes(+id)||!VIS.has(+id)||a.DUP.includes(+id)),'Every visible DV picture is in the section (new pictures join automatically)');
  assert(P.includes(200),'Drawn scheme Q200 included');
  for(const id of [4,5,6,7,15,17,18,64,68,74])assert(!P.includes(id),'Hidden or duplicate question stays out '+id);
- const pic=i=>(a.Q[i][4].match(/[?&]v=(\w+)/)||[])[1]||a.Q[i][4],seen={};for(const i of P){const k=pic(i)+'|'+a.Q[i][0];assert(!seen[k],'Same picture and question twice: '+seen[k]+'='+i);seen[k]=i}
+ const pic=i=>(a.Q[i][4].match(/[?&]v=(\w+)/)||[])[1]||a.Q[i][4],seen={};for(const i of P){const k=pic(i);assert(!seen[k]||seen[k]===37&&i===331,'Same picture twice: '+seen[k]+'='+i);seen[k]=i} // Q37/Q331: one sign, two different questions (meaning / group)
  assert.equal(P.length,194,'Photo section size 28.11 (snapshot: update when pictures are added)');
  assert.deepEqual([...a.GT.map(g=>g.n)],['Формы и цвета','Регулирующие знаки (Regulatory)','Предупреждающие знаки (Warning)','Указатели и услуги (Guide)','Дорожные работы и переезды',...a.RT.slice(0,23).map(t=>t.n),'Дополнительные знаки (не из учебника)','Исправность машины'],'GT topics and indexes unchanged (progress th/d keys)');
  assert.equal(a.GT.length,30);assert(!a.GT.some(g=>/картинк/i.test(g.n)),'Photo section is not a GT topic');
@@ -351,9 +351,9 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  assert(b.app.innerHTML.includes('← К разделу'),'Quiz back link to the section');
  b.pcm('a');assert.equal(b.getS().ids.length,n);
  b.pcm('w');S=b.getS();assert.equal(S.ids.length,n-2);assert(!S.ids.includes(P[0])&&S.ids.includes(P[1]));
- S.i=S.ids.findIndex(x=>{const q=b.Q[x];return !q.o&&!q.p&&!q.n&&!q.m&&!q.t});assert(S.i>=0,'A single-choice question in the section');
+ S.i=S.ids.findIndex(x=>{const q=b.Q[x];return x!==P[1]&&!q.o&&!q.p&&!q.n&&!q.m&&!q.t});assert(S.i>=0,'A single-choice question in the section');
  const id=S.ids[S.i],q=b.Q[id];b.ans((q[2]+1)%q[1].length);S=b.getS();assert.equal(S.ids.length,n-1,'Mode w re-queues a wrong answer');assert.equal(S.ids[S.ids.length-1],id);assert.equal(JSON.parse(Lo.storage.r)[id],0,'Wrong answer saved in R');assert(JSON.parse(Lo.storage.w).includes(id),'Wrong answer saved in W');
  S.i=S.ids.length;b.quiz();assert(b.app.innerHTML.includes("pcm('w')\">Ещё раз")&&b.app.innerHTML.includes('onclick="pcv()">К разделу'),'Section end screen buttons');
  assert.equal(Lo.storage.th,saved.th,'Theory marks untouched');assert.equal(Lo.storage.d,saved.d,'Topic done marks untouched');
- b.TP(10);b.start([P[0]],0,undefined,5);assert(!b.app.innerHTML.includes('← К разделу')&&b.getS().pc==null,'Section flag does not leak into topic quizzes');}
+ b.TP(10);b.pcm('a');b.tmode(5,'a');assert(!b.app.innerHTML.includes('← К разделу')&&b.app.innerHTML.includes('← К темам')&&b.getS().pc==null,'Section flag does not leak into topic quizzes');}
 console.log('PASS: photo section «Вопросы с картинками» (Версия 61), rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
