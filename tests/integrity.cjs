@@ -9,7 +9,7 @@ function load(saved={}){
  const storage={...saved};
  const c={console,Math,Date,JSON,Set,Map,Array,Number,String,Boolean,Promise,window:{scrollTo:()=>{}},navigator:{},document:{documentElement:{dataset:{}},getElementById:()=>el(),querySelector:()=>el(),querySelectorAll:()=>[]},localStorage:{getItem:k=>storage[k]??null,setItem:(k,v)=>{storage[k]=v},removeItem:k=>{delete storage[k]}}};
  vm.createContext(c);
- vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,APP_VER,VER,openTopics:()=>go("sign"),PCQ,pcv,pcm,hm2,TP,app,quiz,getS:()=>S};',c,{timeout:10000});
+ vm.runInContext(script.replace(/go\('home'\);\s*$/,'')+';globalThis.audit={Q,RT,ALL,EXQ,SIGNQ,MQ,W,R,QV,DV,DVI,CD,SG3,GT,FT,SP,SYN,APP_VER,VER,openTopics:()=>go("sign"),PCQ,pcv,pcm,hm2,TP,app,quiz,ans,start,tids,DUP,getS:()=>S};',c,{timeout:10000});
  return {a:c.audit,storage};
 }
 const {a}=load();
@@ -331,23 +331,29 @@ assert(script.includes("${VER()}</p>`;window.scrollTo(0,0)}")&&(script.match(/\$
  assert.deepEqual([...a.RT[VT].ids],N.map((d,n)=>d.topic==='vehicle'?701+n:-1).filter(i=>i>=0),'«Исправность машины» holds the vehicle questions');
  assert.equal(a.RT[VT].ids.length,14,'«Исправность машины»: 8 picture questions (155–162) + 6 without pictures');
  for(const e of f10.filter(x=>x.action==='edit'))assert(e.id<701,'fixes-10 edits touch old questions only');}
-// Версия 61 (user 2026-11-28): section «Вопросы с картинками» — every question with a scene picture (all DV photos: driver's view, top-down, close-up; plus drawn schemes), built automatically; only a home tile, not a GT topic
-{const P=a.PCQ(),DVK=Object.keys(a.DV).map(Number),SCH=a.Q.map((q,i)=>q.sc&&!q.dv&&String(q[4]||'').startsWith('data:image/svg+xml')?i:-1).filter(i=>i>=0);
+// Версия 61 (user 2026-11-28): section «Вопросы с картинками» — every question with a scene picture (q.sc: DV photos — driver's view, top-down, close-up — and drawn schemes) that the app shows anywhere (practice pool ALL or a topic), without the DUP duplicates; built automatically; only a home tile, not a GT topic
+{const P=a.PCQ(),VIS=new Set(a.ALL);a.GT.forEach((_,i)=>a.tids(i).forEach(x=>VIS.add(x)));
+ const EXP=a.Q.map((q,i)=>(q.dv===1||q.sc===1&&String(q[4]||'').startsWith('data:image/svg+xml'))&&VIS.has(i)&&!a.DUP.includes(i)?i:-1).filter(i=>i>=0);
  assert.equal(P.length,new Set(P).size,'Photo section: no duplicates');
- assert.deepEqual([...P].sort((x,y)=>x-y),[...DVK,...SCH].sort((x,y)=>x-y),'Photo section = all DV pictures + drawn schemes');
- assert.equal(DVK.length,203);assert.deepEqual([...SCH],[200]);assert.equal(P.length,204,'Photo section size 28.11');
- for(const id of P)assert(a.Q[id][4]&&a.Q[id].sc===1,'Photo section question has a scene picture '+id);
- assert(!a.Q.some((q,i)=>q[4]&&!q.sc&&P.includes(i)),'Sign-card pictures stay out');
+ assert.deepEqual([...P],[...EXP],'Photo section = every visible DV picture or drawn scheme, minus DUP');
+ assert(Object.keys(a.DV).every(id=>P.includes(+id)||!VIS.has(+id)||a.DUP.includes(+id)),'Every visible DV picture is in the section (new pictures join automatically)');
+ assert(P.includes(200),'Drawn scheme Q200 included');
+ for(const id of [4,5,6,7,15,17,18,64,68,74])assert(!P.includes(id),'Hidden or duplicate question stays out '+id);
+ const pic=i=>(a.Q[i][4].match(/[?&]v=(\w+)/)||[])[1]||a.Q[i][4],seen={};for(const i of P){const k=pic(i)+'|'+a.Q[i][0];assert(!seen[k],'Same picture and question twice: '+seen[k]+'='+i);seen[k]=i}
+ assert.equal(P.length,194,'Photo section size 28.11 (snapshot: update when pictures are added)');
  assert.deepEqual([...a.GT.map(g=>g.n)],['Формы и цвета','Регулирующие знаки (Regulatory)','Предупреждающие знаки (Warning)','Указатели и услуги (Guide)','Дорожные работы и переезды',...a.RT.slice(0,23).map(t=>t.n),'Дополнительные знаки (не из учебника)','Исправность машины'],'GT topics and indexes unchanged (progress th/d keys)');
  assert.equal(a.GT.length,30);assert(!a.GT.some(g=>/картинк/i.test(g.n)),'Photo section is not a GT topic');
- const saved={qv:JSON.stringify(a.QV),th:'[0,5,29]',d:'[1,6]',r:JSON.stringify({[P[0]]:1,[P[1]]:0,[P[2]]:1}),w:JSON.stringify([P[1]])},L=load(saved),b=L.a;
- b.hm2();assert(b.app.innerHTML.includes("onclick='TP(10)'")&&b.app.innerHTML.includes('Вопросы с картинками')&&b.app.innerHTML.includes('Фото и схемы: 204'),'Home tile');
- b.TP(10);const h=b.app.innerHTML;assert(h.includes('📸 Вопросы с картинками')&&h.includes('Поехали (202)')&&h.includes('Поехали (2)')&&h.includes('Поехали (204)'),'Section screen: modes w/o/a = 202/2/204');
- assert(h.includes('Верно 2 · Неверно 1 · Без ответа 201'),'Section progress bar');
+ const saved={qv:JSON.stringify(a.QV),th:'[0,5,29]',d:'[1,6]',r:JSON.stringify({[P[0]]:1,[P[1]]:0,[P[2]]:1}),w:JSON.stringify([P[1]])},Lo=load(saved),b=Lo.a,n=P.length;
+ b.hm2();assert(b.app.innerHTML.includes("onclick='TP(10)'")&&b.app.innerHTML.includes('Вопросы с картинками')&&b.app.innerHTML.includes('Фото и схемы: '+n),'Home tile');
+ b.TP(10);const h=b.app.innerHTML;assert(h.includes('📸 Вопросы с картинками')&&h.includes('Поехали ('+(n-2)+')')&&h.includes('Поехали (2)')&&h.includes('Поехали ('+n+')'),'Section screen: modes w/o/a');
+ assert(h.includes('Верно 2 · Неверно 1 · Без ответа '+(n-3)),'Section progress bar');
  b.pcm('o');let S=b.getS();assert.equal(S.pc,1);assert.equal(S.mode,'o');assert(S.g==null,'Section quiz is not a topic quiz');assert.deepEqual([...S.ids].sort((x,y)=>x-y),[P[0],P[2]].sort((x,y)=>x-y));
  assert(b.app.innerHTML.includes('← К разделу'),'Quiz back link to the section');
- b.pcm('w');S=b.getS();assert.equal(S.ids.length,202);assert(!S.ids.includes(P[0])&&S.ids.includes(P[1]));
- b.pcm('a');assert.equal(b.getS().ids.length,204);
- b.pcm('o');b.getS().i=2;b.quiz();assert(b.app.innerHTML.includes("pcm('o')\">Ещё раз")&&b.app.innerHTML.includes('onclick="pcv()">К разделу'),'Section end screen buttons');
- assert.equal(L.storage.th,saved.th,'Theory marks untouched');assert.equal(L.storage.d,saved.d,'Topic done marks untouched');}
+ b.pcm('a');assert.equal(b.getS().ids.length,n);
+ b.pcm('w');S=b.getS();assert.equal(S.ids.length,n-2);assert(!S.ids.includes(P[0])&&S.ids.includes(P[1]));
+ S.i=S.ids.findIndex(x=>{const q=b.Q[x];return !q.o&&!q.p&&!q.n&&!q.m&&!q.t});assert(S.i>=0,'A single-choice question in the section');
+ const id=S.ids[S.i],q=b.Q[id];b.ans((q[2]+1)%q[1].length);S=b.getS();assert.equal(S.ids.length,n-1,'Mode w re-queues a wrong answer');assert.equal(S.ids[S.ids.length-1],id);assert.equal(JSON.parse(Lo.storage.r)[id],0,'Wrong answer saved in R');assert(JSON.parse(Lo.storage.w).includes(id),'Wrong answer saved in W');
+ S.i=S.ids.length;b.quiz();assert(b.app.innerHTML.includes("pcm('w')\">Ещё раз")&&b.app.innerHTML.includes('onclick="pcv()">К разделу'),'Section end screen buttons');
+ assert.equal(Lo.storage.th,saved.th,'Theory marks untouched');assert.equal(Lo.storage.d,saved.d,'Topic done marks untouched');
+ b.TP(10);b.start([P[0]],0,undefined,5);assert(!b.app.innerHTML.includes('← К разделу')&&b.getS().pc==null,'Section flag does not leak into topic quizzes');}
 console.log('PASS: photo section «Вопросы с картинками» (Версия 61), rule-map fixes, new questions N1-N11 and extra topic G1, G2, G4, G5, parking 30 ft (law), driver-view pictures Q65/Q68/Q213/Q294 + 13 R questions (16:10, high/low beam icons) + 9 list pictures 2026-11-18 (Q99 top view) + release 3 (Q90, Q195, Q196, Q197, Q647; speedometer marks) + batch 6 (45 questions: items 53-92 + 100, Q466 top view, texts Q87/Q17/Q561), questions, IDs, keys, new right-of-way scenario questions and schemes, crash scenario questions C1/C2 and their theory, right-of-way review edits and progress reset, exam pools, NaN UI guard, repeat list, malformed/valid topic progress and storage preservation.');
